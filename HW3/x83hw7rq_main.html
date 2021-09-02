@@ -8,26 +8,106 @@ table, th, td {
 th, td {
   padding: 5px;
 }
+a.tab {
+  color: gray;
+  font-family: 'Roboto', sans-serif;
+  text-align: right;
+  text-decoration: none;
+  font-weight: bold;
+}
+div.menu-bar {
+    background-color: 'red';
+    font-family: 'Roboto', sans-serif;
+    text-align: 'left';
+    font-weight: bold;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+span.tabs {
+    display: inline-block;
+}
+span.tab {
+    margin-left: 1em;
+}
+
+.relative {
+    position: relative;
+}
+
+.overlay-box {
+    position: absolute;
+    background-color: #003d5d;
+    width: 20%;
+    height: 20%;
+    top: 30%;
+    left: 8%;
+    padding: 3em;
+}
+.white-text {
+    color: white;
+}
+.yellow-text {
+    color:  #ffdc19;
+}
+.yellow-bg {
+    background-color:  #ffdc19;
+}
+.button {
+    padding: 12px;
+    width: auto;
+}
+div.improve-business {
+    font-size: xx-large;
+}
+img.bg {
+    width: 100%;
+}
+.signup {
+    width: 100%;
+}
+.no-border table, tr, td{
+    border: 0px;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.tabs-table {
+    width: 100%;
+}
 </style>
 </head>
+<body>
+<div class="menu-bar no-border">
+<table class="tabs-table">
+<tr><td class="left">MENU</td>
+    <td class="right"><span class="tabs">
+        <span class="tab"><a class="tab" href="y44tb49g_page2.html#About" target="_blank">About</a></span>
+        <span class="tab"><a class="tab" href="y44tb49g_page2.html#Projects" target="_blank">Projects</a></span>
+        <span class="tab"><a class="tab" href="y44tb49g_page2.html#Services" target="_blank">Services</a></span>
+    </span></td></tr>
+</table>
+</div>
 
-<a href="y44tb49g_page2.html#About" target="_blank">About</a>
-<a href="y44tb49g_page2.html#Projects" target="_blank">Projects</a>
-<a href="y44tb49g_page2.html#Services" target="_blank">Services</a>
-
-
-
-
-
-
-Put MENU and About/Projects/Services at very top  <br/>
-<img src="res/lawyer.jpg" />
-IMPROVE YOUR BUSINESS TODAY<!-- overlay on top of lawyers-->  <br/>
+<div>
+    <img class="bg" src="res/lawyer.jpg" />
+    <div class="overlay-box">
+        <div class="white-text dont-wait">DON'T WAIT</div>
+        <div class="white-text improve-business">IMPROVE YOUR BUSINESS TODAY!</div>
+        <div class="yellow-text get-your-hands-on"><em>- Get your hands on MyBiz -</em></div>
+        <div><textarea class="signup"></textarea></div>
+        <div class="button yellow-bg"><span><a>SIGN UP FOR FREE!</a></span></div>
+    </div>
+</div>
 
 <table>
 <tr>
 <td>
-AMAZING FEATURE #1 <br/>
+<h4>AMAZING FEATURE #1 </h4><br/>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi. Habitant morbi tristique senectus et netus et. Cursus metus aliquam eleifend mi in nulla. Nisl pretium fusce id velit ut tortor pretium viverra. Et malesuada fames ac turpis egestas.
 </td>
 <td>
@@ -91,7 +171,7 @@ MYBIZ <br/>
 <img src="res/facebook.png" />
 </a>
 
-<a href="http://plus.google.com" target="_blank">
+<a href="https://www.google.com/" target="_blank">
 <img src="res/googleplus.png" />
 </a>
 
@@ -107,5 +187,4 @@ MYBIZ <br/>
 <img src="res/youtube.png" />
 </a>
 
-<body>
 </body></html>

@@ -6,7 +6,7 @@ AMAZING FEATURE #1
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi. Habitant morbi tristique senectus et netus et. Cursus metus aliquam eleifend mi in nulla. Nisl pretium fusce id velit ut tortor pretium viverra. Et malesuada fames ac turpis egestas.
 
 "I COULDN'T HAVE ASKED FOR MORE THAN THIS, MYBIZ IS THE NEXT KILLER APP."
-JOhn Doe CEO & Founder, MyBiz
+John Doe CEO & Founder, MyBiz
 
 Static background image: glasses
 
@@ -20,3 +20,14 @@ Plan Amazing Feature #3
 Plan Amazing Feature #4
 $29.99
 Monthly
+BUY NOW (button)
+
+TRY THE BEST APP IN THE MARKET
+(and small text below it)
+TRY IT FOR FREE (button)
+
+MYBIZ
+
+Address of some sort
+
+all the twitter icons
