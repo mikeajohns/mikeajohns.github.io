@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <style>
+div { 
+  font-family: 'Calibri', sans-serif;
+}
 table, th, td {
-  border: 5px solid black;
-  border-collapse: collapse;
+  border: 0px;
 }
 th, td {
   padding: 5px;
@@ -20,10 +22,14 @@ div.menu-bar {
     font-family: 'Roboto', sans-serif;
     text-align: 'left';
     font-weight: bold;
-    margin-left: 5em;
-    margin-right: 5em;
-    margin-bottom: 2em;
-    margin-top: 2em;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    background-color: white;
+}
+div.features {
+    background-color: white;
 }
 span.tabs {
     display: inline-block;
@@ -45,11 +51,17 @@ span.tab {
     left: 8%;
     padding: 3em;
 }
+.blue-bg {
+    background-color: #003d5d;
+}
 .white-text {
     color: white;
 }
 .yellow-text {
     color:  #ffdc19;
+}
+.gray-text {
+    color: #8f8f8f;
 }
 .yellow-bg {
     background-color:  #ffdc19;
@@ -79,9 +91,44 @@ img.bg {
 .tabs-table {
     width: 100%;
 }
+div.feature-header {
+    font-weight: bold;
+    font-size: large;
+}
+div.feature-details {
+    font-weight: bold;
+    
+}
+div.table-feature{
+    margin: 45px;
+}
+img.social{
+    width: 40px;
+    padding: 30px;
+}
+div.footer-area {
+    background-color: #1D2530;
+    text-align: center;
+    padding: 120px;
+}
+div.prices {
+}
+div.testamonials {
+    background-color: white;
+}
+.center {
+    text-align: center;
+}
+body {
+    background-image: url("res/glasses.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
 </style>
+<title>MyBiz</title>
 </head>
-<body>
+<body style="width: 1245px; padding: 0px; margin: 0px"> 
 <div class="menu-bar no-border">
 <table class="tabs-table">
 <tr><td class="left">MENU</td>
@@ -94,7 +141,7 @@ img.bg {
 </div>
 
 <div>
-    <img class="bg" src="res/lawyer.jpg" />
+    <img class="lawyers bg" src="res/lawyer.jpg" />
     <div class="overlay-box">
         <div class="white-text dont-wait">DON'T WAIT</div>
         <div class="white-text improve-business">IMPROVE YOUR BUSINESS TODAY!</div>
@@ -104,87 +151,117 @@ img.bg {
     </div>
 </div>
 
+<div class="features">
 <table>
 <tr>
 <td>
-<h4>AMAZING FEATURE #1 </h4><br/>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi. Habitant morbi tristique senectus et netus et. Cursus metus aliquam eleifend mi in nulla. Nisl pretium fusce id velit ut tortor pretium viverra. Et malesuada fames ac turpis egestas.
+<div class="table-feature">
+<div class="feature-header">
+<h4>AMAZING FEATURE #1</h4>
+</div>
+    <div class="gray-text feature-details">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    </div>
+</div>
 </td>
 <td>
-AMAZING FEATURE #2 <br/>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi. Habitant morbi tristique senectus et netus et. Cursus metus aliquam eleifend mi in nulla. Nisl pretium fusce id velit ut tortor pretium viverra. Et malesuada fames ac turpis egestas.
-</td>
+<div class="table-feature">
+<div class="feature-header">
+<h4>AMAZING FEATURE #2</h4>
+</div>
+    <div class="gray-text feature-details">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    </div>
+</div></td>
 <td>
-AMAZING FEATURE #3 <br/>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi. Habitant morbi tristique senectus et netus et. Cursus metus aliquam eleifend mi in nulla. Nisl pretium fusce id velit ut tortor pretium viverra. Et malesuada fames ac turpis egestas.
-</td>
+<div class="table-feature">
+<div class="feature-header">
+<h4>AMAZING FEATURE #3</h4>
+</div>
+    <div class="gray-text feature-details">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    </div>
+</div></td>
 </tr>
 </table>
+</div>
 
+<div class="testamonials">
 "I COULDN'T HAVE ASKED FOR MORE THAN THIS, MYBIZ IS THE NEXT KILLER APP." <br/>
 John Doe CEO &amp; Founder, MyBiz <br/>
+</div>
 
-Static background image: glasses
-
+<div class="prices">
 PRICES <br/>
 AFFORDABLE FOR EVERYONE <br/>
 <table>
 <tr>
 <td>
 BASIC PLAN
-Plan Amazing Feature #1
-Plan Amazing Feature #2
-Plan Amazing Feature #3
-Plan Amazing Feature #4
+<div class="plan-feature">Plan Amazing Feature #1</div>
+<div class="plan-feature">Plan Amazing Feature #2</div>
+<div class="plan-feature">Plan Amazing Feature #3</div>
+<div class="plan-feature">Plan Amazing Feature #4</div>
 $29.99
 Monthly
-BUY NOW (button)
+<div class="white-text button blue-bg">BUY NOW</div>
 </td>
 <td>
 STANDARD PLAN
-Plan Amazing Feature #2
-Plan Amazing Feature #3
-Plan Amazing Feature #4
+<div class="plan-feature">Plan Amazing Feature #1</div>
+<div class="plan-feature">Plan Amazing Feature #2</div>
+<div class="plan-feature">Plan Amazing Feature #3</div>
+<div class="plan-feature">Plan Amazing Feature #4</div>
 $29.99
 Monthly
-BUY NOW (button)
+<div class="white-text button blue-bg">BUY NOW</div>
 </td>
 <td>
 CORPORATE PLAN
-Plan Amazing Feature #1
-Plan Amazing Feature #2
-Plan Amazing Feature #3
-Plan Amazing Feature #4
+<div class="plan-feature">Plan Amazing Feature #1</div>
+<div class="plan-feature">Plan Amazing Feature #2</div>
+<div class="plan-feature">Plan Amazing Feature #3</div>
+<div class="plan-feature">Plan Amazing Feature #4</div>
 $29.99
 Monthly
-BUY NOW (button)
+<div class="white-text button blue-bg">BUY NOW</div>
 </td>
 </tr></table>
-TRY THE BEST APP IN THE MARKET <br/>
-(and small text below it) <br/>
+</div>
 
-<a>TRY IT FOR FREE</a> <br/>
-MYBIZ <br/>
-12345 Camino Real, Lindale, IA 52402  <br/>
+<div class="try-it">
+<div>TRY THE BEST APP IN THE MARKET</div>
+tell more why your software is amazing and why users need to sign up<br/>
+
+</div>
+<div class="button yellow-bg">TRY IT FOR FREE</div>
+
+<div class="footer-area white-text">
+<div style="font-size: x-large; margin: 5px;">MY BIZ</div>
+<div style="font-size: small;">
+    224 Grant Ave. Redondo Beach, CA, 90278 310.555.1212 Ext. 3 for Business Needs
+</div>
 
 <a href="http://www.facebook.com" target="_blank">
-<img src="res/facebook.png" />
-</a>
-
-<a href="https://www.google.com/" target="_blank">
-<img src="res/googleplus.png" />
-</a>
-
-<a href="http://www.instagram.com" target="_blank">
-<img src="res/instagram.png" />
+<img class="social" src="res/facebook.png" />
 </a>
 
 <a href="http://www.twitter.com" target="_blank">
-<img src="res/twitter.png" />
+<img class="social" src="res/twitter.png" />
 </a>
 
-<a href="http://www.youtube.com" target="_blank">
-<img src="res/youtube.png" />
+<a href="http://www.instagram.com" target="_blank">
+<img class="social" src="res/instagram.png" />
 </a>
+
+
+<a href="http://www.youtube.com" target="_blank">
+<img class="social" src="res/youtube.png" />
+</a>
+
+<a href="https://www.google.com/" target="_blank">
+<img class="social" src="res/googleplus.png" />
+</a>
+</div>
 
 </body></html>
