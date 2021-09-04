@@ -2,7 +2,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <style>
 
-/*
+/*/*
 * General Stuff (AKA library)
 */
 
@@ -157,25 +157,30 @@ div.testamonials {
     margin-right: auto;
 }
 .static-image-glasses {
-    /*background-image: url("res/glasses.png");
-    background-attachment: fixed;
-    background-size: 1189px;
-    background-repeat: no-repeat;*/
+    width: 1189px;
     filter: grayscale(100%);
     position:fixed;
+    top: 10px;
+    left: 0;
+    z-index: -1;
 }
 div.prices {
-    background-color: rgba(239, 227, 217, 0.5);
+    background-color: rgba(217, 217, 217, 0.7);
     background-size: cover;
     padding: 50px;
     text-align: center;
 }
-div.plan-details {
+div.plan-details-holder {
     background: url("res/grid.png");
     background-size: cover;
     background-color: rgb(255, 255, 255, 1);
-    padding: 45px;
     margin: 10px;
+    z-index: 3;
+}
+div.plan-details {
+    background-color: rgb(255, 255, 255, 0.7);
+    padding: 45px;
+    z-index: 2;
 }
 div.plan-feature {
     padding: 5px;
@@ -281,6 +286,7 @@ div.footer-area {
 <table class="center-table">
 <tr>
 <td>
+<div class="plan-details-holder">
 <div class="plan-details">
 BASIC PLAN
 <div class="plan-feature">Plan Amazing Feature #1</div>
@@ -290,8 +296,10 @@ BASIC PLAN
 <div class="plan-pricing">$29.99</br>Monthly</div>
 <div class="white-text button blue-bg">BUY NOW</div>
 </div>
+</div>
 </td>
 <td>
+<div class="plan-details-holder">
 <div class="plan-details">
 STANDARD PLAN
 <div class="plan-feature">Plan Amazing Feature #1</div>
@@ -301,8 +309,10 @@ STANDARD PLAN
 <div class="plan-pricing">$29.99</br>Monthly</div>
 <div class="white-text button blue-bg">BUY NOW</div>
 </div>
+</div>
 </td>
 <td>
+<div class="plan-details-holder">
 <div class="plan-details">
 CORPORATE PLAN
 <div class="plan-feature">Plan Amazing Feature #1</div>
@@ -311,6 +321,7 @@ CORPORATE PLAN
 <div class="plan-feature">Plan Amazing Feature #4</div>
 <div class="plan-pricing">$29.99</br>Monthly</div>
 <div class="white-text button blue-bg">BUY NOW</div>
+</div>
 </div>
 </td>
 </tr></table>
