@@ -37,6 +37,7 @@ th, td {
 .button {
     padding: 12px;
     width: auto;
+    display: inline-block;
 }
 .left {
     text-align: left;
@@ -52,6 +53,12 @@ th, td {
 }
 .section-header {
     font-size: x-large;
+}
+.x-large {
+    font-size: x-large;
+}
+.xx-large {
+    font-size: xx-large;
 }
 
 /*
@@ -194,9 +201,15 @@ div.plan-pricing {
 * Try It
 */
 div.try-it {
-    background-color: rgba(13, 51, 76, 1);
+    background-color: rgba(13, 51, 76, 0.8);
+    padding: 200px;
+    z-index: 2;
+}
+div.try-it-holder {
     background: url("res/notebook.jpg");
-    padding: 50px;
+    background-size: cover;
+    background-color: rgb(255, 255, 255, 1);
+    z-index: 3;
 }
 
 /*
@@ -306,7 +319,7 @@ STANDARD PLAN
 <div class="plan-feature">Plan Amazing Feature #2</div>
 <div class="plan-feature">Plan Amazing Feature #3</div>
 <div class="plan-feature">Plan Amazing Feature #4</div>
-<div class="plan-pricing">$29.99</br>Monthly</div>
+<div class="plan-pricing">$39.99</br>Monthly</div>
 <div class="white-text button blue-bg">BUY NOW</div>
 </div>
 </div>
@@ -319,7 +332,7 @@ CORPORATE PLAN
 <div class="plan-feature">Plan Amazing Feature #2</div>
 <div class="plan-feature">Plan Amazing Feature #3</div>
 <div class="plan-feature">Plan Amazing Feature #4</div>
-<div class="plan-pricing">$29.99</br>Monthly</div>
+<div class="plan-pricing">$49.99</br>Monthly</div>
 <div class="white-text button blue-bg">BUY NOW</div>
 </div>
 </div>
@@ -328,10 +341,12 @@ CORPORATE PLAN
 </div>
 
 <div class="white-bg" style="opacity: 1;">
-<div class="try-it">
-<div>TRY THE BEST APP IN THE MARKET</div>
-<div>tell more why your software is amazing and why users need to sign up</div>
+<div class="try-it-holder">
+<div class="try-it center">
+<div class="white-text xx-large">TRY THE BEST APP IN THE MARKET</div>
+<div class="white-text">tell more why your software is amazing and why users need to sign up</div>
 <div class="button yellow-bg">TRY IT FOR FREE</div>
+</div>
 </div>
 </div>
 
