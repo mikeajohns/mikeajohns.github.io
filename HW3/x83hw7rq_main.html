@@ -6,8 +6,8 @@
 * General Stuff (AKA library)
 */
 
-div { 
-  font-family: 'Calibri', sans-serif;
+div, a, span { 
+  font-family: 'Segoe UI', sans-serif;
 }
 table, th, td {
   border: 0px;
@@ -34,10 +34,18 @@ th, td {
 .gray-text {
     color: #8f8f8f;
 }
+.light-gray-text {
+    color: LightGray;
+    /*font-weight: bold;*/
+}
 .button {
     padding: 12px;
     width: auto;
     display: inline-block;
+    font-size: small;
+    /*
+    font-size: 78%;
+    */
 }
 .left {
     text-align: left;
@@ -54,6 +62,9 @@ th, td {
 .section-header {
     font-size: x-large;
 }
+.large {
+    font-size: large;
+}
 .x-large {
     font-size: x-large;
 }
@@ -66,28 +77,27 @@ th, td {
 */
 
 a.tab {
-  color: gray;
-  font-family: 'Roboto', sans-serif;
   text-align: right;
   text-decoration: none;
-  font-weight: bold;
 }
 div.menu-bar {
-    background-color: 'red';
-    font-family: 'Roboto', sans-serif;
+    color: #606060;
     text-align: 'left';
-    font-weight: bold;
-    padding-left: 5em;
+    padding-left: 110px;
     padding-right: 5em;
-    padding-bottom: 2em;
-    padding-top: 2em;
+    padding-bottom: 2.4em;
+    padding-top: 2.4em;
     background-color: white;
+    font-size: 108%;
 }
 div.features {
     background-color: white;
 }
 span.tabs {
     display: inline-block;
+    margin-right: 30px;
+    font-size: 80%;
+    font-weight: bold;
 }
 span.tab {
     margin-left: 1em;
@@ -112,21 +122,33 @@ div.lawyers {
     position: relative;
     background-color: #003d5d;
     width: 21.6%;
-    height: 45.9%;
+    height: 46.9%;
     top: 19.9%;
     left: 7.85%;
-    padding: 3em;
+    padding: 2.8em;
+    line-height: 1.05;
 }
 div.improve-business {
-    font-size: xx-large;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 220%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+div.dont-wait {
+    font-size: 90%;
 }
 div.get-your-hands-on {
     font-weight: bold;
     font-style: italic;
-    margin: 4%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    font-size: 80%;
 }
 .signup {
     width: 100%;
+    margin-bottom: 9%;
+    margin-top: 3%;
 }
 
 
@@ -202,13 +224,14 @@ div.plan-pricing {
 */
 div.try-it {
     background-color: rgba(13, 51, 76, 0.8);
-    padding: 200px;
+    padding: 150px;
     z-index: 2;
 }
 div.try-it-holder {
     background: url("res/notebook.jpg");
-    background-size: cover;
+    background-size: 100%;
     background-color: rgb(255, 255, 255, 1);
+    background-position: center;
     z-index: 3;
 }
 
@@ -233,9 +256,9 @@ div.footer-area {
 <table class="tabs-table">
 <tr><td class="left">MENU</td>
     <td class="right"><span class="tabs">
-        <span class="tab"><a class="tab" href="y44tb49g_page2.html#About" target="_blank">About</a></span>
-        <span class="tab"><a class="tab" href="y44tb49g_page2.html#Projects" target="_blank">Projects</a></span>
-        <span class="tab"><a class="tab" href="y44tb49g_page2.html#Services" target="_blank">Services</a></span>
+        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#About" target="_blank">About</a></span>
+        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#Projects" target="_blank">Projects</a></span>
+        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#Services" target="_blank">Services</a></span>
     </span></td></tr>
 </table>
 </div>
@@ -243,7 +266,19 @@ div.footer-area {
 <div class="lawyers">
     <div class="overlay-box">
         <div class="white-text dont-wait">DON'T WAIT</div>
-        <div class="white-text improve-business">IMPROVE YOUR BUSINESS TODAY!</div>
+        <div class="white-text improve-business" style="font-family: 'Segoe UI', sans-serif;">IMPROVE<br/> YOUR BUSINESS<br/> TODAY!</div>
+        <!--
+        <div class="white-text improve-business" style="font-family: 'Candara', sans-serif;">IMPROVE<br/>YOUR BUSINESS</br> TODAY!</div>
+        <div class="white-text improve-business" style="font-family: 'Brush Script MT', sans-serif;">IMPROVE<br/> YOUR BUSINESS<br/> TODAY!</div>
+        <div class="white-text improve-business" style="font-family: 'Helvetica', sans-serif;">IMPROVE<br/> YOUR BUSINESS<br/> TODAY!</div>
+        <div class="white-text improve-business">IMPROVE<br/>YOUR BUSINESS<br/>TODAY!</div>
+        <div class="white-text improve-business" style="font-family: 'Arial', sans-serif;">ISS</div>
+        <div class="white-text improve-business" style="font-family: 'Trebuchet MS', sans-serif;">IM</div>
+        <div class="white-text improve-business" style="font-family: 'Verdana', sans-serif;">I</div>
+        <div class="white-text improve-business" style="font-family: 'Tahoma', sans-serif;">I</div>
+        <div class="white-text improve-business" style="font-family: 'Georgia', sans-serif;">I</div>
+        <div class="white-text improve-business" style="font-family: 'Garamond', sans-serif;">I</div>
+        <div class="white-text improve-business" style="font-family: 'Courier New', sans-serif;">I</div>-->
         <div class="yellow-text get-your-hands-on">- Get your hands on MyBiz -</div>
         <div><textarea class="signup"></textarea></div>
         <div class="button yellow-bg"><span><a>SIGN UP FOR FREE!</a></span></div>
@@ -259,7 +294,7 @@ div.footer-area {
 <h4>AMAZING FEATURE #1</h4>
 </div>
     <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
     </div>
 </div>
 </td>
@@ -269,7 +304,7 @@ div.footer-area {
 <h4>AMAZING FEATURE #2</h4>
 </div>
     <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
     </div>
 </div></td>
 <td>
@@ -278,7 +313,7 @@ div.footer-area {
 <h4>AMAZING FEATURE #3</h4>
 </div>
     <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat consequat mauris nunc congue nisi vitae suscipit. Id volutpat lacus laoreet non. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Ultricies tristique nulla aliquet enim. Rhoncus mattis rhoncus urna neque viverra. Mattis molestie a iaculis at. Faucibus nisl tincidunt eget nullam non nisi.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
     </div>
 </div></td>
 </tr>
