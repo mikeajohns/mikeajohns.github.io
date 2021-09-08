@@ -225,11 +225,16 @@ div.quote {
     margin-right: auto;
 }
 .static-image-glasses {
+    background: url("res/glasses.png");
+background-size: cover;
+background-position: center;
     filter: grayscale(100%);
     position: fixed;
-    height: 100%;
     top: 0px;
-    left: -20px;
+    left: 0px;
+    width: 1189px;
+    height: 100%;
+    
     z-index: -1;
 
     /* TODO remove
@@ -238,7 +243,6 @@ div.quote {
     margin-top: 50%;
     margin-left: 50%;
     right: 1260px;
-    width: 1189px;
     top: 10px;
     */
 }
@@ -305,11 +309,6 @@ div.buy-now-button {
 * Try It
 */
 /* NOTES
-    - relative seems worthless as it always seems to leave room where it should've been, not allowing the siblings to go where I want them 
-    - absolute seems like it will work, but it's very precarious
-    - maybe figure out the background image grayscale
-    - I suspect this will work too: https://css-tricks.com/apply-a-filter-to-a-background-image/
-    
     Other TODOs:
     - Check latest response on piazza
     - Re-fix TRY THE BEST
@@ -317,9 +316,33 @@ div.buy-now-button {
 div.try-it {
     /*TODO remove
     background-color: rgba(13, 51, 76, 0.9); 
-    */
-    background-color: rgba(10, 59, 96, 0.8);
     z-index: 3;
+    padding: 125px;
+    */
+    position: relative;
+}
+div.try-it::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*TODO remove
+    width: 1189px;
+    height: 400px;
+    z-index: -1;
+    */
+    width: 100%;
+    height: 100%;
+    background-image: url("res/notebook.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+}
+div.try-it-inside {
+    position: relative;
+        background-color: rgba(10, 59, 96, 0.8);
+        padding: 125px;
+
 }
 div.try-the-best {
     font-size: 180%;
@@ -454,7 +477,6 @@ AMAZING FEATURE #3
 
 <div class="prices">
     <div class="static-image-glasses">
-        <img class="static-image-glasses" src="res/glasses.png">
     </div>
     <div class="prices-header">
         <div class="prices-section-header">PRICES</div>
@@ -510,9 +532,8 @@ AMAZING FEATURE #3
 </tr></table>
 </div>
 
-<div class="try-it">
-    <img class="image-notebook" src="res/notebook.jpg">
-    <div class="center" style="padding: 125px;">
+<div class="try-it center">
+    <div class="try-it-inside">
         <div class="try-the-best white-text">TRY THE BEST APP IN THE MARKET</div>
         <div class="why-try-it white-text">tell more why your software is amazing and why users need to sign up</div>
         <div class="button try-it-button yellow-bg">TRY IT FOR FREE</div>
