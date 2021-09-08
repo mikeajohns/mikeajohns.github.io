@@ -2,7 +2,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <style>
 
-/*/*
+/*
 * General Stuff (AKA library)
 */
 
@@ -19,7 +19,10 @@ th, td {
     background-color: white;
 }
 .yellow-bg {
+    background-color:  #F9E336;
+    /*TODO remove old
     background-color:  #ffdc19;
+    */
     opacity: 1;
 }
 .blue-bg {
@@ -36,14 +39,16 @@ th, td {
 }
 .light-gray-text {
     color: LightGray;
-    /*font-weight: bold;*/
+    /*TODO remove
+    font-weight: bold;
+    */
 }
 .button {
     padding: 12px;
     width: auto;
     display: inline-block;
     font-size: small;
-    /*
+    /*TODO remove
     font-size: 78%;
     */
 }
@@ -59,9 +64,6 @@ th, td {
 .no-border table, tr, td{
     border: 0px;
 }
-.section-header {
-    font-size: x-large;
-}
 .large {
     font-size: large;
 }
@@ -70,6 +72,9 @@ th, td {
 }
 .xx-large {
     font-size: xx-large;
+}
+.small {
+    font-size: small;
 }
 
 /*
@@ -88,16 +93,21 @@ div.menu-bar {
     padding-bottom: 2.4em;
     padding-top: 2.4em;
     background-color: white;
+    font-weight: bold;
+    font-size: 90%;
+
+    /*TODO remove
     font-size: 108%;
-}
-div.features {
-    background-color: white;
+    */
 }
 span.tabs {
     display: inline-block;
     margin-right: 30px;
+    font-size: 90%;
+    /*TODO remove
     font-size: 80%;
     font-weight: bold;
+    */
 }
 span.tab {
     margin-left: 1em;
@@ -156,16 +166,28 @@ div.get-your-hands-on {
 * Features
 */
 
+div.features {
+    padding-top: 125px;
+    padding-bottom: 125px;
+    padding-left: 20px;
+    background-color: white;
+}
 div.feature-header {
-    font-weight: bold;
-    font-size: large;
+    font-size: 105%;
+    padding-bottom: 18px;
 }
 div.feature-details {
+    font-size: 80%;
     font-weight: bold;
-    
+    /*TODO remove
+    */
 }
 div.table-feature{
-    margin: 45px;
+    /*TODO remove
+    margin: 32px;
+    */
+    margin-left: 32px;
+    margin-right: 32px;
 }
 
 /*
@@ -173,8 +195,25 @@ div.table-feature{
 */
 div.testamonials {
     background-color: #F4F4F4;
-    padding: 100px;
+    padding: 140px;
     text-align: center;
+}
+div.quote {
+    font-size: 125%;
+    margin-bottom: 13px;
+    font-weight: bold;
+}
+.testamonials-name {
+    font-size: 80%;
+    color: black;
+    font-weight: bold;
+    /*TODO remove
+    */
+}
+.testamonials-title {
+    font-size: 80%;
+    color: Gray;
+    font-weight: bold;
 }
 
 /*
@@ -186,12 +225,22 @@ div.testamonials {
     margin-right: auto;
 }
 .static-image-glasses {
-    width: 1189px;
     filter: grayscale(100%);
-    position:fixed;
-    top: 10px;
-    left: 0;
+    position: fixed;
+    height: 100%;
+    top: 0px;
+    left: -20px;
     z-index: -1;
+
+    /* TODO remove
+    top: 50%;
+    left: 50%;
+    margin-top: 50%;
+    margin-left: 50%;
+    right: 1260px;
+    width: 1189px;
+    top: 10px;
+    */
 }
 div.prices {
     background-color: rgba(217, 217, 217, 0.7);
@@ -199,53 +248,131 @@ div.prices {
     padding: 50px;
     text-align: center;
 }
+div.prices-header {
+    padding-bottom: 70px;
+    font-weight: bold;
+}
+div.prices-section-header {
+    font-size: 130%;
+    margin-bottom: 12px;
+}
+div.prices-sub-text {
+    font-size: 80%;
+}
+
 div.plan-details-holder {
     background: url("res/grid.png");
     background-size: cover;
     background-color: rgb(255, 255, 255, 1);
-    margin: 10px;
+    margin: 15px;
     z-index: 3;
 }
 div.plan-details {
-    background-color: rgb(255, 255, 255, 0.7);
-    padding: 45px;
+    background-color: rgb(255, 255, 255, 0.9);
+    padding: 65px;
     z-index: 2;
+}
+div.plan-title {
+    font-size: 100%;
+    margin-bottom: 25px;
+    font-weight: bold;
+    /*TODO remove
+    */
+}
+div.plan-features {
+    line-height: 1.5;
+    font-size: 95%;
+    /*TODO remove
+    color: Gray;
+    */
 }
 div.plan-feature {
     padding: 5px;
 }
 div.plan-pricing {
-    font-size: x-large;
-    padding: 5px;
+    line-height: 1;
+    font-size: 170%;
+    padding: 25px;
+    font-weight: bold;
+}
+div.buy-now-button {
+    padding: 18px;
+    padding-left: 37px;
+    padding-right: 37px;
 }
 
 /*
 * Try It
 */
+/* NOTES
+    - relative seems worthless as it always seems to leave room where it should've been, not allowing the siblings to go where I want them 
+    - absolute seems like it will work, but it's very precarious
+    - maybe figure out the background image grayscale
+    - I suspect this will work too: https://css-tricks.com/apply-a-filter-to-a-background-image/
+    
+    Other TODOs:
+    - Check latest response on piazza
+    - Re-fix TRY THE BEST
+*/
 div.try-it {
-    background-color: rgba(13, 51, 76, 0.8);
-    padding: 150px;
-    z-index: 2;
-}
-div.try-it-holder {
-    background: url("res/notebook.jpg");
-    background-size: 100%;
-    background-color: rgb(255, 255, 255, 1);
-    background-position: center;
+    /*TODO remove
+    background-color: rgba(13, 51, 76, 0.9); 
+    */
+    background-color: rgba(10, 59, 96, 0.8);
     z-index: 3;
+}
+div.try-the-best {
+    font-size: 180%;
+    margin-bottom: 5px;
+}
+div.why-try-it {
+    font-size: 85%;
+}
+div.try-it-button {
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 50px;
+}
+div.image-notebook {
+    z-index: -1;
+    width: 1189px;
+    
+    /*TODO remove
+    height: 671px;
+    */
+}
+img.image-notebook {
+    position: absolute;
+    filter: grayscale(100%);
+    z-index: -1;
+    margin: 0px;
+        width: 1189px;
+
+    width: 100%;
+    
+  
 }
 
 /*
 * Footer + Social
 */
 img.social{
-    width: 40px;
-    padding: 30px;
+    width: 35px;
+    padding: 17px;
 }
 div.footer-area {
     background-color: #1D2530;
     text-align: center;
-    padding: 120px;
+    padding: 75px;
+}
+div.mybiz {
+    padding: 5px;
+}
+div.biz-address {
+    font-size: 75%;
+    color: gray;
+    padding-bottom: 10px;
 }
 
 </style>
@@ -291,7 +418,7 @@ div.footer-area {
 <td>
 <div class="table-feature">
 <div class="feature-header">
-<h4>AMAZING FEATURE #1</h4>
+AMAZING FEATURE #1
 </div>
     <div class="gray-text feature-details">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
@@ -301,7 +428,7 @@ div.footer-area {
 <td>
 <div class="table-feature">
 <div class="feature-header">
-<h4>AMAZING FEATURE #2</h4>
+AMAZING FEATURE #2
 </div>
     <div class="gray-text feature-details">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
@@ -310,7 +437,7 @@ div.footer-area {
 <td>
 <div class="table-feature">
 <div class="feature-header">
-<h4>AMAZING FEATURE #3</h4>
+AMAZING FEATURE #3
 </div>
     <div class="gray-text feature-details">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
@@ -321,73 +448,80 @@ div.footer-area {
 </div>
 
 <div class="testamonials">
-&quot;I COULDN'T HAVE ASKED FOR MORE THAN THIS, MYBIZ IS THE NEXT KILLER APP.&quot; <br/>
-<strong>John Doe</strong>, CEO &amp; Founder, MyBiz <br/>
+    <div class="quote">&quot;I COULDN'T HAVE ASKED FOR MORE THAN THIS, MYBIZ IS THE NEXT KILLER APP.&quot;</div>
+    <div><span class="testamonials-name">John Doe</span><span class="testamonials-title">, CEO &amp; Founder, MyBiz</span></div>
 </div>
 
 <div class="prices">
     <div class="static-image-glasses">
         <img class="static-image-glasses" src="res/glasses.png">
     </div>
-<div class="section-header">PRICES</div>
-<div class="gray-text">AFFORDABLE FOR EVERYONE</div>
+    <div class="prices-header">
+        <div class="prices-section-header">PRICES</div>
+        <div class="prices-sub-text gray-text">AFFORDABLE FOR EVERYONE</div>
+    </div>
 <table class="center-table">
 <tr>
 <td>
 <div class="plan-details-holder">
 <div class="plan-details">
-BASIC PLAN
-<div class="plan-feature">Plan Amazing Feature #1</div>
-<div class="plan-feature">Plan Amazing Feature #2</div>
-<div class="plan-feature">Plan Amazing Feature #3</div>
-<div class="plan-feature">Plan Amazing Feature #4</div>
+<div class="plan-title">BASIC PLAN</div>
+<div class="plan-features">
+    <div class="plan-feature">Plan Amazing Feature #1</div>
+    <div class="plan-feature">Plan Amazing Feature #2</div>
+    <div class="plan-feature">Plan Amazing Feature #3</div>
+    <div class="plan-feature">Plan Amazing Feature #4</div>
+</div>
 <div class="plan-pricing">$29.99</br>Monthly</div>
-<div class="white-text button blue-bg">BUY NOW</div>
+<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
 </div>
 </div>
 </td>
 <td>
 <div class="plan-details-holder">
 <div class="plan-details">
-STANDARD PLAN
-<div class="plan-feature">Plan Amazing Feature #1</div>
-<div class="plan-feature">Plan Amazing Feature #2</div>
-<div class="plan-feature">Plan Amazing Feature #3</div>
-<div class="plan-feature">Plan Amazing Feature #4</div>
+<div class="plan-title">STANDARD PLAN</div>
+<div class="plan-features">
+    <div class="plan-feature">Plan Amazing Feature #1</div>
+    <div class="plan-feature">Plan Amazing Feature #2</div>
+    <div class="plan-feature">Plan Amazing Feature #3</div>
+    <div class="plan-feature">Plan Amazing Feature #4</div>
+</div>
 <div class="plan-pricing">$39.99</br>Monthly</div>
-<div class="white-text button blue-bg">BUY NOW</div>
+<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
 </div>
 </div>
 </td>
 <td>
 <div class="plan-details-holder">
 <div class="plan-details">
-CORPORATE PLAN
-<div class="plan-feature">Plan Amazing Feature #1</div>
-<div class="plan-feature">Plan Amazing Feature #2</div>
-<div class="plan-feature">Plan Amazing Feature #3</div>
-<div class="plan-feature">Plan Amazing Feature #4</div>
+<div class="plan-title">CORPORATE PLAN</div>
+<div class="plan-features">
+    <div class="plan-feature">Plan Amazing Feature #1</div>
+    <div class="plan-feature">Plan Amazing Feature #2</div>
+    <div class="plan-feature">Plan Amazing Feature #3</div>
+    <div class="plan-feature">Plan Amazing Feature #4</div>
+</div>
 <div class="plan-pricing">$49.99</br>Monthly</div>
-<div class="white-text button blue-bg">BUY NOW</div>
+<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
 </div>
 </div>
 </td>
 </tr></table>
 </div>
 
-<div class="white-bg" style="opacity: 1;">
-<div class="try-it-holder">
-<div class="try-it center">
-<div class="white-text xx-large">TRY THE BEST APP IN THE MARKET</div>
-<div class="white-text">tell more why your software is amazing and why users need to sign up</div>
-<div class="button yellow-bg">TRY IT FOR FREE</div>
-</div>
-</div>
+<div class="try-it">
+    <img class="image-notebook" src="res/notebook.jpg">
+    <div class="center" style="padding: 125px;">
+        <div class="try-the-best white-text">TRY THE BEST APP IN THE MARKET</div>
+        <div class="why-try-it white-text">tell more why your software is amazing and why users need to sign up</div>
+        <div class="button try-it-button yellow-bg">TRY IT FOR FREE</div>
+    </div>
 </div>
 
 <div class="footer-area white-text">
-<div style="font-size: x-large; margin: 5px;">MY BIZ</div>
-<div style="font-size: small;">
+<div class="mybiz">MY BIZ</div>
+<div class="biz-address">
     224 Grant Ave. Redondo Beach, CA, 90278 310.555.1212 Ext. 3 for Business Needs
 </div>
 
