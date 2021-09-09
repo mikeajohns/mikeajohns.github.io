@@ -9,11 +9,14 @@
 div, a, span { 
   font-family: 'Segoe UI', sans-serif;
 }
-table, th, td {
+table, tr, th, td {
   border: 0px;
 }
 th, td {
   padding: 5px;
+}
+a {
+  text-decoration: none;
 }
 .white-bg {
     background-color: white;
@@ -52,9 +55,6 @@ th, td {
 .right {
     text-align: right;
 }
-.no-border table, tr, td{
-    border: 0px;
-}
 .large {
     font-size: large;
 }
@@ -74,9 +74,6 @@ th, td {
 
 a.tab {
   text-align: right;
-  text-decoration: none;
-}
-a {
   text-decoration: none;
 }
 div.menu-bar {
@@ -356,7 +353,7 @@ div.biz-address {
 <title>MyBiz</title>
 </head>
 <body style="width: 1189px; padding: 0px; margin: 0px"> 
-<div class="menu-bar no-border">
+<div class="menu-bar">
 <table class="tabs-table">
 <tr><td class="left">MENU</td>
     <td class="right"><span class="tabs">
