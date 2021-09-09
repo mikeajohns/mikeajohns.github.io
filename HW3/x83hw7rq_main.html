@@ -19,8 +19,9 @@ th, td {
     background-color: white;
 }
 .yellow-bg {
-    background-color:  #F9E336;
+    background-color: #F3E32F;
     /*TODO remove old
+    background-color:  #F9E336;
     background-color:  #ffdc19;
     */
     opacity: 1;
@@ -85,6 +86,9 @@ a.tab {
   text-align: right;
   text-decoration: none;
 }
+a {
+  text-decoration: none;
+}
 div.menu-bar {
     color: #606060;
     text-align: 'left';
@@ -114,6 +118,10 @@ span.tab {
 }
 .tabs-table {
     width: 100%;
+}
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -159,6 +167,7 @@ div.get-your-hands-on {
     width: 100%;
     margin-bottom: 9%;
     margin-top: 3%;
+    font-size: 90%;
 }
 
 
@@ -167,27 +176,27 @@ div.get-your-hands-on {
 */
 
 div.features {
-    padding-top: 125px;
-    padding-bottom: 125px;
-    padding-left: 20px;
+    padding-top: 115px;
+    padding-bottom: 105px;
+    padding-left: 90px;
+    padding-right: 60px;
     background-color: white;
 }
 div.feature-header {
-    font-size: 105%;
-    padding-bottom: 18px;
+    font-size: 95%;
+    padding-bottom: 16px;
+    font-weight: 600;
 }
 div.feature-details {
-    font-size: 80%;
-    font-weight: bold;
     /*TODO remove
+        font-weight: bold;
+        font-size: 80%
     */
+    font-size: 75%;
+    font-weight: 800;
 }
 div.table-feature{
-    /*TODO remove
-    margin: 32px;
-    */
-    margin-left: 32px;
-    margin-right: 32px;
+    margin-right: 40px;
 }
 
 /*
@@ -202,32 +211,31 @@ div.quote {
     font-size: 125%;
     margin-bottom: 13px;
     font-weight: bold;
+    color: #707070;
 }
 .testamonials-name {
     font-size: 80%;
     color: black;
-    font-weight: bold;
+    font-weight: 900;
     /*TODO remove
     */
 }
 .testamonials-title {
     font-size: 80%;
     color: Gray;
-    font-weight: bold;
+    font-weight: 800;
 }
 
 /*
 * Prices
 */
-
-.center-table {
-    margin-left: auto;
-    margin-right: auto;
-}
 .static-image-glasses {
     background: url("res/glasses.png");
-background-size: cover;
-background-position: center;
+    /*TODO remove
+    background-size: cover;
+    */
+    background-size: cover;
+    background-position: center;
     filter: grayscale(100%);
     position: fixed;
     top: 0px;
@@ -247,7 +255,10 @@ background-position: center;
     */
 }
 div.prices {
+    /*TODO remove
     background-color: rgba(217, 217, 217, 0.7);
+    */
+    background-color: rgba(255, 255, 255, 0.8);
     background-size: cover;
     padding: 50px;
     text-align: center;
@@ -269,15 +280,18 @@ div.plan-details-holder {
     background-size: cover;
     background-color: rgb(255, 255, 255, 1);
     margin: 15px;
+    margin-top: 10px;
     z-index: 3;
 }
 div.plan-details {
     background-color: rgb(255, 255, 255, 0.9);
     padding: 65px;
+    padding-bottom: 80px;
+    margin-bottom: 25px;
     z-index: 2;
 }
 div.plan-title {
-    font-size: 100%;
+    font-size: 90%;
     margin-bottom: 25px;
     font-weight: bold;
     /*TODO remove
@@ -286,6 +300,7 @@ div.plan-title {
 div.plan-features {
     line-height: 1.5;
     font-size: 95%;
+    padding-bottom: 15px;
     /*TODO remove
     color: Gray;
     */
@@ -308,17 +323,7 @@ div.buy-now-button {
 /*
 * Try It
 */
-/* NOTES
-    Other TODOs:
-    - Check latest response on piazza
-    - Re-fix TRY THE BEST
-*/
 div.try-it {
-    /*TODO remove
-    background-color: rgba(13, 51, 76, 0.9); 
-    z-index: 3;
-    padding: 125px;
-    */
     position: relative;
 }
 div.try-it::before {
@@ -326,11 +331,6 @@ div.try-it::before {
     position: absolute;
     top: 0;
     left: 0;
-    /*TODO remove
-    width: 1189px;
-    height: 400px;
-    z-index: -1;
-    */
     width: 100%;
     height: 100%;
     background-image: url("res/notebook.jpg");
@@ -340,22 +340,25 @@ div.try-it::before {
 }
 div.try-it-inside {
     position: relative;
-        background-color: rgba(10, 59, 96, 0.8);
-        padding: 125px;
-
+    background-color: rgba(10, 59, 96, 0.8);
+    padding-top: 160px;
+    padding-bottom: 170px;
 }
 div.try-the-best {
-    font-size: 180%;
-    margin-bottom: 5px;
+    font-size: 150%;
+    margin-bottom: 6px;
+    font-weight: 600;
+    /*TODO remove
+    */
 }
 div.why-try-it {
-    font-size: 85%;
+    font-size: 77%;
 }
 div.try-it-button {
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
-    margin: 50px;
+    margin-top: 33px;
 }
 div.image-notebook {
     z-index: -1;
@@ -382,7 +385,10 @@ img.image-notebook {
 */
 img.social{
     width: 35px;
-    padding: 17px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 13px;
+    padding-right: 13px;
 }
 div.footer-area {
     background-color: #1D2530;
