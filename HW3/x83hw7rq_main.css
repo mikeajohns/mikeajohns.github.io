@@ -2,8 +2,10 @@
 * General Stuff (AKA library)
 */
 
+
+/*1189px width determined by removing all excess pixels on left and right side of ScreenShot1.png*/
 body {
-    width: 1189px; 
+    width: 1189px;
     padding: 0px; 
     margin: 0px;
 }
@@ -112,7 +114,7 @@ span.tab {
 div.lawyers {
     width: 1189px;
     height: 671px;
-    background-image: url("res/lawyer.jpg");
+    background-image: url("https://csci571.com/hw/hw3/images/lawyer.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -206,7 +208,7 @@ div.quote {
 * Prices
 */
 .static-image-glasses {
-    background: url("res/glasses.png");
+    background: url("https://csci571.com/hw/hw3/images/glasses.png");
     background-size: cover;
     background-position: center;
     filter: grayscale(100%);
@@ -235,7 +237,7 @@ div.prices-sub-text {
     font-size: 80%;
 }
 div.plan-details-holder {
-    background: url("res/grid.png");
+    background: url("https://csci571.com/hw/hw3/images/grid.png");
     background-size: cover;
     background-color: rgb(255, 255, 255, 1);
     margin: 15px;
@@ -288,7 +290,7 @@ div.try-it::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("res/notebook.jpg");
+    background-image: url("https://csci571.com/hw/hw3/images/notebook.jpg");
     background-size: cover;
     background-position: center;
     filter: grayscale(100%);
