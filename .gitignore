@@ -32,3 +32,4 @@
 *.app
 */env/
 *.swp
+python-docs-samples/
