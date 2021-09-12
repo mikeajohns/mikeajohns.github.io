@@ -1,0 +1,353 @@
+/*
+* General Stuff (AKA library)
+*/
+
+
+/*1189px width determined by removing all excess pixels on left and right side of ScreenShot1.png*/
+body {
+    width: 1189px;
+    padding: 0px; 
+    margin: 0px;
+}
+div, a, span { 
+  font-family: 'Segoe UI', sans-serif;
+}
+table, tr, th, td {
+  border: 0px;
+}
+th, td {
+  padding: 5px;
+}
+a {
+  text-decoration: none;
+}
+.white-bg {
+    background-color: white;
+}
+.yellow-bg {
+    background-color: #F3E32F;
+    opacity: 1;
+}
+.blue-bg {
+    background-color: #003d5d;
+}
+.white-text {
+    color: white;
+}
+.yellow-text {
+    color:  #ffdc19;
+}
+.gray-text {
+    color: #8f8f8f;
+}
+.light-gray-text {
+    color: LightGray;
+}
+.button {
+    padding: 12px;
+    width: auto;
+    display: inline-block;
+    font-size: small;
+}
+.left {
+    text-align: left;
+}
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+.large {
+    font-size: large;
+}
+.x-large {
+    font-size: x-large;
+}
+.xx-large {
+    font-size: xx-large;
+}
+.small {
+    font-size: small;
+}
+
+/*
+* Tabs
+*/
+
+a.tab {
+  text-align: right;
+  text-decoration: none;
+}
+div.menu-bar {
+    color: #606060;
+    text-align: 'left';
+    padding-left: 110px;
+    padding-right: 5em;
+    padding-bottom: 2.4em;
+    padding-top: 2.4em;
+    background-color: white;
+    font-weight: bold;
+    font-size: 90%;
+}
+span.tabs {
+    display: inline-block;
+    margin-right: 30px;
+    font-size: 90%;
+}
+span.tab {
+    margin-left: 1em;
+}
+.tabs-table {
+    width: 100%;
+}
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*
+* Lawyers + Overlay
+*/
+
+div.lawyers {
+    width: 1189px;
+    height: 671px;
+    background-image: url("https://csci571.com/hw/hw3/images/lawyer.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.overlay-box {
+    position: relative;
+    background-color: #003d5d;
+    width: 21.6%;
+    height: 46.9%;
+    top: 19.9%;
+    left: 7.85%;
+    padding: 2.8em;
+    line-height: 1.05;
+}
+div.improve-business {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 220%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+div.dont-wait {
+    font-size: 90%;
+}
+div.get-your-hands-on {
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    font-size: 80%;
+}
+.signup {
+    width: 100%;
+    margin-bottom: 9%;
+    margin-top: 3%;
+    font-size: 90%;
+}
+
+
+/*
+* Features
+*/
+
+div.features {
+    padding-top: 115px;
+    padding-bottom: 105px;
+    padding-left: 90px;
+    padding-right: 60px;
+    background-color: white;
+}
+div.feature-header {
+    font-size: 95%;
+    padding-bottom: 16px;
+    font-weight: 600;
+}
+div.feature-details {
+    font-size: 75%;
+    font-weight: 800;
+}
+div.table-feature{
+    margin-right: 40px;
+}
+
+
+/*
+* Testamonials
+*/
+div.testamonials {
+    background-color: #F4F4F4;
+    padding: 140px;
+    text-align: center;
+}
+div.quote {
+    font-size: 125%;
+    margin-bottom: 13px;
+    font-weight: bold;
+    color: #707070;
+}
+.testamonials-name {
+    font-size: 80%;
+    color: black;
+    font-weight: 900;
+}
+.testamonials-title {
+    font-size: 80%;
+    color: Gray;
+    font-weight: 800;
+}
+
+
+/*
+* Prices
+*/
+.static-image-glasses {
+    background: url("https://csci571.com/hw/hw3/images/glasses.png");
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 1189px;
+    height: 100%;
+    z-index: -1;
+}
+div.prices {
+    background-color: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    padding: 50px;
+    text-align: center;
+}
+div.prices-header {
+    padding-bottom: 70px;
+    font-weight: bold;
+}
+div.prices-section-header {
+    font-size: 130%;
+    margin-bottom: 12px;
+}
+div.prices-sub-text {
+    font-size: 80%;
+}
+div.plan-details-holder {
+    background: url("https://csci571.com/hw/hw3/images/grid.png");
+    background-size: cover;
+    background-color: rgb(255, 255, 255, 1);
+    margin: 15px;
+    margin-top: 10px;
+    z-index: 3;
+}
+div.plan-details {
+    background-color: rgb(255, 255, 255, 0.9);
+    padding: 65px;
+    padding-bottom: 80px;
+    margin-bottom: 25px;
+    z-index: 2;
+}
+div.plan-title {
+    font-size: 90%;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+div.plan-features {
+    line-height: 1.5;
+    font-size: 95%;
+    padding-bottom: 15px;
+}
+div.plan-feature {
+    padding: 5px;
+}
+div.plan-pricing {
+    line-height: 1;
+    font-size: 170%;
+    padding: 25px;
+    font-weight: 600;
+}
+div.buy-now-button {
+    padding: 18px;
+    padding-left: 37px;
+    padding-right: 37px;
+}
+
+
+/*
+* Try It
+*/
+div.try-it {
+    position: relative;
+}
+div.try-it::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://csci571.com/hw/hw3/images/notebook.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+}
+div.try-it-inside {
+    position: relative;
+    background-color: rgba(10, 59, 96, 0.8);
+    padding-top: 160px;
+    padding-bottom: 170px;
+}
+div.try-the-best {
+    font-size: 150%;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+div.why-try-it {
+    font-size: 77%;
+}
+div.try-it-button {
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 33px;
+}
+div.image-notebook {
+    z-index: -1;
+    width: 1189px;
+}
+img.image-notebook {
+    position: absolute;
+    filter: grayscale(100%);
+    z-index: -1;
+    margin: 0px;
+    width: 100%;
+}
+
+
+/*
+* Footer + Social
+*/
+img.social{
+    width: 35px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+div.footer-area {
+    background-color: #1D2530;
+    text-align: center;
+    padding: 75px;
+}
+div.mybiz {
+    padding: 5px;
+}
+div.biz-address {
+    font-size: 75%;
+    color: gray;
+    padding-bottom: 10px;
+}

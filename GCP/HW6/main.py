@@ -1,24 +1,28 @@
-from flask import Flask
+from flask import Flask, request, send_from_directory
 
-app = Flask(__name__)
-
-
-def print_hi(name):
-    print(f'Hi, {name}')
+#app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='web/static',
+            template_folder='web/templates')
 
 
 @app.route('/')
 def hello():
-    """Return a friendly HTTP greeting."""
-    rv = "<html>"
-    rv += 'Hello World!'
-    rv += '</br>'
-    rv += '<div style="background-color: red;">foobar</div>'
-    rv += "</html>"
-    return rv
+    print('Hello')
+    search_html_path = r'web\static\search.html'
+    file_str = ""
+    with open(search_html_path) as f:
+        file_str = f.read()
+
+    return file_str
 
 
-# Press the green button in the gutter to run the script.
+@app.route('/web/<path:path>')
+def send_webfiles(path):
+    print('Sending: ' + path)
+    return send_from_directory('web', path)
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
     app.run(host='127.0.0.1', port=8080, debug=True)
