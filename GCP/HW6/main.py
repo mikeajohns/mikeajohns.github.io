@@ -10,7 +10,12 @@ def print_hi(name):
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    rv = "<html>"
+    rv += 'Hello World!'
+    rv += '</br>'
+    rv += '<div style="background-color: red;">foobar</div>'
+    rv += "</html>"
+    return rv
 
 
 # Press the green button in the gutter to run the script.
