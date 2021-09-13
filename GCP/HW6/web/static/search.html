@@ -1,161 +1,85 @@
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" content="text/css" href="web/static/weather.css">
+<script src="web/static/search.js"></script>
 <title>TODO</title>
 </head>
 <body> 
-<div class="menu-bar">
-<table class="tabs-table">
-<tr><td class="left">MENU</td>
-    <td class="right"><span class="tabs">
-        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#About" target="_blank">About</a></span>
-        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#Projects" target="_blank">Projects</a></span>
-        <span class="tab"><a class="tab light-gray-text" href="y44tb49g_page2.html#Services" target="_blank">Services</a></span>
-    </span></td></tr>
-</table>
-</div>
 
-<div class="lawyers">
-    <div class="overlay-box">
-        <div class="white-text dont-wait">DON'T WAIT</div>
-        <div class="white-text improve-business">IMPROVE<br> YOUR BUSINESS<br> TODAY!</div>
-        <div class="yellow-text get-your-hands-on">- Get your hands on MyBiz -</div>
-        <div><textarea class="signup"></textarea></div>
-        <div class="button yellow-bg"><span><a>SIGN UP FOR FREE!</a></span></div>
+<div class="card-holder"><div id="weather-form" class="form card">
+    <div class="header-bar">
+        <div class="title">Weather Search</div>
+        <div>Fill out the form to get weather info!</div>
     </div>
-</div>
-
-<div class="features">
-<table>
-<tr>
-<td>
-<div class="table-feature">
-<div class="feature-header">
-AMAZING FEATURE #1
-</div>
-    <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
+    <form>
+    <div class="address-info">
+    <table>
+        
+        <tr><td colspan=2><label for="street">Street<span class="required">*</span></label></td></tr>
+        <tr><td colspan=2><input type="text" id="street"></input></td></tr>
+        
+        <tr>
+            <td class="width-auto-2"><label for="city">City<span class="required">*</span></label></td>
+            <td class="width-auto-2"><label for="state">State<span class="required">*</span></label></td>
+        </tr>
+        <tr>
+            <td class="width-auto-2"><input type="text" id="city"></input></td>
+            <td class="width-auto-2"><select id="state">
+                <!--TODO remove these and replace with a template value so we can build this dynamically-->
+                <option value="TODO">TODO</option>
+                <option value="TODO2">TODO2</option>
+            </select></td>
+        </tr>
+    </table>
     </div>
-</div>
-</td>
-<td>
-<div class="table-feature">
-<div class="feature-header">
-AMAZING FEATURE #2
-</div>
-    <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
+    <hr>
+    <div class="auto-detect">
+        <label for="auto-detect">Want us to auto-detect your location? Check here </label><input type="checkbox" id="auto-detect"></input>
     </div>
-</div></td>
-<td>
-<div class="table-feature">
-<div class="feature-header">
-AMAZING FEATURE #3
-</div>
-    <div class="gray-text feature-details">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros uterat facilisis maximus. In congue et leo in varius. Vestibulum sit amet felis ornare, commodo orci ut, feugiat lorem.
+    <div>
+        <button type="button" onclick="alert('foo')" class="submit button">SUBMIT</button>
+        <button type="button" onclick="clearForm()" class="clear-button button">CLEAR</button>
     </div>
-</div></td>
-</tr>
-</table>
-</div>
-
-<div class="testamonials">
-    <div class="quote">&quot;I COULDN'T HAVE ASKED FOR MORE THAN THIS, MYBIZ IS THE NEXT KILLER APP.&quot;</div>
-    <div><span class="testamonials-name">John Doe</span><span class="testamonials-title">, CEO &amp; Founder, MyBiz</span></div>
-</div>
-
-<div class="prices">
-    <div class="static-image-glasses">
-    </div>
-    <div class="prices-header">
-        <div class="prices-section-header">PRICES</div>
-        <div class="prices-sub-text gray-text">AFFORDABLE FOR EVERYONE</div>
-    </div>
-<table class="center-table">
-<tr>
-<td>
-<div class="plan-details-holder">
-<div class="plan-details">
-<div class="plan-title">BASIC PLAN</div>
-<div class="plan-features">
-    <div class="plan-feature">Plan Amazing Feature #1</div>
-    <div class="plan-feature">Plan Amazing Feature #2</div>
-    <div class="plan-feature">Plan Amazing Feature #3</div>
-    <div class="plan-feature">Plan Amazing Feature #4</div>
-</div>
-<div class="plan-pricing">$29.99<br>Monthly</div>
-<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
-</div>
-</div>
-</td>
-<td>
-<div class="plan-details-holder">
-<div class="plan-details">
-<div class="plan-title">STANDARD PLAN</div>
-<div class="plan-features">
-    <div class="plan-feature">Plan Amazing Feature #1</div>
-    <div class="plan-feature">Plan Amazing Feature #2</div>
-    <div class="plan-feature">Plan Amazing Feature #3</div>
-    <div class="plan-feature">Plan Amazing Feature #4</div>
-</div>
-<div class="plan-pricing">$39.99<br>Monthly</div>
-<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
-</div>
-</div>
-</td>
-<td>
-<div class="plan-details-holder">
-<div class="plan-details">
-<div class="plan-title">CORPORATE PLAN</div>
-<div class="plan-features">
-    <div class="plan-feature">Plan Amazing Feature #1</div>
-    <div class="plan-feature">Plan Amazing Feature #2</div>
-    <div class="plan-feature">Plan Amazing Feature #3</div>
-    <div class="plan-feature">Plan Amazing Feature #4</div>
-</div>
-<div class="plan-pricing">$49.99<br>Monthly</div>
-<div class="white-text button buy-now-button blue-bg">BUY NOW</div>
-</div>
-</div>
-</td>
-</tr></table>
-</div>
-
-<div class="try-it center">
-    <div class="try-it-inside">
-        <div class="try-the-best white-text">TRY THE BEST APP IN THE MARKET</div>
-        <div class="why-try-it white-text">tell more why your software is amazing and why users need to sign up</div>
-        <div class="button try-it-button yellow-bg">TRY IT FOR FREE</div>
-    </div>
-</div>
-
-<div class="footer-area white-text">
-<div class="mybiz">MY BIZ</div>
-<div class="biz-address">
-    224 Grant Ave. Redondo Beach, CA, 90278 310.555.1212 Ext. 3 for Business Needs
-</div>
-
-<a href="http://www.facebook.com" target="_blank">
-<img alt="Facebook" class="social" src="https://csci571.com/hw/hw3/images/facebook.png" />
-</a>
-
-<a href="http://www.twitter.com" target="_blank">
-<img alt="Twitter" class="social" src="https://csci571.com/hw/hw3/images/twitter.png" />
-</a>
-
-<a href="http://www.instagram.com" target="_blank">
-<img alt="Instagram" class="social" src="https://csci571.com/hw/hw3/images/instagram.png" />
-</a>
-
-
-<a href="http://www.youtube.com" target="_blank">
-<img alt="YouTube" class="social" src="https://csci571.com/hw/hw3/images/youtube.png" />
-</a>
-
-<a href="https://www.google.com/" target="_blank">
-<img alt="Google" class="social" src="https://csci571.com/hw/hw3/images/googleplus.png" />
-</a>
-</div>
+    </form>
+</div></div>
+<div class="card-holder"><div id=current-weather" class="card">
+    Current Weather
+    <div id="location"></div>
+    <table id="current-details">
+        <tr id="current-details-header">
+            <td>Humidity</td>
+            <td>Pressure</td>
+            <td>Wind Speed</td>
+            <td>Visibility</td>
+            <td>Cloud Cover</td>
+            <td>UV Level</td>
+        </tr>
+        <tr id="current-details-icons">
+            <td><img id="humidity-icon"></td>
+            <td><img id="pressure-icon"></td>
+            <td><img id="wind-speed-icon"></td>
+            <td><img id="visibility-icon"></td>
+            <td><img id="cloud-cover-icon"></td>
+            <td><img id="uv-level-icon"></td>
+        </tr>
+        <tr id="current-details-values">
+            <td id="humitity-value"></td>
+            <td id="humitity-value"></td><!--TODO finish-->
+            <td id="humitity-value"></td>
+            <td id="humitity-value"></td>
+            <td id="humitity-value"></td>
+            <td id="humitity-value"></td>
+        </tr>
+    </table>
+</div></div>
+<div class="card-holder"><div id="forecast" class="card">
+X Day Forecast
+</div></div>
+<div class="card-holder"><div id="daily-weather-details" class="card">
+Daily Details
+</div></div>
+<div class="card-holder"><div id="weather-charts" class="card">
+Charts
+</div></div>
 
 </body></html>
