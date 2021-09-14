@@ -79,7 +79,7 @@ div.card {
 */
 div.header-bar {
     /*TODO need to fix this to the cloud picture*/
-    background-image: url("https://csci571.com/hw/hw3/images/notebook.jpg");
+    background-image: url("/web/images/banner.jpg");
     padding: 2em;
     padding-bottom: 1em;
 }

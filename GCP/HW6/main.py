@@ -18,10 +18,27 @@ def hello():
     return file_str
 
 
+### another way to do this
+# url_for('static', filename='style.css')
 @app.route('/web/<path:path>')
 def send_webfiles(path):
     print('Sending: ' + path)
     return send_from_directory('web', path)
+
+
+# https://api.tomorrow.io/v4/timelines?location=-73.98529171943665,40.75872069597532&fields=temperature&timesteps=1h&units=metric&apikey=sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O
+@app.route('/apis/tomorrow/<path:path>', methods=['GET', 'POST'])
+def call_tomorrow_io(path):
+    print("Path: " + path)
+    url = path
+    print(request.get_json())
+    #print("Data: " + data)
+    secret_key = "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"
+    url = url + '&apikey=' + secret_key
+
+    #TODO make call
+    results = {"foobar": "baz"}
+    return results
 
 
 if __name__ == '__main__':
