@@ -30,15 +30,26 @@ def send_webfiles(path):
 @app.route('/apis/tomorrow/<path:path>', methods=['GET', 'POST'])
 def call_tomorrow_io(path):
     print("Path: " + path)
-    url = path
-    print(request.get_json())
-    #print("Data: " + data)
-    secret_key = "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"
-    url = url + '&apikey=' + secret_key
+    req_data = request.get_json()
 
-    #TODO make call
-    results = {"foobar": "baz"}
-    return results
+    base_url = "https://api.tomorrow.io/v4"
+    method = req_data['method']
+    del req_data['method']
+
+    import urllib.request
+    import urllib.parse
+
+    secret_key = "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"
+    req_data["apikey"] = secret_key
+
+    params = urllib.parse.urlencode(req_data)
+    url = base_url + "/%s?%s" % (method, params)
+    print(url)
+
+    import requests
+    response = requests.get(url)
+
+    return response.json()
 
 
 if __name__ == '__main__':
