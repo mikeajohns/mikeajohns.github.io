@@ -1,13 +1,19 @@
+function onLoad() {
+    jQuery(".default-hide").hide()
+}
+
 function clearForm(){
-    alert("cleared (TODO)");
+    jQuery(".default-hide").hide()
+    alert("cleared (TODO - actually empty fields)");
 }
 function submitForm(){
+    jQuery("#current-weather").show()
     call_tomorrow_test()
     call_geocode_test()
 }
 
-function call_geocode_test() {
-    req_data = {
+function call_tomorrow_test() {
+    var req_data = {
         /*NOTE: This is the method to call and is treated special*/
         "location": "-73.98529171943665,40.75872069597532",
         "fields": "temperature",
@@ -16,8 +22,8 @@ function call_geocode_test() {
     };
     get_api_info("tomorrow", "timelines", req_data);
 }
-function call_tomorrow_test() {
-    req_data = {
+function call_geocode_test() {
+    var req_data = {
         /*NOTE: This is the method to call and is treated special*/
         "address": "1600 Ampitheatre Parkway, Mountain View, CA",
     };

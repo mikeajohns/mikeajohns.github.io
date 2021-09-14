@@ -35,7 +35,7 @@ def call_api(api_name):
     api_infos = {
         "tomorrow": {
             "url": "https://api.tomorrow.io/v4",
-            "params": {"apikey": "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O", "key_field":"apikey"}
+            "params": {"apikey": "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"}
         },
         "geocode": {
             "url": "https://maps.googleapis.com/maps/api/geocode",

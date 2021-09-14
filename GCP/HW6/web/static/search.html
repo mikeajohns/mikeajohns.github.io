@@ -5,7 +5,7 @@
 <script src="web/static/jquery-3.5.1.min.js"></script>
 <title>TODO</title>
 </head>
-<body> 
+<body onload="onLoad()"> 
 
 <div class="card-holder"><div id="weather-form" class="form card">
     <div class="header-bar">
@@ -43,7 +43,7 @@
     </div>
     </form>
 </div></div>
-<div class="card-holder"><div id=current-weather" class="card">
+<div class="card-holder default-hide" id="current-weather"><div class="card">
     Current Weather
     <div id="location"></div>
     <table id="current-details">
@@ -73,13 +73,13 @@
         </tr>
     </table>
 </div></div>
-<div class="card-holder"><div id="forecast" class="card">
+<div class="card-holder default-hide" id="forecast"><div class="card">
 X Day Forecast
 </div></div>
-<div class="card-holder"><div id="daily-weather-details" class="card">
+<div class="card-holder default-hide" id="daily-weather-details"><div class="card">
 Daily Details
 </div></div>
-<div class="card-holder"><div id="weather-charts" class="card">
+<div class="card-holder default-hide" id="weather-charts"><div class="card">
 Charts
 </div></div>
 
