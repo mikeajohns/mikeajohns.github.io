@@ -27,23 +27,40 @@ def send_webfiles(path):
 
 
 # https://api.tomorrow.io/v4/timelines?location=-73.98529171943665,40.75872069597532&fields=temperature&timesteps=1h&units=metric&apikey=sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O
-@app.route('/apis/tomorrow/<path:path>', methods=['GET', 'POST'])
-def call_tomorrow_io(path):
-    print("Path: " + path)
+# https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY}
+@app.route('/apis/<api_name>', methods=['GET', 'POST'])
+def call_api(api_name):
     req_data = request.get_json()
 
-    base_url = "https://api.tomorrow.io/v4"
-    method = req_data['method']
-    del req_data['method']
+    api_infos = {
+        "tomorrow": {
+            "url": "https://api.tomorrow.io/v4",
+            "params": {"apikey": "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O", "key_field":"apikey"}
+        },
+        "geocode": {
+            "url": "https://maps.googleapis.com/maps/api/geocode",
+            "params": {"key": "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc"}
+        }
+    }
+
+    if api_name not in api_infos:
+        return None
+
 
     import urllib.request
     import urllib.parse
 
-    secret_key = "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"
-    req_data["apikey"] = secret_key
+    api_info = api_infos[api_name]
+    url = api_info["url"]
 
-    params = urllib.parse.urlencode(req_data)
-    url = base_url + "/%s?%s" % (method, params)
+    if "method" in req_data:
+        method = req_data["method"]
+        del req_data["method"]
+        url = url + "/%s" % (method)
+
+    params = urllib.parse.urlencode(req_data | api_info["params"])
+
+    url = url + "?%s" % (params)
     print(url)
 
     import requests
