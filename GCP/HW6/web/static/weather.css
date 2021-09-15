@@ -78,7 +78,6 @@ div.card {
 * Search
 */
 div.header-bar {
-    /*TODO need to fix this to the cloud picture*/
     background-image: url("/web/images/banner.jpg");
     padding: 2em;
     padding-bottom: 1em;
