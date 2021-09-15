@@ -1,6 +1,13 @@
 function onLoad() {
     jQuery(".default-hide").hide()
     
+    for (const [stateShort, stateLong] of Object.entries(states)) {
+        jQuery("#state").append(jQuery("<option>", {
+            value: stateShort,
+            text: stateShort
+        }));
+    }
+    
     /*TODO remove debug code*/
     jQuery("#street").val("1600 Ampitheatre Parkway")
     jQuery("#city").val("Mountain View")
@@ -8,7 +15,7 @@ function onLoad() {
 }
 
 function onCheckAutoDetect() {
-    if (jQuery("#auto-detect").prop('checked') ) {
+    if (jQuery("#auto-detect").prop("checked") ) {
         //TODO do auto-detect
         clearInputFields()
         setInputFieldsNoEdit()
@@ -24,6 +31,19 @@ function clearInputFields() {
     jQuery("#city").val("")
     jQuery("#state").val("")
     jQuery("#auto-detect").prop('checked', false);
+}
+
+function onCheckboxChange() {
+    if(jQuery("#auto-detect").prop('checked')) {
+        jQuery("#street").val("").prop('disabled', true)
+        jQuery("#city").val("").prop('disabled', true)
+        jQuery("#state").val("").prop('disabled', true)
+    }
+    else {
+        jQuery("#street").prop('disabled', false)
+        jQuery("#city").prop('disabled', false)
+        jQuery("#state").prop('disabled', false)
+    }
 }
 
 function clearForm(){
