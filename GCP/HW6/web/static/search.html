@@ -44,9 +44,12 @@
     </form>
 </div></div>
 <div class="card-holder default-hide" id="current-weather"><div class="card">
-    Current Weather
     <div id="location"></div>
     <table id="current-details">
+        <tr id="current-big-picture-row">
+            <td><img id="weather-code-icon"></td>
+            <td id="current-temp"></td>
+        </tr>
         <tr id="current-details-header">
             <td>Humidity</td>
             <td>Pressure</td>
@@ -64,7 +67,7 @@
             <td><img id="uv-level-icon"></td>
         </tr>
         <tr id="current-details-values">
-            <td id="humitity-value"></td>
+            <td id="humidity-value"></td>
             <td id="pressure-value"></td><!--TODO finish-->
             <td id="wind-speed-value"></td>
             <td id="visibility-value"></td>

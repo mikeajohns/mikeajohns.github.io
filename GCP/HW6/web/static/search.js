@@ -39,7 +39,7 @@ function submitForm(){
             var loc = json["loc"]
             var lng = loc.split(",")[1]
             var lat = loc.split(",")[0]
-            call_tomorrow_weather(lng, lat)
+            call_tomorrow_weather(lng, lat, json["city"] + ", " + json["region"] + ", " + json["country"])
         });
     }
     else {
@@ -54,32 +54,101 @@ function submitForm(){
         get_api_info("geocode", "json", req_data, function(rspObj){
             var json = JSON.parse(rspObj.responseText)
             //TODO remove debug (get these from geocode -> results -> 0 -> geometry -> location -> lat/long
-            var lng = 40.75872069597532;
-            var lat = -73.98529171943665;
-            call_tomorrow_weather(lng, lat)
+            var lng = -73.98529171943665;
+            var lat = 40.75872069597532;
+            resultsIdx = 0 //TODO stop hardcoding
+            call_tomorrow_weather(lng, lat, json["results"][resultsIdx]["formatted_address"])
         });
     }    
 }
 
-function call_tomorrow_weather(lng, lat) {
+function call_tomorrow_weather(lng, lat, loc) {
     var req_data = {
-        /*NOTE: This is the method to call and is treated special*/
-        "location": lng + "," + lat,
-        "fields": ["temperature", "pressure", "windSpeed", "visibility", "cloudCover", "uvIndex"],
-        "timesteps": "1h",
-        "units": "metric"
+        "location": "" + lng + "," + lat + "",
+        "fields": [
+            "temperature", "temperatureApparent", "temperatureMin", "temperatureMax", 
+            "humidity", "pressureSeaLevel", "windSpeed", "windDirection", 
+            "visibility", "cloudCover", "uvIndex", 
+            "weatherCode", "precipitationProbability", "precipitationType", 
+            "sunriseTime", "sunsetTime", "moonPhase"],
+        "timesteps": ["1h", "1d"], //TODO for current, only use 1d
+        "timezone": "America/Los_Angeles",
+        "units": "imperial"
     };
     get_api_info("tomorrow", "timelines", req_data, function(rspObj){
-        //alert(rspObj.responseText)
-        jQuery("#humitity-value").text(123)
-        jQuery("#pressure-value").text(321)
-        jQuery("#wind-speed-value").text(321)
-        jQuery("#visibility-value").text(321)
-        jQuery("#cloud-cover-value").text(321)
-        jQuery("#uv-level-value").text(333)
+        var rspJSON = JSON.parse(rspObj.responseText)
+        
+        // weather for today
+        twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+        startTimeIdx = 0 //TODO either fix the query to only ask for what we need or make this smarter
+        alert(rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"])
+        var values = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
+        
+        jQuery("#location").text(loc)
+        
+        //TODO format the strings and add units
+        jQuery("#humidity-value").text(values["humidity"])
+        jQuery("#pressure-value").text(values["pressureSeaLevel"])
+        jQuery("#wind-speed-value").text(values["windSpeed"])
+        jQuery("#visibility-value").text(values["visibility"])
+        jQuery("#cloud-cover-value").text(values["cloudCover"])
+        jQuery("#uv-level-value").text(values["uvIndex"])
+        
+        jQuery("#current-temp").text(values["temperature"])
+        
+        jQuery("#humidity-icon").attr("src", get_current_weather_icon("humidity"))
+        jQuery("#pressure-icon").attr("src", get_current_weather_icon("pressureSeaLevel"))
+        jQuery("#wind-speed-icon").attr("src", get_current_weather_icon("windSpeed"))
+        jQuery("#visibility-icon").attr("src", get_current_weather_icon("visibility"))
+        jQuery("#cloud-cover-icon").attr("src", get_current_weather_icon("cloudCover"))
+        jQuery("#uv-level-icon").attr("src", get_current_weather_icon("uvIndex"))
+        
+        jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
+        
         
         jQuery("#current-weather").show()
     });
+}
+
+iconPrefix = "https://raw.githubusercontent.com/Tomorrow-IO-API/tomorrow-weather-codes/master/color/";
+weatherCodeLookup = {
+    //TODO remove "0": ["Unknown", "ico"],
+    "1000": ["Clear", iconPrefix + "clear_day.svg"],
+    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/clear_night.svg
+    "1001": ["Cloudy", iconPrefix + "cloudy.svg"],
+    "1100": ["Mostly Clear", iconPrefix + "mostly_clear_day.svg"],
+    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/mostly_clear_night.svg
+    "1101": ["Partly Cloudy", iconPrefix + "partly_cloudy_day.svg"],
+    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/partly_cloudy_night.svg
+    "1102": ["Mostly Cloudy", iconPrefix + "mostly_cloudy.svg"],
+    "2000": ["Fog", iconPrefix + "fog.svg"],
+    "2100": ["Light Fog", iconPrefix + "fog_light.svg"],
+    "3000": ["Light Wind", "ico"],
+    "3001": ["Wind", "ico"],
+    "3002": ["Strong Wind", "ico"],
+    "4000": ["Drizzle", iconPrefix + "drizzle.svg"],
+    "4001": ["Rain", iconPrefix + "rain.svg"],
+    "4200": ["Light Rain", iconPrefix + "rain_light.svg"],
+    "4201": ["Heavy Rain", iconPrefix + "rain_heavy.svg"],
+    "5000": ["Snow", iconPrefix + "snow.svg"],
+    "5001": ["Flurries", iconPrefix + "flurries.svg"],
+    "5100": ["Light Snow", iconPrefix + "snow_light.svg"],
+    "5101": ["Heavy Snow", iconPrefix + "snow_heavy.svg"],
+    "6000": ["Freezing Drizzle", iconPrefix + "freezing_drizzle.svg"],
+    "6001": ["Freezing Rain", iconPrefix + "freezing_rain.svg"],
+    "6200": ["Light Freezing Rain", iconPrefix + "freezing_rain_light.svg"],
+    "6201": ["Heavy Freezing Rain", iconPrefix + "freezing_rain_heavy.svg"],
+    "7000": ["Ice Pellets", iconPrefix + "ice_pellets.svg"],
+    "7101": ["Heavy Ice Pellets", iconPrefix + "ice_pellets_heavy.svg"],
+    "7102": ["Light Ice Pellets", iconPrefix + "ice_pellets_light.svg"],
+    "8000": ["Thunderstorm", iconPrefix + "tstorm.svg"]
+}
+
+function get_weather_code_text(weatherCode){
+    return weatherCodeLookup[weatherCode][0]
+}
+function get_weather_code_icon(weatherCode){
+    return weatherCodeLookup[weatherCode][1]
 }
 
 function todo_callback(rspObj) {
@@ -106,4 +175,16 @@ function get_api_info(api, method, req_data, callback){
     req_data.method = method;
     
     req.send(JSON.stringify(req_data));
+}
+
+function get_current_weather_icon(infoType){
+    lookup = {
+        "humidity":         "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-16-512.png",
+        "pressureSeaLevel": "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-25-512.png",
+        "windSpeed":        "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-27-512.png",
+        "visibility":       "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-30-512.png",
+        "cloudCover":       "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-28-512.png",
+        "uvIndex":          "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png"
+    };
+    return lookup[infoType];
 }

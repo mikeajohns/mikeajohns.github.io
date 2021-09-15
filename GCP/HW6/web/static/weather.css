@@ -107,6 +107,18 @@ label {
     color: red;
 }
 
+
+/*
+* Current Weather
+*/
+tr#current-details-icons img {
+    width: 20px;
+}
+tr#current-big-picture-row {
+    height = 50px;
+}
+
+
 /*
 * Tabs
 */
