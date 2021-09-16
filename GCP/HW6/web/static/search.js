@@ -101,7 +101,7 @@ function call_tomorrow_weather(lng, lat, loc) {
         // weather for today
         twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
         startTimeIdx = 0 //TODO either fix the query to only ask for what we need or make this smarter
-        alert(rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"])
+        
         var values = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
         
         jQuery("#location").text(loc)
@@ -126,16 +126,27 @@ function call_tomorrow_weather(lng, lat, loc) {
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
         
         
-        forecastData = {}
+        var twentyFourHrIdx = 1
+        var forecastData = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"]
+            console.log(JSON.stringify(forecastData))
+        var daysToForecast = 15
         
         /*TODO remove debug*/
-        for (const [stateShort, stateLong] of Object.entries(states)) {
-            var date = "Sunday, 05 Sep 2021";
-            var weatherStatusIconPath = get_weather_code_icon(4201);
-            var weatherStatusText = get_weather_code_text(4201);
-            var highTemp = "100"
-            var lowTemp = "32"
-            var windSpeed = "60"
+        for (var timeIdx in forecastData) {
+            
+            if(timeIdx >= daysToForecast)
+            {
+                break;
+            }
+            
+            var timeData = forecastData[timeIdx]
+            var date = timeData["startTime"]
+            var weatherCode = timeData["values"]["weatherCode"]
+            var weatherStatusIconPath = get_weather_code_icon(weatherCode);
+            var weatherStatusText = get_weather_code_text(weatherCode);
+            var highTemp = timeData["values"]["temperatureMax"]
+            var lowTemp = timeData["values"]["temperatureMin"]
+            var windSpeed = timeData["values"]["windSpeed"]
             
             
             var newRow = "<tr class='forecast-table-row'>";
