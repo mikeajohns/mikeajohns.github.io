@@ -159,13 +159,6 @@ function call_tomorrow_weather(lng, lat, loc) {
             
             jQuery("#x-day-forecast").append(newRow);
         }
-        /*TODO foreach day of forecast (up to XX?)
-        insert
-        "<tr class="forecast-table-row">
-        <td>DATE</td><td>statusIcon</td><td>highTemp</td><td>lowTemp</td><td>windSpeed</td>
-    </tr>"
-        */
-        
         
         jQuery("#current-weather").show()
         jQuery("#forecast").show()
