@@ -138,8 +138,10 @@ tr#current-big-picture-row {
     color: darkgray;
     border-spacing: 0;
     font-weight: bold;
-    
+    text-align: center;
 }
+
+/*TODO make the text for status line up vertically in center*/
 #x-day-forecast th {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -149,6 +151,10 @@ tr#current-big-picture-row {
 
 #x-day-forecast th, td{
     border-bottom: 5px solid lightgray;
+}
+img.forecast-weather-status-icon {
+    width: 40px;
+    
 }
 .forecast-table-header{
     background-color: #5A68AC;

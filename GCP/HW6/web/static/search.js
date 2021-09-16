@@ -126,6 +126,36 @@ function call_tomorrow_weather(lng, lat, loc) {
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
         
         
+        forecastData = {}
+        
+        /*TODO remove debug*/
+        for (const [stateShort, stateLong] of Object.entries(states)) {
+            var date = "Sunday, 05 Sep 2021";
+            var weatherStatusIconPath = get_weather_code_icon(4201);
+            var weatherStatusText = get_weather_code_text(4201);
+            var highTemp = "100"
+            var lowTemp = "32"
+            var windSpeed = "60"
+            
+            
+            var newRow = "<tr class='forecast-table-row'>";
+            newRow += "<td>" + date + "</td>";
+            newRow += "<td><img class='forecast-weather-status-icon' src='" + weatherStatusIconPath + "'>" + weatherStatusText + "</td>";
+            newRow += "<td>" + highTemp + "</td>";
+            newRow += "<td>" + lowTemp + "</td>";
+            newRow += "<td>" + windSpeed + "</td>";
+            newRow += "</tr>";
+            
+            jQuery("#x-day-forecast").append(newRow);
+        }
+        /*TODO foreach day of forecast (up to XX?)
+        insert
+        "<tr class="forecast-table-row">
+        <td>DATE</td><td>statusIcon</td><td>highTemp</td><td>lowTemp</td><td>windSpeed</td>
+    </tr>"
+        */
+        
+        
         jQuery("#current-weather").show()
         jQuery("#forecast").show()
     });
