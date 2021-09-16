@@ -114,6 +114,17 @@ label {
 tr#current-details-icons img {
     width: 20px;
 }
+img#weather-code-icon{
+    width: 75px;
+}
+#current-summary {
+    width: 100%;
+}
+#current-temp{
+    font-size: 60px;
+    text-align: right;
+    color: gray;
+}
 tr#current-big-picture-row {
     height = 50px;
 }
