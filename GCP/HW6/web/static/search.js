@@ -128,7 +128,6 @@ function call_tomorrow_weather(lng, lat, loc) {
         
         var twentyFourHrIdx = 1
         var forecastData = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"]
-            console.log(JSON.stringify(forecastData))
         var daysToForecast = 15
         
         /*TODO remove debug*/
@@ -160,9 +159,20 @@ function call_tomorrow_weather(lng, lat, loc) {
             jQuery("#x-day-forecast").append(newRow);
         }
         
+        jQuery(".forecast-table-row").click(showForecastDetail);
+    
+        
         jQuery("#current-weather").show()
         jQuery("#forecast").show()
     });
+}
+
+function showForecastDetail(){
+    jQuery("#current-weather").hide()
+    jQuery("#forecast").hide()
+    jQuery("#daily-weather-details").show()
+    jQuery("#weather-charts-card").hide() //don't show this until the button is clicked
+    jQuery("#weather-charts").show()
 }
 
 iconPrefix = "https://raw.githubusercontent.com/Tomorrow-IO-API/tomorrow-weather-codes/master/color/";
