@@ -127,6 +127,7 @@ function call_tomorrow_weather(lng, lat, loc) {
         
         
         jQuery("#current-weather").show()
+        jQuery("#forecast").show()
     });
 }
 

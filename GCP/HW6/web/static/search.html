@@ -17,16 +17,16 @@
     <div class="address-info">
     <table>
         
-        <tr><td colspan=2><label for="street">Street<span class="required">*</span></label></td></tr>
-        <tr><td colspan=2><input type="text" id="street"></input></td></tr>
+        <tr><th colspan=2><label for="street">Street<span class="required">*</span></label></th></tr>
+        <tr><th colspan=2><input type="text" id="street"></input></th></tr>
         
         <tr>
-            <td class="width-auto-2"><label for="city">City<span class="required">*</span></label></td>
-            <td class="width-auto-2"><label for="state">State<span class="required">*</span></label></td>
+            <th class="width-auto-2"><label for="city">City<span class="required">*</span></label></th>
+            <th class="width-auto-2"><label for="state">State<span class="required">*</span></label></th>
         </tr>
         <tr>
-            <td class="width-auto-2"><input type="text" id="city"></input></td>
-            <td class="width-auto-2"><select id="state"></select></td>
+            <th class="width-auto-2"><input type="text" id="city"></input></th>
+            <th class="width-auto-2"><select id="state"></select></th>
         </tr>
     </table>
     </div>
@@ -44,39 +44,43 @@
     <div id="location"></div>
     <table id="current-summary">
         <tr id="current-big-picture-row">
-            <td><img id="weather-code-icon"></td>
-            <td id="current-temp"></td>
+            <th><img id="weather-code-icon"></th>
+            <th id="current-temp"></th>
         </tr>
     </table>
     <table id="current-details">
         <tr id="current-details-header">
-            <td>Humidity</td>
-            <td>Pressure</td>
-            <td>Wind Speed</td>
-            <td>Visibility</td>
-            <td>Cloud Cover</td>
-            <td>UV Level</td>
+            <th>Humidity</th>
+            <th>Pressure</th>
+            <th>Wind Speed</th>
+            <th>Visibility</th>
+            <th>Cloud Cover</th>
+            <th>UV Level</th>
         </tr>
         <tr id="current-details-icons">
-            <td><img id="humidity-icon"></td>
-            <td><img id="pressure-icon"></td>
-            <td><img id="wind-speed-icon"></td>
-            <td><img id="visibility-icon"></td>
-            <td><img id="cloud-cover-icon"></td>
-            <td><img id="uv-level-icon"></td>
+            <th><img id="humidity-icon"></th>
+            <th><img id="pressure-icon"></th>
+            <th><img id="wind-speed-icon"></th>
+            <th><img id="visibility-icon"></th>
+            <th><img id="cloud-cover-icon"></th>
+            <th><img id="uv-level-icon"></th>
         </tr>
         <tr id="current-details-values">
-            <td id="humidity-value"></td>
-            <td id="pressure-value"></td><!--TODO finish-->
-            <td id="wind-speed-value"></td>
-            <td id="visibility-value"></td>
-            <td id="cloud-cover-value"></td>
-            <td id="uv-level-value"></td>
+            <th id="humidity-value"></th>
+            <th id="pressure-value"></th><!--TODO finish-->
+            <th id="wind-speed-value"></th>
+            <th id="visibility-value"></th>
+            <th id="cloud-cover-value"></th>
+            <th id="uv-level-value"></th>
         </tr>
     </table>
 </div></div>
 <div class="card-holder default-hide" id="forecast"><div class="card">
-X Day Forecast
+    <table id="x-day-forecast">
+    <tr class="forecast-table-header">
+        <th>Date</th><th>Status</th><th>Temp High</th><th>Temp Low</th><th>Wind Speed</th>
+    </tr>
+    </table>
 </div></div>
 <div class="card-holder default-hide" id="daily-weather-details"><div class="card">
 Daily Details
