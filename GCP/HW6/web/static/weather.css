@@ -161,6 +161,22 @@ img.forecast-weather-status-icon {
 }
 
 /*
+* Daily Weather
+*/
+#daily-day{
+    font-size: 25px;
+}
+#daily-weather-code-text {
+    font-size: 25px;
+}
+#daily-hi-low-temp {
+    font-size: 35px;
+}
+#daily-weather-code-icon {
+    width: 100px;
+}
+
+/*
 * Charts
 */
 .arrow-button{

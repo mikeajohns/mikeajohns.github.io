@@ -150,7 +150,7 @@ function call_tomorrow_weather(lng, lat, loc) {
             var windSpeed = timeData["values"]["windSpeed"]
             
             
-            var newRow = "<tr class='forecast-table-row' data-timeIdx='" + timeIdx + "'>";
+            var newRow = "<tr class='forecast-table-row' data-timeidx='" + timeIdx + "'>";
             newRow += "<td>" + date + "</td>";
             newRow += "<td><img class='forecast-weather-status-icon' src='" + weatherStatusIconPath + "'>" + weatherStatusText + "</td>";
             newRow += "<td>" + highTemp + "</td>";
@@ -169,14 +169,52 @@ function call_tomorrow_weather(lng, lat, loc) {
     });
 }
 
-function showForecastDetail(){
+test = ""
+function showForecastDetail(elem){
+    startTimeIdx = jQuery(elem.currentTarget).attr("data-timeidx")
+    
     jQuery("#current-weather").hide()
     jQuery("#forecast").hide()
     jQuery("#daily-weather-details").show()
     jQuery("#weather-charts-card").hide() //don't show this until the button is clicked
     jQuery("#weather-charts").show()
     
-    //TODO tr->data-timeIdx
+    // weather for today
+    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+    var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
+    
+    var date = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals[startTimeIdx].startTime;
+    var weatherCode = values.weatherCode;
+    var highTemp = values.temperatureMax;
+    var lowTemp = values.temperatureMin;
+    
+    jQuery("#daily-day").text(date);
+    jQuery("#daily-weather-code-text").text(get_weather_code_text(weatherCode));
+    jQuery("#daily-weather-code-icon").attr("src", get_weather_code_icon(weatherCode));
+    jQuery("#daily-hi-low-temp").text(highTemp + "/" + lowTemp);
+    
+    //clear the table before adding new rows
+    jQuery("#daily-weather-details-table").empty()
+    
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Precipitation:</td><td>" + values.precipitationType + "</td></tr>");
+            
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Chance of Rain:</td><td>" + values.precipitationProbability + "%</td></tr>");
+            
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Wind Speed:</td><td>" + values.windSpeed + " mph</td></tr>");
+            
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Humidity:</td><td>" + values.humidity + "%</td></tr>");
+            
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Visibility:</td><td>" + values.visibility + " mi</td></tr>");
+            
+    var sunriseTime = values.sunriseTime;
+    var sunsetTime = values.sunsetTime;
+    jQuery("#daily-weather-details-table").append(
+            "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "%</td></tr>");
 }
 
 iconPrefix = "web/images/";
