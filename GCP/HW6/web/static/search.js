@@ -17,32 +17,6 @@ function onLoad() {
     
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const chart = Highcharts.chart('days-chart', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Fruit Consumption'
-        },
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-        }, {
-            name: 'John',
-            data: [5, 7, 3]
-        }]
-    }
-    );
-});
 
 
 function onCheckAutoDetect() {
@@ -323,10 +297,48 @@ function get_current_weather_icon(infoType){
 
 //down button
 function showWeatherCharts(){
+    // weather for today
+    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+    var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
+    mins = []
+    maxs = []
+    //for (const [stateShort, stateLong] of Object.entries(states)) {
+    for (day of days) {
+        maxs.push(day.values.temperatureMax)
+        mins.push(day.values.temperatureMin)
+    }
+    const chart = Highcharts.chart('days-chart', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Temperature Ranges (Min, Max)'
+        },
+        xAxis: {
+            labels: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            labels: {
+                enabled: false
+            }
+        },
+        series: [{
+            data: mins
+        }, {
+            data: maxs
+        }]
+    });
+
+    
+    
     jQuery("#weather-charts-card").show()
     jQuery("#weather-charts").show()
     jQuery("#up-button").show()
     jQuery("#down-button").hide()
+    
+    
 }
 
 //up button
