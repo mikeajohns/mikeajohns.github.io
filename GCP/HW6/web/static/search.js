@@ -300,16 +300,16 @@ function showWeatherCharts(){
     // weather for today
     twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
-    mins = []
-    maxs = []
+    daysChartData = []
     //for (const [stateShort, stateLong] of Object.entries(states)) {
+    dayIdx =0;
     for (day of days) {
-        maxs.push(day.values.temperatureMax)
-        mins.push(day.values.temperatureMin)
+        dayIdx++;
+        daysChartData.push([dayIdx, day.values.temperatureMin, day.values.temperatureMax])
     }
     const chart = Highcharts.chart('days-chart', {
         chart: {
-            type: 'line'
+            type: 'arearange'
         },
         title: {
             text: 'Temperature Ranges (Min, Max)'
@@ -317,17 +317,29 @@ function showWeatherCharts(){
         xAxis: {
             labels: {
                 enabled: false
-            }
+            },
+            title: {
+                enabled: false
+            },
+            type: 'datetime'
         },
         yAxis: {
             labels: {
                 enabled: false
+            },
+            title: {
+                enabled: false
             }
         },
+        tooltip: {
+           // xDateFormat: '%A, %b, %e',
+            valueSuffix: '\u00B0'
+        },
+        legend: {
+            enabled: false
+        },
         series: [{
-            data: mins
-        }, {
-            data: maxs
+            data: daysChartData
         }]
     });
 
