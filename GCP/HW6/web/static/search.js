@@ -6,7 +6,7 @@ function onLoad() {
     for (const [stateShort, stateLong] of Object.entries(states)) {
         jQuery("#state").append(jQuery("<option>", {
             value: stateShort,
-            text: stateShort
+            text: stateLong
         }));
     }
     
@@ -14,7 +14,36 @@ function onLoad() {
     jQuery("#street").val("1600 Ampitheatre Parkway")
     jQuery("#city").val("Mountain View")
     jQuery("#state").val("CA")
+    
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const chart = Highcharts.chart('days-chart', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: ['Apples', 'Bananas', 'Oranges']
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+            name: 'Jane',
+            data: [1, 0, 4]
+        }, {
+            name: 'John',
+            data: [5, 7, 3]
+        }]
+    }
+    );
+});
+
 
 function onCheckAutoDetect() {
     if (jQuery("#auto-detect").prop("checked") ) {
@@ -116,7 +145,7 @@ function call_tomorrow_weather(lng, lat, loc) {
         jQuery("#cloud-cover-value").text(values["cloudCover"])
         jQuery("#uv-level-value").text(values["uvIndex"])
         
-        jQuery("#current-temp").text(values["temperature"])
+        jQuery("#current-temp").text(values["temperature"] + "\u00B0");
         
         jQuery("#humidity-icon").attr("src", get_current_weather_icon("humidity"))
         jQuery("#pressure-icon").attr("src", get_current_weather_icon("pressureSeaLevel"))

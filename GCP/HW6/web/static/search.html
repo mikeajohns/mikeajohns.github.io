@@ -4,6 +4,8 @@
 <script src="web/static/search.js"></script>
 <script src="web/static/states.js"></script>
 <script src="web/static/jquery-3.5.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
 <title>TODO</title>
 </head>
 <body onload="onLoad()"> 
@@ -67,7 +69,7 @@
         </tr>
         <tr id="current-details-values">
             <th id="humidity-value"></th>
-            <th id="pressure-value"></th><!--TODO finish-->
+            <th id="pressure-value"></th>
             <th id="wind-speed-value"></th>
             <th id="visibility-value"></th>
             <th id="cloud-cover-value"></th>
@@ -101,6 +103,13 @@
             <input type="image" id="up-button" class="arrow-button" onclick="hideWeatherCharts()" src="web/images/point-up-512.png" />
         </div>
         Charts
+        <div id="charts">
+            <div id="days-chart" style="width:400px; height:400px;">
+
+            </div>
+            <div id="hours-chart">
+            </div>
+        </div>
     </div>
     <div>
         <input type="image" id="down-button" class="arrow-button" onclick="showWeatherCharts()" src="web/images/point-down-512.png" />
