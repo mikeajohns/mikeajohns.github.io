@@ -1,3 +1,5 @@
+tomorrowWeatherStore = {} //global to store and retrieve weather info
+
 function onLoad() {
     jQuery(".default-hide").hide()
     
@@ -96,13 +98,13 @@ function call_tomorrow_weather(lng, lat, loc) {
         "units": "imperial"
     };
     get_api_info("tomorrow", "timelines", req_data, function(rspObj){
-        var rspJSON = JSON.parse(rspObj.responseText)
+        tomorrowWeatherStore = JSON.parse(rspObj.responseText);
         
         // weather for today
         twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
         startTimeIdx = 0 //TODO either fix the query to only ask for what we need or make this smarter
         
-        var values = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
+        var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
         
         jQuery("#location").text(loc)
         
@@ -127,7 +129,7 @@ function call_tomorrow_weather(lng, lat, loc) {
         
         
         var twentyFourHrIdx = 1
-        var forecastData = rspJSON["data"]["timelines"][twentyFourHrIdx]["intervals"]
+        var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
         var daysToForecast = 15
         
         /*TODO remove debug*/
@@ -148,7 +150,7 @@ function call_tomorrow_weather(lng, lat, loc) {
             var windSpeed = timeData["values"]["windSpeed"]
             
             
-            var newRow = "<tr class='forecast-table-row'>";
+            var newRow = "<tr class='forecast-table-row' data-timeIdx='" + timeIdx + "'>";
             newRow += "<td>" + date + "</td>";
             newRow += "<td><img class='forecast-weather-status-icon' src='" + weatherStatusIconPath + "'>" + weatherStatusText + "</td>";
             newRow += "<td>" + highTemp + "</td>";
@@ -173,11 +175,12 @@ function showForecastDetail(){
     jQuery("#daily-weather-details").show()
     jQuery("#weather-charts-card").hide() //don't show this until the button is clicked
     jQuery("#weather-charts").show()
+    
+    //TODO tr->data-timeIdx
 }
 
-iconPrefix = "https://raw.githubusercontent.com/Tomorrow-IO-API/tomorrow-weather-codes/master/color/";
+iconPrefix = "web/images/";
 weatherCodeLookup = {
-    //TODO remove "0": ["Unknown", "ico"],
     "1000": ["Clear", iconPrefix + "clear_day.svg"],
     //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/clear_night.svg
     "1001": ["Cloudy", iconPrefix + "cloudy.svg"],
@@ -188,9 +191,9 @@ weatherCodeLookup = {
     "1102": ["Mostly Cloudy", iconPrefix + "mostly_cloudy.svg"],
     "2000": ["Fog", iconPrefix + "fog.svg"],
     "2100": ["Light Fog", iconPrefix + "fog_light.svg"],
-    "3000": ["Light Wind", "ico"],
-    "3001": ["Wind", "ico"],
-    "3002": ["Strong Wind", "ico"],
+    "3000": ["Light Wind", "ico"],//TODO
+    "3001": ["Wind", "ico"],//TODO
+    "3002": ["Strong Wind", "ico"],//TODO
     "4000": ["Drizzle", iconPrefix + "drizzle.svg"],
     "4001": ["Rain", iconPrefix + "rain.svg"],
     "4200": ["Light Rain", iconPrefix + "rain_light.svg"],
@@ -216,9 +219,6 @@ function get_weather_code_icon(weatherCode){
     return weatherCodeLookup[weatherCode][1]
 }
 
-function todo_callback(rspObj) {
-    console.log("rspObj length: " + rspObj.responseText.length)
-}
 
 // var url = "/apis/tomorrow/test";
 /*
@@ -252,4 +252,19 @@ function get_current_weather_icon(infoType){
         "uvIndex":          "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png"
     };
     return lookup[infoType];
+}
+
+//down button
+function showWeatherCharts(){
+    jQuery("#weather-charts-card").show()
+    jQuery("#weather-charts").show()
+    jQuery("#up-button").show()
+    jQuery("#down-button").hide()
+}
+
+//up button
+function hideWeatherCharts(){
+    jQuery("#weather-charts-card").hide()
+    jQuery("#up-button").hide()
+    jQuery("#down-button").show()
 }
