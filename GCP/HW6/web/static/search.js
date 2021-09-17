@@ -168,7 +168,7 @@ function call_tomorrow_weather(lng, lat, loc) {
     
         
         jQuery("#current-weather").show()
-        jQuery("#forecast").show()
+        jQuery("#forecast").show()        
     });
 }
 
@@ -218,6 +218,12 @@ function showForecastDetail(elem){
     var sunsetTime = values.sunsetTime;
     jQuery("#daily-weather-details-table").append(
             "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "%</td></tr>");
+    
+    loadDaysWeatherChart()
+    loadHoursWeatherChart()
+    
+    showWeatherCharts();//TODO remove debug
+    jQuery("#days-chart").hide()//TODO remove debug
 }
 
 iconPrefix = "web/images/";
@@ -295,8 +301,131 @@ function get_current_weather_icon(infoType){
     return lookup[infoType];
 }
 
-//down button
-function showWeatherCharts(){
+
+function loadHoursWeatherChart() {
+    // weather for today
+    hourIdx = 0 // TODO fix the query to only ask what we need
+    var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;
+    hoursTemps = []
+    hoursPressures = []
+    hoursHumidities = []
+    hoursWinds = []
+    //for (const [stateShort, stateLong] of Object.entries(states)) {
+    hourIdx =0;
+    for (hour of hours) {
+        hourIdx++;//TODO this should actually be the timestamp in highcharts format
+        hoursTemps.push(hour.values.temperature)
+        hoursPressures.push(hour.values.pressure)
+        hoursHumidities.push(hour.values.humidity)
+        hoursWinds.push(hour.values.windSpeed)
+        if (hourIdx > 20) break; // TODO remove debug code
+    }
+    
+    //TODOs to make chart done
+    /*
+    * Add the Meteogram.prototype.drawBlocksForWindArrows = function
+    *     on ChartLoad->this.drawBlocksForWindArrows(chart);
+
+
+    */
+    const chart = Highcharts.chart('hours-chart', {
+        tooltip: {
+            shared: true,
+           // xDateFormat: '%A, %b, %e',
+        },
+        title: {
+            text: 'Hourly Forecast (For Next 5 Days)'
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                enabled: false
+            },
+            title: {
+                enabled: false
+            },
+            tickInterval: 36e5, //1 hr
+            
+        },
+        yAxis: [{ //===temperatures axis
+            labels: {
+                format: '{value}°',
+            },
+            gridLineColor: 'rgba(128, 128, 128, 0.1)',
+            title: {
+                enabled: false
+            }
+        }, { //===humidities axis
+            labels: {
+                enabled: false
+            },
+            title: {
+                enabled: false
+            }
+        }, { //===pressure axis
+            labels: {
+                enabled: true
+            },
+            title: {
+                enabled: false
+            },
+            opposite: true,
+        }],
+        legend: {
+            enabled: false
+        },
+        //======================SERIES======================================
+        series: [{
+            name: "Temperature",
+            data: hoursTemps,
+            type: "spline",
+            tooltip: {
+                valueSuffix: '\u00B0F'
+            },
+            color: '#FF3333',
+            yAxis: 0,
+            zIndex: 2
+        }, {
+            name: "Air Pressure",
+            data: hoursPressures,
+            type: "spline",
+            color: Highcharts.getOptions().colors[2],
+            tooltip: {
+                valueSuffix: ' inHg'
+            },
+            dashStyle: 'shortdot',
+            yAxis: 2
+        }, {
+            name: "Humidity",
+            data: hoursHumidities,
+            type: "column",
+            datalabels: {
+                enabled: true,
+                formatter: function () {
+                    return this.y;
+                }
+            },
+            tooltip: {
+                valueSuffix: ' %'
+            },
+            yAxis: 1
+        }, {
+            name: "Wind",
+            data: hoursWinds,
+            /*
+            type: 'windbarb',
+            id: 'windbarbs',
+            */
+            yOffset: -15,
+            tooltip: {
+                valueSuffix: ' mph'
+            }
+        }]
+    });
+}
+
+
+function loadDaysWeatherChart() {
     // weather for today
     twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
@@ -304,7 +433,7 @@ function showWeatherCharts(){
     //for (const [stateShort, stateLong] of Object.entries(states)) {
     dayIdx =0;
     for (day of days) {
-        dayIdx++;
+        dayIdx++; //TODO, this should actually be the timestamp in high charts format
         daysChartData.push([dayIdx, day.values.temperatureMin, day.values.temperatureMax])
     }
     const chart = Highcharts.chart('days-chart', {
@@ -342,15 +471,14 @@ function showWeatherCharts(){
             data: daysChartData
         }]
     });
+}
 
-    
-    
+//down button
+function showWeatherCharts(){
     jQuery("#weather-charts-card").show()
     jQuery("#weather-charts").show()
     jQuery("#up-button").show()
     jQuery("#down-button").hide()
-    
-    
 }
 
 //up button
