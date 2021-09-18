@@ -221,18 +221,12 @@ function showForecastDetail(elem){
 iconPrefix = "web/images/";
 weatherCodeLookup = {
     "1000": ["Clear", iconPrefix + "clear_day.svg"],
-    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/clear_night.svg
     "1001": ["Cloudy", iconPrefix + "cloudy.svg"],
     "1100": ["Mostly Clear", iconPrefix + "mostly_clear_day.svg"],
-    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/mostly_clear_night.svg
     "1101": ["Partly Cloudy", iconPrefix + "partly_cloudy_day.svg"],
-    //TODO night: https://github.com/Tomorrow-IO-API/tomorrow-weather-codes/blob/master/color/partly_cloudy_night.svg
     "1102": ["Mostly Cloudy", iconPrefix + "mostly_cloudy.svg"],
     "2000": ["Fog", iconPrefix + "fog.svg"],
     "2100": ["Light Fog", iconPrefix + "fog_light.svg"],
-    "3000": ["Light Wind", "ico"],//TODO
-    "3001": ["Wind", "ico"],//TODO
-    "3002": ["Strong Wind", "ico"],//TODO
     "4000": ["Drizzle", iconPrefix + "drizzle.svg"],
     "4001": ["Rain", iconPrefix + "rain.svg"],
     "4200": ["Light Rain", iconPrefix + "rain_light.svg"],
@@ -251,6 +245,7 @@ weatherCodeLookup = {
     "8000": ["Thunderstorm", iconPrefix + "tstorm.svg"]
 }
 
+//TODO fix so that a failure doesn't just crash
 function get_weather_code_text(weatherCode){
     return weatherCodeLookup[weatherCode][0]
 }
