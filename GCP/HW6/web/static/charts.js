@@ -1,23 +1,23 @@
 
-
+hours_data = null;
 
 function loadHoursWeatherChart() {
     // weather for today
     hourIdx = 0 // TODO fix the query to only ask what we need
     var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;
+    hours_data = hours
     hoursTemps = []
     hoursPressures = []
     hoursHumidities = []
     hoursWinds = []
     //for (const [stateShort, stateLong] of Object.entries(states)) {
-    hourIdx =0;
     for (hour of hours) {
-        hourIdx++;//TODO this should actually be the timestamp in highcharts format
-        hoursTemps.push(hour.values.temperature)
-        hoursPressures.push(hour.values.pressure)
-        hoursHumidities.push(hour.values.humidity)
-        hoursWinds.push(hour.values.windSpeed)
-        if (hourIdx > 20) break; // TODO remove debug code
+        timestamp = (new Date(hour.startTime)).getTime()
+        hoursTemps.push([timestamp, hour.values.temperature])
+        hoursPressures.push([timestamp, hour.values.pressure])
+        hoursHumidities.push([timestamp, hour.values.humidity])
+        hoursWinds.push([timestamp, hour.values.windSpeed])
+        if (hoursTemps.length > 20) break; // TODO remove debug code
     }
     
     //TODOs to make chart done
@@ -121,20 +121,27 @@ function loadHoursWeatherChart() {
             }
         }]
     });
+    
+    showWeatherCharts();//TODO remove debug
+    /*TODO remove debug
+    jQuery("#days-chart").hide()//TODO remove debug
+    */
 }
 
-
+debug_timestamps = null;
+debug_days = null;
 function loadDaysWeatherChart() {
     // weather for today
     twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
     daysChartData = []
     //for (const [stateShort, stateLong] of Object.entries(states)) {
-    dayIdx =0;
     for (day of days) {
-        dayIdx++; //TODO, this should actually be the timestamp in high charts format
-        daysChartData.push([dayIdx, day.values.temperatureMin, day.values.temperatureMax])
+        timestamp = (new Date(day.startTime)).getTime()
+        debug_days = day
+        daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
     }
+    debug_timestamps = daysChartData
     const chart = Highcharts.chart('days-chart', {
         chart: {
             type: 'arearange'
@@ -160,7 +167,7 @@ function loadDaysWeatherChart() {
             }
         },
         tooltip: {
-           // xDateFormat: '%A, %b, %e',
+            xDateFormat: '%A, %b, %e',
             valueSuffix: '\u00B0'
         },
         legend: {
@@ -219,3 +226,18 @@ drawBlocksForWindArrows = function (chart) {
     });
 
 };
+
+//down button
+function showWeatherCharts(){
+    jQuery("#weather-charts-card").show()
+    jQuery("#weather-charts").show()
+    jQuery("#up-button").show()
+    jQuery("#down-button").hide()
+}
+
+//up button
+function hideWeatherCharts(){
+    jQuery("#weather-charts-card").hide()
+    jQuery("#up-button").hide()
+    jQuery("#down-button").show()
+}

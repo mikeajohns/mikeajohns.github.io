@@ -183,4 +183,11 @@ img.forecast-weather-status-icon {
     width: 40px;
 }
 
-
+#days-chart {
+    width:800px; 
+    height:400px;
+}
+#hours-chart {
+    width:800px; 
+    height:400px;
+}

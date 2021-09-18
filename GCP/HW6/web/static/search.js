@@ -17,29 +17,21 @@ function onLoad() {
     
 }
 
-
-
-function onCheckAutoDetect() {
-    if (jQuery("#auto-detect").prop("checked") ) {
-        //TODO do auto-detect
-        clearInputFields()
-        setInputFieldsNoEdit()
-    }
-}
-
-function setInputFieldsNoEdit() {
-    //TODO
-}
-
 function clearInputFields() {
+    
+    clearAddrFields()
+    jQuery("#auto-detect").prop('checked', false);
+}
+
+function clearAddrFields() {
     jQuery("#street").val("")
     jQuery("#city").val("")
     jQuery("#state").val("")
-    jQuery("#auto-detect").prop('checked', false);
 }
 
 function onCheckboxChange() {
     if(jQuery("#auto-detect").prop('checked')) {
+        clearAddrFields()
         jQuery("#street").val("").prop('disabled', true)
         jQuery("#city").val("").prop('disabled', true)
         jQuery("#state").val("").prop('disabled', true)
@@ -55,9 +47,11 @@ function clearForm(){
     jQuery(".default-hide").hide()
     clearInputFields()
 }
+
+debug_geocode = null //TODO remove
 function submitForm(){
     if (jQuery("#auto-detect").prop('checked') ) {
-        //TODO do auto-detect
+        // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
@@ -68,7 +62,7 @@ function submitForm(){
         });
     }
     else {
-        //TODO geocode
+        // do geocode
         var addr = jQuery("#street").val()
         var city = jQuery("#city").val()
         var state = jQuery("#state").val()
@@ -78,6 +72,7 @@ function submitForm(){
         };
         get_api_info("geocode", "json", req_data, function(rspObj){
             var json = JSON.parse(rspObj.responseText)
+            debug_geocode = json;
             //TODO remove debug (get these from geocode -> results -> 0 -> geometry -> location -> lat/long
             var lng = -73.98529171943665;
             var lat = 40.75872069597532;
@@ -96,7 +91,7 @@ function call_tomorrow_weather(lng, lat, loc) {
             "visibility", "cloudCover", "uvIndex", 
             "weatherCode", "precipitationProbability", "precipitationType", 
             "sunriseTime", "sunsetTime", "moonPhase"],
-        "timesteps": ["1h", "1d"], //TODO for current, only use 1d
+        "timesteps": ["1h", "1d"],
         "timezone": "America/Los_Angeles",
         "units": "imperial"
     };
@@ -221,9 +216,6 @@ function showForecastDetail(elem){
     
     loadDaysWeatherChart()
     loadHoursWeatherChart()
-    
-    showWeatherCharts();//TODO remove debug
-    jQuery("#days-chart").hide()//TODO remove debug
 }
 
 iconPrefix = "web/images/";
@@ -299,20 +291,4 @@ function get_current_weather_icon(infoType){
         "uvIndex":          "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png"
     };
     return lookup[infoType];
-}
-
-
-//down button
-function showWeatherCharts(){
-    jQuery("#weather-charts-card").show()
-    jQuery("#weather-charts").show()
-    jQuery("#up-button").show()
-    jQuery("#down-button").hide()
-}
-
-//up button
-function hideWeatherCharts(){
-    jQuery("#weather-charts-card").hide()
-    jQuery("#up-button").hide()
-    jQuery("#down-button").show()
 }
