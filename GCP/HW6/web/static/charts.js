@@ -1,5 +1,6 @@
 
 hours_data = null;
+debug_pressures = null;
 
 function loadHoursWeatherChart() {
     // weather for today
@@ -14,11 +15,13 @@ function loadHoursWeatherChart() {
     for (hour of hours) {
         timestamp = (new Date(hour.startTime)).getTime()
         hoursTemps.push([timestamp, hour.values.temperature])
-        hoursPressures.push([timestamp, hour.values.pressure])
+        hoursPressures.push([timestamp, hour.values.pressureSeaLevel])
         hoursHumidities.push([timestamp, hour.values.humidity])
         hoursWinds.push([timestamp, hour.values.windSpeed])
         if (hoursTemps.length > 20) break; // TODO remove debug code
     }
+    
+    debug_pressures = hoursPressures;
     
     //TODOs to make chart done
     /*
@@ -46,7 +49,8 @@ function loadHoursWeatherChart() {
             tickInterval: 36e5, //1 hr
             
         },
-        yAxis: [{ //===temperatures axis
+        yAxis: [
+        { //===temperatures axis
             labels: {
                 format: '{value}°',
             },
@@ -54,19 +58,34 @@ function loadHoursWeatherChart() {
             title: {
                 enabled: false
             }
-        }, { //===humidities axis
+        }, 
+        { //===humidities axis
             labels: {
                 enabled: false
             },
             title: {
                 enabled: false
             }
-        }, { //===pressure axis
+        }, 
+        { //===pressure axis
             labels: {
-                enabled: true
+                enabled: true,
+                style: {
+                    color: '#F7B53D',
+                }
+
             },
             title: {
-                enabled: false
+                text: 'inHg',
+                offset: 0,
+                align: 'high',
+                rotation: 0,
+                style: {
+                    fontSize: '10px',
+                    color: '#F7B53D',
+                },
+                textAlign: 'left',
+                x: 3
             },
             opposite: true,
         }],
@@ -85,16 +104,6 @@ function loadHoursWeatherChart() {
             yAxis: 0,
             zIndex: 2
         }, {
-            name: "Air Pressure",
-            data: hoursPressures,
-            type: "spline",
-            color: Highcharts.getOptions().colors[2],
-            tooltip: {
-                valueSuffix: ' inHg'
-            },
-            dashStyle: 'shortdot',
-            yAxis: 2
-        }, {
             name: "Humidity",
             data: hoursHumidities,
             type: "column",
@@ -108,6 +117,16 @@ function loadHoursWeatherChart() {
                 valueSuffix: ' %'
             },
             yAxis: 1
+        },  {
+            name: "Air Pressure",
+            data: hoursPressures,
+            type: "spline",
+            tooltip: {
+                valueSuffix: ' inHg'
+            },
+            color: '#F7B53D',
+            yAxis: 2,
+            dashStyle: 'shortdot',
         }, {
             name: "Wind",
             data: hoursWinds,
@@ -118,13 +137,13 @@ function loadHoursWeatherChart() {
             yOffset: -15,
             tooltip: {
                 valueSuffix: ' mph'
-            }
+            },
         }]
     });
     
     showWeatherCharts();//TODO remove debug
-    /*TODO remove debug
     jQuery("#days-chart").hide()//TODO remove debug
+    /*TODO remove debug
     */
 }
 
