@@ -1,7 +1,71 @@
+debug_timestamps = null;
+debug_days = null;
+function loadDaysWeatherChart() {
+    // weather for today
+    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+    var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
+    daysChartData = []
+    //for (const [stateShort, stateLong] of Object.entries(states)) {
+    for (day of days) {
+        timestamp = (new Date(day.startTime)).getTime()
+        debug_days = day
+        daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
+    }
+    debug_timestamps = daysChartData
+    const chart = Highcharts.chart('days-chart', {
+        chart: {
+            type: 'arearange'
+        },
+        title: {
+            text: 'Temperature Ranges (Min, Max)'
+        },
+        xAxis: {
+            labels: {
+                enabled: false
+            },
+            title: {
+                enabled: false
+            },
+            type: 'datetime'
+        },
+        yAxis: {
+            labels: {
+                enabled: false
+            },
+            title: {
+                enabled: false
+            }
+        },
+        tooltip: {
+            xDateFormat: '%A, %b, %e',
+            valueSuffix: '\u00B0F'
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: "Temperatures",
+            data: daysChartData,
+            color: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [
+                    [0, '#f7af2f'], // start
+                    [0.5, '#d5d0c0'], // middle
+                    [1, '#e0eaf8'] // end 
+                ]
+            },
+            marker: {
+                enabled: true,
+                fillColor: "#87AFEB"
+            },
+
+        }]
+    });
+}
+
 
 hours_data = null;
 debug_pressures = null;
-
 function loadHoursWeatherChart() {
     // weather for today
     hourIdx = 0 // TODO fix the query to only ask what we need
@@ -17,7 +81,11 @@ function loadHoursWeatherChart() {
         hoursTemps.push([timestamp, hour.values.temperature])
         hoursPressures.push([timestamp, hour.values.pressureSeaLevel])
         hoursHumidities.push([timestamp, hour.values.humidity])
-        hoursWinds.push([timestamp, hour.values.windSpeed])
+        hoursWinds.push({
+            x: timestamp,
+            value: hour.values.windSpeed,
+            direction: hour.values.windDirection
+        })
         if (hoursTemps.length > 20) break; // TODO remove debug code
     }
     
@@ -103,6 +171,9 @@ function loadHoursWeatherChart() {
             },
             color: '#FF3333',
             yAxis: 0,
+            marker: {
+                enabled: false
+            },
             zIndex: 2
         }, {
             name: "Humidity",
@@ -117,7 +188,10 @@ function loadHoursWeatherChart() {
             tooltip: {
                 valueSuffix: ' %'
             },
-            yAxis: 1
+            yAxis: 1,
+            marker: {
+                enabled: false
+            },
         },  {
             name: "Air Pressure",
             data: hoursPressures,
@@ -127,13 +201,16 @@ function loadHoursWeatherChart() {
             },
             color: '#F7B53D',
             yAxis: 2,
+            marker: {
+                enabled: false
+            },
             dashStyle: 'shortdot',
         }, {
             name: "Wind",
             data: hoursWinds,
-            /*
             type: 'windbarb',
             id: 'windbarbs',
+            /*
             */
             yOffset: -15,
             tooltip: {
@@ -142,76 +219,12 @@ function loadHoursWeatherChart() {
         }]
     });
     
+    drawBlocksForWindArrows(chart)
     showWeatherCharts();//TODO remove debug
-    jQuery("#days-chart").hide()//TODO remove debug
     /*TODO remove debug
+    jQuery("#days-chart").hide()//TODO remove debug
     */
 }
-
-debug_timestamps = null;
-debug_days = null;
-function loadDaysWeatherChart() {
-    // weather for today
-    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
-    var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
-    daysChartData = []
-    //for (const [stateShort, stateLong] of Object.entries(states)) {
-    for (day of days) {
-        timestamp = (new Date(day.startTime)).getTime()
-        debug_days = day
-        daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
-    }
-    debug_timestamps = daysChartData
-    const chart = Highcharts.chart('days-chart', {
-        chart: {
-            type: 'arearange'
-        },
-        title: {
-            text: 'Temperature Ranges (Min, Max)'
-        },
-        xAxis: {
-            labels: {
-                enabled: false
-            },
-            title: {
-                enabled: false
-            },
-            type: 'datetime'
-        },
-        yAxis: {
-            labels: {
-                enabled: false
-            },
-            title: {
-                enabled: false
-            }
-        },
-        tooltip: {
-            xDateFormat: '%A, %b, %e',
-            valueSuffix: '\u00B0F'
-        },
-        legend: {
-            enabled: false
-        },
-        series: [{
-            name: "Temperatures",
-            data: daysChartData,
-            color: {
-                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                stops: [
-                    [0, '#f7af2f'], // start
-                    [0.5, '#d5d0c0'], // middle
-                    [1, '#e0eaf8'] // end 
-                ]
-            }
-        }]
-    }, function(){
-        //TODO on chart load here
-        //NOTE: this doesn't work because chart isn't initialized
-        //drawBlocksForWindArrows(chart);
-    });
-}
-
 
 
 /**
@@ -248,12 +261,11 @@ drawBlocksForWindArrows = function (chart) {
             })
             .add();
     }
-
+    
     // Center items in block
     chart.get('windbarbs').markerGroup.attr({
         translateX: chart.get('windbarbs').markerGroup.translateX + 8
     });
-
 };
 
 //down button
