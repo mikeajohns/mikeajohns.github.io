@@ -75,9 +75,9 @@ function loadHoursWeatherChart() {
     hoursPressures = []
     hoursHumidities = []
     hoursWinds = []
-    HOURS_IN_5_DAYS = 5 * 24
-    HOURS_IN_5_DAYS = 80 //TODO remove this debug
     WIND_RESOLUTION_FACTOR = 2
+    HOURS_IN_5_DAYS = 50 //TODO remove this debug
+    HOURS_IN_5_DAYS = 5 * 24
     
     for (hour of hours) {
         timestamp = (new Date(hour.startTime)).getTime()
@@ -240,7 +240,6 @@ function loadHoursWeatherChart() {
     
     drawBlocksForWindArrows(chart)
     showWeatherCharts();//TODO remove debug
-    jQuery("#days-chart").hide()//TODO remove debug
     /*TODO remove debug
     */
 }
