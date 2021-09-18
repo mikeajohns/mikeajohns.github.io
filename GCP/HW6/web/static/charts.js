@@ -115,9 +115,9 @@ function loadHoursWeatherChart() {
             offset: 30,
             gridLineColor: 'rgba(128, 128, 128, 0.1)',
             gridLineWidth: 1,
+            endOnTick: false,
             crosshair: true,
-
-            
+            startOnTick: false,
         },
         yAxis: [
         { //===temperatures axis
@@ -164,7 +164,10 @@ function loadHoursWeatherChart() {
         plotOptions: {
             column: {
                 pointPlacement: 'on' //per video, this looks right
-            }
+            },
+            series: {
+                pointPlacement: 'on',
+            },
         },
         legend: {
             enabled: false
