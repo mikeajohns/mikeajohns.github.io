@@ -223,8 +223,7 @@ function loadHoursWeatherChart() {
             data: hoursWinds,
             type: 'windbarb',
             id: 'windbarbs',
-            /*
-            */
+            vectorLength: 15,
             yOffset: -15,
             tooltip: {
                 valueSuffix: ' mph'
@@ -234,8 +233,8 @@ function loadHoursWeatherChart() {
     
     drawBlocksForWindArrows(chart)
     showWeatherCharts();//TODO remove debug
-    /*TODO remove debug
     jQuery("#days-chart").hide()//TODO remove debug
+    /*TODO remove debug
     */
 }
 
