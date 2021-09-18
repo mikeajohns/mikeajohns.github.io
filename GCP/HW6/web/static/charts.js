@@ -168,12 +168,13 @@ function loadDaysWeatherChart() {
         },
         tooltip: {
             xDateFormat: '%A, %b, %e',
-            valueSuffix: '\u00B0'
+            valueSuffix: '\u00B0F'
         },
         legend: {
             enabled: false
         },
         series: [{
+            name: "Temperatures",
             data: daysChartData
         }]
     }, function(){
