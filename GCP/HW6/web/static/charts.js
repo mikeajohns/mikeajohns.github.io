@@ -74,7 +74,9 @@ function loadHoursWeatherChart() {
     hoursPressures = []
     hoursHumidities = []
     hoursWinds = []
-    //for (const [stateShort, stateLong] of Object.entries(states)) {
+    HOURS_IN_5_DAYS = 5 * 24
+    HOURS_IN_5_DAYS = 80 //TODO remove this debug
+    
     for (hour of hours) {
         timestamp = (new Date(hour.startTime)).getTime()
         hoursTemps.push([timestamp, hour.values.temperature])
@@ -85,7 +87,7 @@ function loadHoursWeatherChart() {
             value: hour.values.windSpeed,
             direction: hour.values.windDirection
         })
-        if (hoursTemps.length > 20) break; // TODO remove debug code
+        if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
     
     const chart = Highcharts.chart('hours-chart', {
@@ -103,7 +105,13 @@ function loadHoursWeatherChart() {
             title: {
                 enabled: false
             },
-            tickInterval: 36e5, //1 hr
+            //tickInterval: 36e5, //1 hr
+            tickInterval: 4 * 36e5, // four hours
+            minorTickInterval: 36e5, // one hour
+            offset: 30,
+            gridLineColor: 'rgba(128, 128, 128, 0.1)',
+            gridLineWidth: 1,
+
             
         },
         yAxis: [
@@ -112,6 +120,7 @@ function loadHoursWeatherChart() {
                 format: '{value}°',
             },
             gridLineColor: 'rgba(128, 128, 128, 0.1)',
+            gridLineWidth: 1,
             title: {
                 enabled: false
             }
@@ -122,7 +131,7 @@ function loadHoursWeatherChart() {
             },
             title: {
                 enabled: false
-            }
+            },
         }, 
         { //===pressure axis
             labels: {
@@ -147,6 +156,11 @@ function loadHoursWeatherChart() {
             },
             opposite: true,
         }],
+        plotOptions: {
+            column: {
+                pointPlacement: 'on' //per video, this looks right
+            }
+        },
         legend: {
             enabled: false
         },
@@ -174,6 +188,8 @@ function loadHoursWeatherChart() {
                     return Math.round(this.y);
                 }
             },
+            groupPadding: 0,
+            pointPadding: 0,
             tooltip: {
                 valueSuffix: ' %'
             },
