@@ -241,6 +241,7 @@ function loadHoursWeatherChart() {
     drawBlocksForWindArrows(chart)
     showWeatherCharts();//TODO remove debug
     /*TODO remove debug
+    jQuery("#days-chart").hide()//TODO remove debug
     */
 }
 
