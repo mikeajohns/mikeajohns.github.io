@@ -75,6 +75,7 @@ function loadHoursWeatherChart() {
                 }
 
             },
+            allowDecimals: false,
             title: {
                 text: 'inHg',
                 offset: 0,
@@ -107,10 +108,10 @@ function loadHoursWeatherChart() {
             name: "Humidity",
             data: hoursHumidities,
             type: "column",
-            datalabels: {
+            dataLabels: {
                 enabled: true,
                 formatter: function () {
-                    return this.y;
+                    return Math.round(this.y);
                 }
             },
             tooltip: {
