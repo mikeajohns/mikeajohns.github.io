@@ -65,7 +65,6 @@ function loadDaysWeatherChart() {
 
 
 hours_data = null;
-debug_pressures = null;
 function loadHoursWeatherChart() {
     // weather for today
     hourIdx = 0 // TODO fix the query to only ask what we need
@@ -89,19 +88,9 @@ function loadHoursWeatherChart() {
         if (hoursTemps.length > 20) break; // TODO remove debug code
     }
     
-    debug_pressures = hoursPressures;
-    
-    //TODOs to make chart done
-    /*
-    * Add the Meteogram.prototype.drawBlocksForWindArrows = function
-    *     on ChartLoad->this.drawBlocksForWindArrows(chart);
-
-
-    */
     const chart = Highcharts.chart('hours-chart', {
         tooltip: {
             shared: true,
-           // xDateFormat: '%A, %b, %e',
         },
         title: {
             text: 'Hourly Forecast (For Next 5 Days)'
