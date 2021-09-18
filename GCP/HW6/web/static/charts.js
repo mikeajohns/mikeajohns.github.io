@@ -26,7 +26,8 @@ function loadDaysWeatherChart() {
             title: {
                 enabled: false
             },
-            type: 'datetime'
+            type: 'datetime',
+            crosshair: true,
         },
         yAxis: {
             labels: {
@@ -111,6 +112,7 @@ function loadHoursWeatherChart() {
             offset: 30,
             gridLineColor: 'rgba(128, 128, 128, 0.1)',
             gridLineWidth: 1,
+            crosshair: true,
 
             
         },
