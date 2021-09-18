@@ -94,6 +94,10 @@ function loadHoursWeatherChart() {
         if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
     
+    WIND_BARB_LENGTH = 10
+    WIND_BARB_X_OFFSET = WIND_BARB_LENGTH/2
+    WIND_BARB_X_OFFSET_2 = 0
+    WIND_BARB_BOX_HEIGHT = 20
     const chart = Highcharts.chart('hours-chart', {
         tooltip: {
             shared: true,
@@ -112,12 +116,13 @@ function loadHoursWeatherChart() {
             //tickInterval: 36e5, //1 hr
             tickInterval: 4 * 36e5, // four hours
             minorTickInterval: 36e5, // one hour
-            offset: 30,
+            offset: WIND_BARB_BOX_HEIGHT,
             gridLineColor: 'rgba(128, 128, 128, 0.1)',
             gridLineWidth: 1,
             endOnTick: false,
             crosshair: true,
             startOnTick: false,
+            minPadding: 0.005,
         },
         yAxis: [
         { //===temperatures axis
@@ -223,11 +228,13 @@ function loadHoursWeatherChart() {
             data: hoursWinds,
             type: 'windbarb',
             id: 'windbarbs',
-            vectorLength: 15,
-            yOffset: -15,
+            vectorLength: WIND_BARB_LENGTH,
+            yOffset: -WIND_BARB_BOX_HEIGHT/2,
+            xOffset: WIND_BARB_X_OFFSET,
             tooltip: {
                 valueSuffix: ' mph'
             },
+            lineWidth: 1,
         }]
     });
     
@@ -266,7 +273,7 @@ drawBlocksForWindArrows = function (chart) {
             isLong = i % 2 === 0;
         }
         chart.renderer.path(['M', x, chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
-            'L', x, chart.plotTop + chart.plotHeight + 32, 'Z'])
+            'L', x, chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT + 2, 'Z'])
             .attr({
                 stroke: chart.options.chart.plotBorderColor,
                 'stroke-width': 1
@@ -276,7 +283,7 @@ drawBlocksForWindArrows = function (chart) {
     
     // Center items in block
     chart.get('windbarbs').markerGroup.attr({
-        translateX: chart.get('windbarbs').markerGroup.translateX + 8
+        translateX: chart.get('windbarbs').markerGroup.translateX + WIND_BARB_X_OFFSET_2
     });
 };
 
