@@ -77,17 +77,20 @@ function loadHoursWeatherChart() {
     hoursWinds = []
     HOURS_IN_5_DAYS = 5 * 24
     HOURS_IN_5_DAYS = 80 //TODO remove this debug
+    WIND_RESOLUTION_FACTOR = 2
     
     for (hour of hours) {
         timestamp = (new Date(hour.startTime)).getTime()
         hoursTemps.push([timestamp, hour.values.temperature])
         hoursPressures.push([timestamp, hour.values.pressureSeaLevel])
         hoursHumidities.push([timestamp, hour.values.humidity])
-        hoursWinds.push({
-            x: timestamp,
-            value: hour.values.windSpeed,
-            direction: hour.values.windDirection
-        })
+        if(hoursHumidities.length % WIND_RESOLUTION_FACTOR == 1) {
+            hoursWinds.push({
+                x: timestamp,
+                value: hour.values.windSpeed,
+                direction: hour.values.windDirection
+            })
+        }
         if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
     
