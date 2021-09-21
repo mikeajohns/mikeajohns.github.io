@@ -125,11 +125,11 @@ function call_tomorrow_weather(lng, lat, loc) {
         jQuery("#location").text(loc)
         
         //TODO format the strings and add units
-        jQuery("#humidity-value").text(values["humidity"])
-        jQuery("#pressure-value").text(values["pressureSeaLevel"])
-        jQuery("#wind-speed-value").text(values["windSpeed"])
-        jQuery("#visibility-value").text(values["visibility"])
-        jQuery("#cloud-cover-value").text(values["cloudCover"])
+        jQuery("#humidity-value").text(values["humidity"] + "%")
+        jQuery("#pressure-value").text(values["pressureSeaLevel"] + "inHg")
+        jQuery("#wind-speed-value").text(values["windSpeed"] + "mph")
+        jQuery("#visibility-value").text(values["visibility"] + "mi")
+        jQuery("#cloud-cover-value").text(values["cloudCover"] + "%")
         jQuery("#uv-level-value").text(values["uvIndex"])
         
         jQuery("#current-temp").text(values["temperature"] + "\u00B0");
@@ -142,6 +142,8 @@ function call_tomorrow_weather(lng, lat, loc) {
         jQuery("#uv-level-icon").attr("src", get_current_weather_icon("uvIndex"))
         
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
+        jQuery("#weather-code-text").text(get_weather_code_text(values["weatherCode"]))
+        
         
         
         var twentyFourHrIdx = 1
