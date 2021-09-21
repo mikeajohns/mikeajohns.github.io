@@ -161,12 +161,7 @@ function call_tomorrow_weather(lng, lat, loc) {
             var timeData = forecastData[timeIdx]
             var date = timeData["startTime"]
             var timestamp = new Date(timeData.startTime)
-            var localeUS = 'en-us'
-            var date = 
-                    timestamp.toLocaleDateString(localeUS, { weekday: 'short' }) + ", " + 
-                    timestamp.getDate() + " " + 
-                    timestamp.toLocaleDateString(localeUS, {month: 'short'}) + " " + 
-                    timestamp.getFullYear()
+            var date = getPrettyDate(timestamp)
 
             var weatherCode = timeData["values"]["weatherCode"]
             var weatherStatusIconPath = get_weather_code_icon(weatherCode);
@@ -195,6 +190,14 @@ function call_tomorrow_weather(lng, lat, loc) {
     });
 }
 
+function getPrettyDate(d){
+    var localeUS = 'en-us'
+    return d.toLocaleDateString(localeUS, { weekday: 'short' }) + ", " + 
+            d.getDate() + " " + 
+            d.toLocaleDateString(localeUS, {month: 'short'}) + " " + 
+            d.getFullYear()
+}
+
 test = ""
 function showForecastDetail(elem){
     startTimeIdx = jQuery(elem.currentTarget).attr("data-timeidx")
@@ -209,7 +212,9 @@ function showForecastDetail(elem){
     twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
     var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
     
-    var date = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals[startTimeIdx].startTime;
+    var timestamp = new Date(tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals[startTimeIdx].startTime)
+    var date = getPrettyDate(timestamp)
+
     var weatherCode = values.weatherCode;
     var highTemp = values.temperatureMax;
     var lowTemp = values.temperatureMin;
@@ -217,7 +222,7 @@ function showForecastDetail(elem){
     jQuery("#daily-day").text(date);
     jQuery("#daily-weather-code-text").text(get_weather_code_text(weatherCode));
     jQuery("#daily-weather-code-icon").attr("src", get_weather_code_icon(weatherCode));
-    jQuery("#daily-hi-low-temp").text(highTemp + "/" + lowTemp);
+    jQuery("#daily-hi-low-temp").text(highTemp + "°F/" + lowTemp + "°F");
     
     //clear the table before adding new rows
     jQuery("#daily-weather-details-table").empty()
@@ -236,14 +241,34 @@ function showForecastDetail(elem){
             
     jQuery("#daily-weather-details-table").append(
             "<tr class='daily-details-row'><td>Visibility:</td><td>" + values.visibility + " mi</td></tr>");
-            
-    var sunriseTime = values.sunriseTime;
-    var sunsetTime = values.sunsetTime;
+                  
+    var sunriseTime = new Date(values.sunriseTime)
+    mjdate = sunriseTime
+    sunriseTime = sunriseTime.getHours() % 12 + getAMPM(sunriseTime)
+    var sunsetTime = new Date(values.sunsetTime)
+    sunsetTime = sunsetTime.getHours() % 12 + getAMPM(sunsetTime)
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "%</td></tr>");
+            "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "</td></tr>");
     
     loadDaysWeatherChart()
     loadHoursWeatherChart()
+}
+
+mjdate = null
+
+function getAMPM(d){
+    mjdate = d
+    console.log(d)
+    if(!d.getHours())
+    {
+        return null
+    }
+    else if(d.getHours() >= 12){
+        return "PM"
+    }
+    else {
+        return "AM"
+    }
 }
 
 iconPrefix = "web/images/";
