@@ -228,7 +228,7 @@ function showForecastDetail(elem){
     jQuery("#daily-weather-details-table").empty()
     
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Precipitation:</td><td>" + values.precipitationType + "</td></tr>");
+            "<tr class='daily-details-row'><td>Precipitation:</td><td>" + getPrecipitationTypeName(values.precipitationType) + "</td></tr>");
             
     jQuery("#daily-weather-details-table").append(
             "<tr class='daily-details-row'><td>Chance of Rain:</td><td>" + values.precipitationProbability + "%</td></tr>");
@@ -255,6 +255,19 @@ function showForecastDetail(elem){
 }
 
 mjdate = null
+
+//Ref: https://docs.tomorrow.io/reference/data-layers-core
+function getPrecipitationTypeName(typeCode){
+    var lookupTable = [
+        "N/A",
+        "Rain",
+        "Snow",
+        "Freezing Rain",
+        "Ice Pellets"
+    ]
+    
+    return lookupTable[typeCode]
+}
 
 function getAMPM(d){
     mjdate = d
