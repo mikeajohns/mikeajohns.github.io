@@ -60,6 +60,7 @@ function onCheckboxChange() {
 function clearForm(){
     jQuery(".default-hide").hide()
     clearInputFields()
+    onCheckboxChange()
 }
 
 debug_geocode = null //TODO remove
