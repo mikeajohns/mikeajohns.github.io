@@ -146,7 +146,7 @@ function call_tomorrow_weather(lng, lat, loc) {
         
         
         
-        var twentyFourHrIdx = 1
+        var twentyFourHrIdx = 1 //TODO stop hard coding
         var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
         var daysToForecast = 15
         
@@ -160,6 +160,14 @@ function call_tomorrow_weather(lng, lat, loc) {
             
             var timeData = forecastData[timeIdx]
             var date = timeData["startTime"]
+            var timestamp = new Date(timeData.startTime)
+            var localeUS = 'en-us'
+            var date = 
+                    timestamp.toLocaleDateString(localeUS, { weekday: 'short' }) + ", " + 
+                    timestamp.getDate() + " " + 
+                    timestamp.toLocaleDateString(localeUS, {month: 'short'}) + " " + 
+                    timestamp.getFullYear()
+
             var weatherCode = timeData["values"]["weatherCode"]
             var weatherStatusIconPath = get_weather_code_icon(weatherCode);
             var weatherStatusText = get_weather_code_text(weatherCode);
