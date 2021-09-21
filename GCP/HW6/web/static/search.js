@@ -1,8 +1,14 @@
 tomorrowWeatherStore = {} //global to store and retrieve weather info
 
+mjglob = null
+
 function onLoad() {
     jQuery(".default-hide").hide()
     
+    jQuery("#state").append(jQuery("<option>", {
+            value: "",
+            text: "Select your state"
+    }));
     for (const [stateShort, stateLong] of Object.entries(states)) {
         jQuery("#state").append(jQuery("<option>", {
             value: stateShort,
@@ -14,7 +20,15 @@ function onLoad() {
     jQuery("#street").val("1600 Ampitheatre Parkway")
     jQuery("#city").val("Mountain View")
     jQuery("#state").val("CA")
-    
+
+    var form  = document.getElementById('search-form');
+    form.addEventListener('submit', (event) => {
+        // handle the form data
+        event.preventDefault();
+        submitForm()
+    });
+    /*
+    */
 }
 
 function clearInputFields() {
@@ -49,7 +63,7 @@ function clearForm(){
 }
 
 debug_geocode = null //TODO remove
-function submitForm(){
+function submitForm(){    
     if (jQuery("#auto-detect").prop('checked') ) {
         // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
@@ -62,10 +76,13 @@ function submitForm(){
         });
     }
     else {
+
         // do geocode
         var addr = jQuery("#street").val()
         var city = jQuery("#city").val()
         var state = jQuery("#state").val()
+        
+        
         var req_data = {
             /*NOTE: This is the method to call and is treated special*/
             "address": addr + ", " + city + ", " + state,
@@ -267,7 +284,7 @@ function get_api_info(api, method, req_data, callback){
             callback(this)
         }
     }
-    req_type = "POST";
+    req_type = "POST";//TODO must be a GET per https://piazza.com/class/ksgpd7vrj2x4d7?cid=126
     req.open(req_type, url , true);
     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     

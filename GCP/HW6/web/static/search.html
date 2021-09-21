@@ -24,20 +24,20 @@
         <div class="title">Weather Search</div>
         <div>Fill out the form to get weather info!</div>
     </div>
-    <form>
+    <form id="search-form">
     <div class="address-info">
     <table>
         
         <tr><th colspan=2><label for="street">Street<span class="required">*</span></label></th></tr>
-        <tr><th colspan=2><input type="text" id="street"></input></th></tr>
+        <tr><th colspan=2><input type="text" id="street" required></th></tr>
         
         <tr>
             <th class="width-auto-2"><label for="city">City<span class="required">*</span></label></th>
             <th class="width-auto-2"><label for="state">State<span class="required">*</span></label></th>
         </tr>
         <tr>
-            <th class="width-auto-2"><input type="text" id="city"></input></th>
-            <th class="width-auto-2"><select id="state"></select></th>
+            <th class="width-auto-2"><input type="text" id="city" required></input></th>
+            <th class="width-auto-2"><select id="state" required></select></th>
         </tr>
     </table>
     </div>
@@ -46,7 +46,7 @@
         <label for="auto-detect">Want us to auto-detect your location? Check here </label><input type="checkbox" onchange="onCheckboxChange()" id="auto-detect"></input>
     </div>
     <div>
-        <button type="button" onclick="submitForm()" class="submit button">SUBMIT</button>
+        <button type="submit" class="submit button">SUBMIT</button>
         <button type="button" onclick="clearForm()" class="clear-button button">CLEAR</button>
     </div>
     </form>
