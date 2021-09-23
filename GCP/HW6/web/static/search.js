@@ -138,7 +138,7 @@ function call_tomorrow_weather(lat, lng, loc) {
         jQuery("#cloud-cover-value").text(values["cloudCover"] + "%")
         jQuery("#uv-level-value").text(values["uvIndex"])
         
-        jQuery("#current-temp").text(values["temperature"] + "\u00B0");
+        jQuery("#current-temp").text(Math.round(values["temperature"]) + "\u00B0");
         
         jQuery("#humidity-icon").attr("src", get_current_weather_icon("humidity"))
         jQuery("#pressure-icon").attr("src", get_current_weather_icon("pressureSeaLevel"))
@@ -198,7 +198,7 @@ function call_tomorrow_weather(lat, lng, loc) {
 
 function getPrettyDate(d){
     var localeUS = 'en-us'
-    return d.toLocaleDateString(localeUS, { weekday: 'short' }) + ", " + 
+    return d.toLocaleDateString(localeUS, { weekday: 'long' }) + ", " + 
             ("0"+d.getDate()).slice(-2) + " " + 
             d.toLocaleDateString(localeUS, {month: 'short'}) + " " + 
             d.getFullYear()
@@ -249,15 +249,23 @@ function showForecastDetail(elem){
             "<tr class='daily-details-row'><td>Visibility:</td><td>" + values.visibility + " mi</td></tr>");
                   
     var sunriseTime = new Date(values.sunriseTime)
-    mjdate = sunriseTime
-    sunriseTime = sunriseTime.getHours() % 12 + getAMPM(sunriseTime)
+    var HOURS_PER_MERIDIAN = 12;
+    sunriseTime = roundToHours(sunriseTime) % HOURS_PER_MERIDIAN + getAMPM(sunriseTime)
+    
     var sunsetTime = new Date(values.sunsetTime)
-    sunsetTime = sunsetTime.getHours() % 12 + getAMPM(sunsetTime)
+    sunsetTime = roundToHours(sunsetTime) % HOURS_PER_MERIDIAN + getAMPM(sunsetTime)
+    
     jQuery("#daily-weather-details-table").append(
             "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "</td></tr>");
     
     loadDaysWeatherChart()
     loadHoursWeatherChart()
+}
+
+
+function roundToHours(timestamp) {
+    var MINUTES_PER_HOUR = 60;
+    return Math.round(timestamp.getHours() + timestamp.getMinutes()/MINUTES_PER_HOUR);
 }
 
 mjdate = null

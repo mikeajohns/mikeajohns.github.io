@@ -6,10 +6,15 @@ function loadDaysWeatherChart() {
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
     daysChartData = []
     //for (const [stateShort, stateLong] of Object.entries(states)) {
+    var daysCount = 0
     for (day of days) {
         timestamp = (new Date(day.startTime)).getTime()
         debug_days = day
         daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
+        daysCount += 1
+        if (daysCount >= 15){
+            break;
+        }
     }
     debug_timestamps = daysChartData
     const chart = Highcharts.chart('days-chart', {
@@ -21,7 +26,7 @@ function loadDaysWeatherChart() {
         },
         xAxis: {
             labels: {
-                enabled: false
+                enabled: true
             },
             title: {
                 enabled: false
@@ -31,7 +36,7 @@ function loadDaysWeatherChart() {
         },
         yAxis: {
             labels: {
-                enabled: false
+                enabled: true
             },
             title: {
                 enabled: false
@@ -108,7 +113,8 @@ function loadHoursWeatherChart() {
         xAxis: {
             type: 'datetime',
             labels: {
-                enabled: false
+                enabled: true
+                //TODO format to 2 digit hour padded left w/ zeros
             },
             title: {
                 enabled: false
