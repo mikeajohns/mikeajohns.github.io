@@ -34,9 +34,12 @@ def call_api(api_name):
     req_data = request.get_json()
 
     debug_save_usage = False
-    debug_save_usage = True
+    debug_save_usage = True #TODO remove
     if debug_save_usage:
         return get_fake_json(api_name)
+
+    remote_addr = request.remote_addr
+    remote_addr = "47.185.202.16" #TODO remove
 
 
     # NOTE: the keys/tokens below should not be shared with anyone
@@ -50,7 +53,7 @@ def call_api(api_name):
             "url_params": {"key": "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc"}
         },
         "ipinfo": {
-            "url": "https://ipinfo.io/" + request.remote_addr,
+            "url": "https://ipinfo.io/" + remote_addr,
             "url_params": {"token": "6292e80abfdebd"}
         }
     }
@@ -71,6 +74,7 @@ def call_api(api_name):
 
 
     import requests
+
     if api_name == "tomorrow":
         # special handling for tomorrow, since the request data is more complicated, it doesn't seem to work all in the URL
         params = urllib.parse.urlencode(api_info["url_params"])

@@ -64,16 +64,18 @@ function clearForm(){
 }
 
 debug_geocode = null //TODO remove
+debug_ipinfo = null //TODO remove
 function submitForm(){    
     if (jQuery("#auto-detect").prop('checked') ) {
         // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
+            debug_ipinfo = json
             var loc = json["loc"]
-            var lng = loc.split(",")[1]
             var lat = loc.split(",")[0]
-            call_tomorrow_weather(lng, lat, json["city"] + ", " + json["region"] + ", " + json["country"])
+            var lng = loc.split(",")[1]
+            call_tomorrow_weather(lat, lng, json["city"] + ", " + json["region"] + ", " + json["country"])
         });
     }
     else {
@@ -92,15 +94,19 @@ function submitForm(){
             var json = JSON.parse(rspObj.responseText)
             debug_geocode = json;
             //TODO remove debug (get these from geocode -> results -> 0 -> geometry -> location -> lat/long
+            var lat = json.results[0].geometry.location.lat
+            var lng = json.results[0].geometry.location.lng
+            /*TODO remove
             var lng = -73.98529171943665;
             var lat = 40.75872069597532;
+            */
             resultsIdx = 0 //TODO stop hardcoding
-            call_tomorrow_weather(lng, lat, json["results"][resultsIdx]["formatted_address"])
+            call_tomorrow_weather(lat, lng, json["results"][resultsIdx]["formatted_address"])
         });
     }    
 }
 
-function call_tomorrow_weather(lng, lat, loc) {
+function call_tomorrow_weather(lat, lng, loc) {
     var req_data = {
         "location": "" + lat + "," + lng + "",
         "fields": [
