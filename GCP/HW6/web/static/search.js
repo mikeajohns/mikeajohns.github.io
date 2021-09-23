@@ -102,13 +102,13 @@ function submitForm(){
 
 function call_tomorrow_weather(lng, lat, loc) {
     var req_data = {
-        "location": "" + lng + "," + lat + "",
+        "location": "" + lat + "," + lng + "",
         "fields": [
-            "temperature", "temperatureApparent", "temperatureMin", "temperatureMax", 
+            "temperature", "temperatureApparent", "temperatureMin", "temperatureMax", //TODO use temp apparent?
             "humidity", "pressureSeaLevel", "windSpeed", "windDirection", 
             "visibility", "cloudCover", "uvIndex", 
             "weatherCode", "precipitationProbability", "precipitationType", 
-            "sunriseTime", "sunsetTime", "moonPhase"],
+            "sunriseTime", "sunsetTime"/*, "moonPhase"*/],//TODO remove commented out
         "timesteps": ["1h", "1d"],
         "timezone": "America/Los_Angeles",
         "units": "imperial"
