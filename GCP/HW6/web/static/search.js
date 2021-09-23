@@ -193,7 +193,7 @@ function call_tomorrow_weather(lng, lat, loc) {
 function getPrettyDate(d){
     var localeUS = 'en-us'
     return d.toLocaleDateString(localeUS, { weekday: 'short' }) + ", " + 
-            d.getDate() + " " + 
+            ("0"+d.getDate()).slice(-2) + " " + 
             d.toLocaleDateString(localeUS, {month: 'short'}) + " " + 
             d.getFullYear()
 }
