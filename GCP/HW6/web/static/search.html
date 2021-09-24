@@ -21,12 +21,14 @@
 
 <div class="card-holder"><div id="weather-form" class="form card">
     <div class="header-bar">
-        <div class="title">Weather Search</div>
-        <div id="fill-out-form">Fill out the form to get weather info!</div>
+        <div id="header-bar-texts">
+            <div id="weather-search" class="title">Weather Search</div>
+            <div id="fill-out-form">Fill out the form to get weather info !</div>
+        </div>
     </div>
     <form id="search-form">
-    <div class="address-info">
-    <table>
+    <div id="address-info">
+    <table id="address-table">
         
         <tr><th colspan=2><label for="street">Street<span class="required">*</span></label></th></tr>
         <tr><th colspan=2><input type="text" id="street" required></th></tr>
@@ -36,13 +38,15 @@
             <th class="width-auto-2"><label for="state">State<span class="required">*</span></label></th>
         </tr>
         <tr>
-            <th class="width-auto-2"><input type="text" id="city" required></input></th>
-            <th class="width-auto-2"><select id="state" required></select></th>
+            <th id="city-cell" class="width-auto-2"><input type="text" id="city" required></input></th>
+            <th id="state-cell" class="width-auto-2"><select id="state" required></select></th>
+        </tr>
+        <tr>
+            <th colspan="2"><hr id="horiz-rule"></td>
         </tr>
     </table>
     </div>
-    <hr>
-    <div class="auto-detect">
+    <div id="auto-detect">
         <label for="auto-detect">Want us to auto-detect your location? Check here </label><input type="checkbox" onchange="onCheckboxChange()" id="auto-detect"></input>
     </div>
     <div>

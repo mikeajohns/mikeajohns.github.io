@@ -36,11 +36,12 @@ div.card {
     border-bottom: 4px solid #FF8A00;
 }
 .button {
+    width: 80px;
     padding: 12px;
-    width: auto;
     display: inline-block;
     font-size: small;
     cursor: pointer;
+    color: white;
     /*margin-right: 0.1em;*/
 }
 /*alignments*/
@@ -76,32 +77,80 @@ div.card {
 }
 div.header-bar {
     background-image: url("/web/images/banner.jpg");
-    padding: 2em;
-    padding-bottom: 1em;
+    background-position: 0% 22%	; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: 240%; /* Resize the background image to cover the entire container */
     height: 128px;
 }
+#header-bar-texts{
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-bottom: 25px;
+}
+#weather-search{
+    font-size: 140%;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+#fill-out-form{
+    font-size: 100%;
+    font-weight: 400;
+}
 #search-form {
+    /* the following is to take full advantage of the width, minux the padding*/
+    width: auto; 
+    left: 0px; 
+    right: 0px; 
+    max-width: 100%;    
+    
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 25px;
     padding-bottom: 25px;
 }
+#search-form input[type="text"], select{
+    top: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
+    height: 25px;
+    margin-bottom: 10px;
+}
 #street {
     width: 100%;
+    box-sizing: border-box;
 }
-td.width-auto-2 {
-    width: 50%;
+#city{
+    box-sizing: border-box;
+    width: 100%;
 }
-div.auto-detect {
-    margin-bottom: 1em;
+#state{
+    box-sizing: border-box;
+    width: 100%;
 }
-
+#address-table {
+    width: 100%;
     
-div.title {
-    font-size: large;
-    margin-bottom: 1em;
-    font-weight: bold;
 }
+#address-table tr,td,th {
+    padding-bottom: 4px;
+}
+.width-auto-2 {
+    width: 50%;
+    box-sizing: border-box;
+}
+#city-cell{
+    padding-right: 30px;
+}
+div#auto-detect {
+    margin-bottom: 35px;
+    font-size: 120%;
+}
+#horiz-rule{
+    width: 100%;
+    box-sizing: border-box;
+    background-color:RoyalBlue;
+}
+    
 label {
     color: RoyalBlue;
     font-size: 90%;
