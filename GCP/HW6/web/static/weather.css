@@ -22,7 +22,7 @@ div.card-holder {
 div.card {
     background-color: white;
     display: inline-block;
-    margin: 1em;
+    margin-top: 50px;
     text-align: left;
 }
 .submit {
