@@ -3,7 +3,9 @@ tomorrowWeatherStore = {} //global to store and retrieve weather info
 mjglob = null
 
 function onLoad() {
+    /*TODO uncomment
     jQuery(".default-hide").hide()
+    */
     
     jQuery("#state").append(jQuery("<option>", {
             value: "",

@@ -164,33 +164,64 @@ label {
 /*
 * Current Weather
 */
+#current-weather-card {
+    width: 847px;
+    height: 472px;
+    color: #8A8788;
+}
+#current-weather th, td {
+    padding: 11px;
+    padding-left: 8px;
+    padding-right: 8px;
+    
+}
+#location {
+    font-size: 165%;
+    margin-bottom: 20px;
+}
+#current-details{
+    width: 100%;
+    box-sizing: border-box;    
+    text-align: center;
+}
 tr#current-details-icons img {
-    width: 20px;
+    width: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 img#weather-code-icon{
-    width: 132px;
+    width: 140px;
 }
+#weather-code-text{
+    font-size: 110%;
+    /*TODO remove
+    padding-left: 20px;
+    */
+}
+#current-weather-code-stuff{
+    padding-left: 25px;
+}
+
 #current-summary {
     width: 100%;
+    margin-bottom: 20px;
 }
 #current-temp{
-    font-size: 80px;
+    font-size: 140px;
     text-align: center;
-    font-weight: 200;
-    color: gray;
+    font-weight: 300;
+    line-height: 80%;
+    padding-right: 45px;
+}
+#current-temp-th{
+    vertical-align: top;
 }
 tr#current-big-picture-row {
     height = 50px;
 }
 #current-weather table, tr, th, td {
   border: 0px;
-}
-#current-weather th, td {
-  padding: 5px;
-}
-#current-weather-card {
-    width: 847px;
-    height: 472px;
 }
 .current-weather-stat-type-icon {
     /*TODO how to grow?*/
