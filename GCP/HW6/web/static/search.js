@@ -236,19 +236,19 @@ function showForecastDetail(elem){
     jQuery("#daily-weather-details-table").empty()
     
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Precipitation:</td><td>" + getPrecipitationTypeName(values.precipitationType) + "</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Precipitation:</td><td class='daily-details-value'>" + getPrecipitationTypeName(values.precipitationType) + "</td></tr>");
             
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Chance of Rain:</td><td>" + values.precipitationProbability + "%</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Chance of Rain:</td><td class='daily-details-value'>" + values.precipitationProbability + "%</td></tr>");
             
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Wind Speed:</td><td>" + values.windSpeed + " mph</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Wind Speed:</td><td class='daily-details-value'>" + values.windSpeed + " mph</td></tr>");
             
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Humidity:</td><td>" + values.humidity + "%</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Humidity:</td><td class='daily-details-value'>" + values.humidity + "%</td></tr>");
             
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Visibility:</td><td>" + values.visibility + " mi</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Visibility:</td><td class='daily-details-value'>" + values.visibility + " mi</td></tr>");
                   
     var sunriseTime = new Date(values.sunriseTime)
     var HOURS_PER_MERIDIAN = 12;
@@ -258,7 +258,7 @@ function showForecastDetail(elem){
     sunsetTime = roundToHours(sunsetTime) % HOURS_PER_MERIDIAN + getAMPM(sunsetTime)
     
     jQuery("#daily-weather-details-table").append(
-            "<tr class='daily-details-row'><td>Sunrise/Sunset:</td><td>" + sunriseTime + "/" + sunsetTime + "</td></tr>");
+            "<tr class='daily-details-row'><td class='daily-details-label'>Sunrise/Sunset:</td><td class='daily-details-value'>" + sunriseTime + "/" + sunsetTime + "</td></tr>");
     
     loadDaysWeatherChart()
     loadHoursWeatherChart()

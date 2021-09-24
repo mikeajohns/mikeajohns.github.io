@@ -169,7 +169,7 @@ label {
     height: 472px;
     color: #8A8788;
 }
-#current-weather th, td {
+#current-weather th, #current-weather td {
     padding: 11px;
     padding-left: 8px;
     padding-right: 8px;
@@ -243,7 +243,6 @@ tr#current-big-picture-row {
     height: 100%;
 }
 
-/*TODO make the text for status line up vertically in center*/
 #x-day-forecast th {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -251,7 +250,7 @@ tr#current-big-picture-row {
     padding-right: 20px;
 }
 
-#x-day-forecast th, td{
+#x-day-forecast th, #x-day-forecast td{
     border-bottom: 7px solid lightgray;
 }
 img.forecast-weather-status-icon {
@@ -279,19 +278,51 @@ img.forecast-weather-status-icon {
 #daily-weather-details-card{
     width: 600px;
     height: 492px;
+    background-image: linear-gradient(white, #234469);
+    padding: 20px;
+    box-sizing: border-box;
 }
 #daily-day{
     font-size: 25px;
+    color: #234469;
+    margin-bottom: 20px;
 }
 #daily-weather-code-text {
     font-size: 25px;
+    color: #234469;
+    margin-bottom: 20px;
 }
 #daily-hi-low-temp {
     font-size: 35px;
+    color: #234469;
 }
 #daily-weather-code-icon {
-    width: 100px;
+    width: 160px;
+    margin-left: 110px;
+    margin-top: 10px;
 }
+#daily-weather-details-table{
+    color: white;
+    margin-left: 270px;
+    margin-top: 40px;
+}
+.daily-details-label{
+    text-align: right;
+    font-size: 110%;
+}
+.daily-details-value{
+    text-align: left;
+    font-size: 120%;
+    font-weight: 500;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.card-header{
+    font-size: 200%;
+    margin-top: 40px;
+}
+
 
 /*
 * Charts
