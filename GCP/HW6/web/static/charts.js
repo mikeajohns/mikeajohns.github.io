@@ -211,7 +211,8 @@ function loadHoursWeatherChart() {
             data: hoursTemps,
             type: "spline",
             tooltip: {
-                valueSuffix: '\u00B0F'
+                valueSuffix: '\u00B0F',
+                valueDecimals: 0,
             },
             color: '#FF3333',
             yAxis: 0,
@@ -232,7 +233,8 @@ function loadHoursWeatherChart() {
             groupPadding: 0,
             pointPadding: 0,
             tooltip: {
-                valueSuffix: ' %'
+                valueSuffix: ' %',
+                valueDecimals: 0,
             },
             yAxis: 1,
             marker: {
@@ -243,7 +245,8 @@ function loadHoursWeatherChart() {
             data: hoursPressures,
             type: "spline",
             tooltip: {
-                valueSuffix: ' inHg'
+                valueSuffix: ' inHg',
+                valueDecimals: 0,
             },
             color: '#F7B53D',
             yAxis: 2,
