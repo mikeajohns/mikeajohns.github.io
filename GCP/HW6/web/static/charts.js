@@ -1,25 +1,14 @@
-debug_timestamps = null;
-debug_days = null;
 function loadDaysWeatherChart() {
     // weather for today
-    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+    twentyFourHrIdx = 1 // TODO don't hard code
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
     daysChartData = []
         
     //Confirmed from video walkthrough that these are not based on which day you click in the forecast
-    //TODO remove var daysCount = 0
     for (day of days) {
         timestamp = (new Date(day.startTime)).getTime()
-        debug_days = day
         daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
-        /*TODO remove
-        daysCount += 1
-        if (daysCount >= 15){
-            break;
-        }
-        */
     }
-    debug_timestamps = daysChartData
     const chart = Highcharts.chart('days-chart', {
         chart: {
             type: 'arearange'
@@ -74,9 +63,6 @@ function loadDaysWeatherChart() {
 
 
 hours_data = null;
-debugHoursChart = null;
-debugBarbs = null;
-debugTemps = null;
 function loadHoursWeatherChart() {
     // set beaufort floor for MPH
     // Taken from: https://jsfiddle.net/BlackLabel/brnLxeto/
@@ -88,7 +74,7 @@ function loadHoursWeatherChart() {
 
     
     // weather for today
-    hourIdx = 0 // TODO fix the query to only ask what we need
+    hourIdx = 0 // TODO don't hard code
     var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;
     hours_data = hours
     hoursTemps = []
@@ -112,11 +98,7 @@ function loadHoursWeatherChart() {
                 direction: hour.values.windDirection
             })
         }
-        //TODO remove, don't limit//if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
-    
-    debugBarbs = hoursWinds
-    debugTemps = hoursTemps
     
     WIND_BARB_LENGTH = 10
     WIND_BARB_X_OFFSET = WIND_BARB_LENGTH/2
@@ -284,20 +266,14 @@ function loadHoursWeatherChart() {
         }]
     });
     
-    debugHoursChart = chart
-    
     drawBlocksForWindArrows(chart)
-    showWeatherCharts();//TODO remove debug
-    /*TODO remove debug
-    jQuery("#days-chart").hide()//TODO remove debug
-    */
 }
 
 
 /**
  * Draw blocks around wind arrows, below the plot area
- * Taken from Meteogram here: https://www.highcharts.com/demo/combo-meteogram#https://www.yr.no/place/United_Kingdom/England/London/forecast_hour_by_hour
- * TODO proper credit or replace/remove
+ * Taken from Meteogram here and modified: 
+ *  https://www.highcharts.com/demo/combo-meteogram#https://www.yr.no/place/United_Kingdom/England/London/forecast_hour_by_hour
  */
 drawBlocksForWindArrows = function (chart) {
     var xAxis = chart.xAxis[0],
