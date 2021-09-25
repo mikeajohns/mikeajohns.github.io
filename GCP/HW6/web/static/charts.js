@@ -324,6 +324,8 @@ drawBlocksForWindArrows = function (chart) {
 
 //down button
 function showWeatherCharts(){
+    loadDaysWeatherChart()
+    loadHoursWeatherChart()
     jQuery("#weather-charts-card").show()
     jQuery("#weather-charts").show()
     jQuery("#up-button").show()

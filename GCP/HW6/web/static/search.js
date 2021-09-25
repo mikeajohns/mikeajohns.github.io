@@ -237,9 +237,6 @@ function showForecastDetail(elem){
     
     jQuery("#daily-weather-details-table").append(
             "<tr class='daily-details-row'><td class='daily-details-label'>Sunrise/Sunset:</td><td class='daily-details-value'>" + sunriseTime + "/" + sunsetTime + "</td></tr>");
-    
-    loadDaysWeatherChart()
-    loadHoursWeatherChart()
 }
 
 
