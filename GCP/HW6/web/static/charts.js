@@ -5,7 +5,8 @@ function loadDaysWeatherChart() {
     twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
     daysChartData = []
-    //for (const [stateShort, stateLong] of Object.entries(states)) {
+        
+    //Confirmed from video walkthrough that these are not based on which day you click in the forecast
     var daysCount = 0
     for (day of days) {
         timestamp = (new Date(day.startTime)).getTime()
@@ -84,6 +85,7 @@ function loadHoursWeatherChart() {
     HOURS_IN_5_DAYS = 50 //TODO remove this debug
     HOURS_IN_5_DAYS = 5 * 24
     
+    //Confirmed from video walkthrough that these are not based on which day you click in the forecast
     for (hour of hours) {
         timestamp = (new Date(hour.startTime)).getTime()
         hoursTemps.push([timestamp, hour.values.temperature])
