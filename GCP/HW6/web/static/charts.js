@@ -94,8 +94,8 @@ function loadHoursWeatherChart() {
     hoursHumidities = []
     hoursWinds = []
     WIND_RESOLUTION_FACTOR = 2
-    HOURS_IN_5_DAYS = 50 //TODO remove this debug
     HOURS_IN_5_DAYS = 5 * 24
+    //NOTE: following same guidance here as from the 15/16 day forecast and not limiting the data we receive from tomorrow.io
     
     //Confirmed from video walkthrough that these are not based on which day you click in the forecast
     for (hour of hours) {
@@ -110,7 +110,7 @@ function loadHoursWeatherChart() {
                 direction: hour.values.windDirection
             })
         }
-        if (hoursTemps.length > HOURS_IN_5_DAYS) break;
+        //TODO remove, don't limit//if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
     
     WIND_BARB_LENGTH = 10
