@@ -75,6 +75,8 @@ function loadDaysWeatherChart() {
 
 hours_data = null;
 debugHoursChart = null;
+debugBarbs = null;
+debugTemps = null;
 function loadHoursWeatherChart() {
     // set beaufort floor for MPH
     // Taken from: https://jsfiddle.net/BlackLabel/brnLxeto/
@@ -112,6 +114,9 @@ function loadHoursWeatherChart() {
         }
         //TODO remove, don't limit//if (hoursTemps.length > HOURS_IN_5_DAYS) break;
     }
+    
+    debugBarbs = hoursWinds
+    debugTemps = hoursTemps
     
     WIND_BARB_LENGTH = 10
     WIND_BARB_X_OFFSET = WIND_BARB_LENGTH/2
