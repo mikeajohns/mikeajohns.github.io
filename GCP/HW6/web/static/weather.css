@@ -5,7 +5,6 @@
 
 /*1189px width determined by removing all excess pixels on left and right side of ScreenShot1.png*/
 body {
-    width: 1920px;
     padding: 0px; 
     margin: 0px;
     background-color: #E7E6E8;
@@ -42,7 +41,6 @@ div.card {
     font-size: small;
     cursor: pointer;
     color: white;
-    /*margin-right: 0.1em;*/
 }
 /*alignments*/
 .left {
