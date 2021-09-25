@@ -329,6 +329,9 @@ img.forecast-weather-status-icon {
 */
 .arrow-button{
     width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #days-chart {
