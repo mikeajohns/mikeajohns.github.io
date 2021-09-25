@@ -130,7 +130,7 @@ function loadHoursWeatherChart() {
             text: 'Hourly Forecast (For Next 5 Days)'
         },
         xAxis: [{
-            type: 'datetime',
+            type: 'datetime', //bottom ticks (hours)
             labels: {
                 enabled: true,
                 format: '{value:%H}'
@@ -148,10 +148,11 @@ function loadHoursWeatherChart() {
             crosshair: true,
             startOnTick: false,
             minPadding: 0.005,
-        },{ // Top X axis
+        },{ // Top X axis - dates
             linkedTo: 0,
             type: 'datetime',
             tickInterval: 24 * 3600 * 1000,
+
             labels: {
                 format: '{value:<span style="font-size: 12px; font-weight: bold">%a</span> %b %e}',
                 align: 'left',
