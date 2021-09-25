@@ -1,6 +1,6 @@
 function loadDaysWeatherChart() {
     // weather for today
-    twentyFourHrIdx = 1 // TODO don't hard code
+    var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
     daysChartData = []
         
@@ -73,8 +73,7 @@ function loadHoursWeatherChart() {
             46.528352000000005, 54.80503, 63.752790000000005, 73.14793800000001];
 
     
-    // weather for today
-    hourIdx = 0 // TODO don't hard code
+    var hourIdx= getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1h")
     var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;
     hours_data = hours
     hoursTemps = []

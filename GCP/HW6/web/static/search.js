@@ -97,6 +97,16 @@ function submitForm(){
     }    
 }
 
+function getTimestepIdxByName(timelines, timestepName){
+    for (const [idx, timeline] of timelines.entries()) {
+        if (timeline.timestep == timestepName){
+            return idx
+        }
+    }
+    console.log("Error finding " + timestepName)
+    return null; //error condition
+}
+
 function call_tomorrow_weather(lat, lng, loc) {
     var req_data = {
         "location": "" + lat + "," + lng + "",
@@ -106,7 +116,7 @@ function call_tomorrow_weather(lat, lng, loc) {
             "visibility", "cloudCover", "uvIndex", 
             "weatherCode", "precipitationProbability", "precipitationType", 
             "sunriseTime", "sunsetTime"],
-        "timesteps": ["1h", "1d"],
+        "timesteps": ["current", "1h", "1d"],
         "timezone": "America/Los_Angeles",
         "units": "imperial"
     };
@@ -114,10 +124,10 @@ function call_tomorrow_weather(lat, lng, loc) {
         tomorrowWeatherStore = JSON.parse(rspObj.responseText);
         
         // weather for today
-        twentyFourHrIdx = 1 // TODO don't hard code
+        currentTimeIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "current")
         startTimeIdx = 0 //TODO swap over to using the "current"
         
-        var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
+        var values = tomorrowWeatherStore["data"]["timelines"][currentTimeIdx]["intervals"][startTimeIdx]["values"]
         
         jQuery("#location").text(loc)
         
@@ -140,7 +150,7 @@ function call_tomorrow_weather(lat, lng, loc) {
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
         jQuery("#weather-code-text").text(get_weather_code_text(values["weatherCode"]))
         
-        var twentyFourHrIdx = 1 //TODO stop hard coding
+        var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
         var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
         
         for (var timeIdx in forecastData) {
@@ -195,7 +205,7 @@ function showForecastDetail(elem){
     jQuery("#weather-charts").show()
     
     // weather for today
-    twentyFourHrIdx = 1 // TODO don't hard code
+    var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
     var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
     
     var timestamp = new Date(tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals[startTimeIdx].startTime)
