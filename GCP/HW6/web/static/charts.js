@@ -317,8 +317,11 @@ drawBlocksForWindArrows = function (chart) {
         } else {
             isLong = i % 2 === 0;
         }
-        chart.renderer.path(['M', x, chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
-            'L', x, chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT + 2, 'Z'])
+        
+        if (!isLong ) continue; //short is for drawing minor ticks
+        startY = chart.plotTop + chart.plotHeight + (isLong ? 0 : 28)
+        endY = startY + WIND_BARB_BOX_HEIGHT
+        chart.renderer.path(['M', x, startY, 'L', x, endY, 'Z'])
             .attr({
                 stroke: chart.options.chart.plotBorderColor,
                 'stroke-width': 1
