@@ -131,23 +131,20 @@ function loadHoursWeatherChart() {
         },
         xAxis: [{
             type: 'datetime', //bottom ticks (hours)
-            labels: {
-                enabled: true,
-                format: '{value:%H}'
-            },
-            title: {
-                enabled: false
-            },
-            //tickInterval: 36e5, //1 hr
             tickInterval: 4 * 36e5, // four hours
             minorTickInterval: 36e5, // one hour
-            offset: WIND_BARB_BOX_HEIGHT,
-            gridLineColor: 'rgba(128, 128, 128, 0.1)',
+            tickLength: 0,
             gridLineWidth: 1,
-            endOnTick: false,
-            crosshair: true,
+            gridLineColor: 'rgba(128, 128, 128, 0.1)',
             startOnTick: false,
-            minPadding: 0.005,
+            endOnTick: false,
+            minPadding: 0,
+            maxPadding: 0,
+            offset: WIND_BARB_BOX_HEIGHT,
+            showLastLabel: true,
+            labels: {
+                format: '{value:%H}'
+            },
         },{ // Top X axis - dates
             linkedTo: 0,
             type: 'datetime',
@@ -214,10 +211,10 @@ function loadHoursWeatherChart() {
         }],
         plotOptions: {
             column: {
-                pointPlacement: 'on' //per video, this looks right
+                pointPlacement: 'between' //per video, this looks right
             },
             series: {
-                pointPlacement: 'on',
+                pointPlacement: 'between',
             },
         },
         legend: {
@@ -324,9 +321,17 @@ drawBlocksForWindArrows = function (chart) {
             isLong = i % 2 === 0;
         }
         
-        if (!isLong ) continue; //short is for drawing minor ticks
-        startY = chart.plotTop + chart.plotHeight + (isLong ? 0 : 28)
-        endY = startY + WIND_BARB_BOX_HEIGHT
+        if(isLong) {
+            //draw box edges
+            startY = chart.plotTop + chart.plotHeight
+            endY = startY + WIND_BARB_BOX_HEIGHT            
+        }
+        else {
+            //draw minor ticks
+            WIND_BARB_MINOR_TICK_LENGTH = 4
+            startY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT - WIND_BARB_MINOR_TICK_LENGTH / 2 //off by 1 because of other boundaries
+            endY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT + WIND_BARB_MINOR_TICK_LENGTH / 2 //off by 1 because of other boundaries
+        }
         chart.renderer.path(['M', x, startY, 'L', x, endY, 'Z'])
             .attr({
                 stroke: chart.options.chart.plotBorderColor,
