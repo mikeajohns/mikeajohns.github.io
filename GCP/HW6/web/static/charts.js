@@ -139,7 +139,7 @@ function loadHoursWeatherChart() {
             startOnTick: false,
             endOnTick: false,
             minPadding: 0,
-            maxPadding: 0,
+            maxPadding: 0, //NOTE could add padding here to close off the wind barb box, but that wouldn't match the screenshots from the HW6 Description PDF
             offset: WIND_BARB_BOX_HEIGHT,
             showLastLabel: true,
             labels: {
