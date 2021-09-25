@@ -4,8 +4,6 @@ mjglob = null
 
 function onLoad() {
     jQuery(".default-hide").hide()
-    /*TODO uncomment
-    */
     
     jQuery("#state").append(jQuery("<option>", {
             value: "",
@@ -65,15 +63,12 @@ function clearForm(){
     onCheckboxChange()
 }
 
-debug_geocode = null //TODO remove
-debug_ipinfo = null //TODO remove
 function submitForm(){    
     if (jQuery("#auto-detect").prop('checked') ) {
         // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
-            debug_ipinfo = json
             var loc = json["loc"]
             var lat = loc.split(",")[0]
             var lng = loc.split(",")[1]
@@ -94,14 +89,8 @@ function submitForm(){
         };
         get_api_info("geocode", "json", req_data, function(rspObj){
             var json = JSON.parse(rspObj.responseText)
-            debug_geocode = json;
-            //TODO remove debug (get these from geocode -> results -> 0 -> geometry -> location -> lat/long
             var lat = json.results[0].geometry.location.lat
             var lng = json.results[0].geometry.location.lng
-            /*TODO remove
-            var lng = -73.98529171943665;
-            var lat = 40.75872069597532;
-            */
             resultsIdx = 0 //TODO stop hardcoding
             call_tomorrow_weather(lat, lng, json["results"][resultsIdx]["formatted_address"])
         });
@@ -116,7 +105,7 @@ function call_tomorrow_weather(lat, lng, loc) {
             "humidity", "pressureSeaLevel", "windSpeed", "windDirection", 
             "visibility", "cloudCover", "uvIndex", 
             "weatherCode", "precipitationProbability", "precipitationType", 
-            "sunriseTime", "sunsetTime"/*, "moonPhase"*/],//TODO remove commented out
+            "sunriseTime", "sunsetTime"],
         "timesteps": ["1h", "1d"],
         "timezone": "America/Los_Angeles",
         "units": "imperial"
@@ -125,14 +114,13 @@ function call_tomorrow_weather(lat, lng, loc) {
         tomorrowWeatherStore = JSON.parse(rspObj.responseText);
         
         // weather for today
-        twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
-        startTimeIdx = 0 //TODO either fix the query to only ask for what we need or make this smarter
+        twentyFourHrIdx = 1 // TODO don't hard code
+        startTimeIdx = 0 //TODO swap over to using the "current"
         
         var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
         
         jQuery("#location").text(loc)
         
-        //TODO format the strings and add units
         jQuery("#humidity-value").text(values["humidity"] + "%")
         jQuery("#pressure-value").text(values["pressureSeaLevel"] + "inHg")
         jQuery("#wind-speed-value").text(values["windSpeed"] + "mph")
@@ -152,21 +140,10 @@ function call_tomorrow_weather(lat, lng, loc) {
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
         jQuery("#weather-code-text").text(get_weather_code_text(values["weatherCode"]))
         
-        
-        
         var twentyFourHrIdx = 1 //TODO stop hard coding
         var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
-        //TODO remove var daysToForecast = 15
         
-        /*TODO remove debug*/
         for (var timeIdx in forecastData) {
-            /*TODO remove
-            if(timeIdx >= daysToForecast)
-            {
-                break;
-            }
-            */
-            
             var timeData = forecastData[timeIdx]
             var date = timeData["startTime"]
             var timestamp = new Date(timeData.startTime)
@@ -218,7 +195,7 @@ function showForecastDetail(elem){
     jQuery("#weather-charts").show()
     
     // weather for today
-    twentyFourHrIdx = 1 // TODO fix the query to only ask what we need
+    twentyFourHrIdx = 1 // TODO don't hard code
     var values = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"][startTimeIdx]["values"]
     
     var timestamp = new Date(tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals[startTimeIdx].startTime)
@@ -287,8 +264,6 @@ function getPrecipitationTypeName(typeCode){
 }
 
 function getAMPM(d){
-    mjdate = d
-    console.log(d)
     if(!d.getHours())
     {
         return null
