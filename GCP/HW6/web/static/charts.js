@@ -204,6 +204,7 @@ function loadHoursWeatherChart() {
                 padding: '5px',
             },
             opposite: true,
+            endOnTick: false,
         }],
         plotOptions: {
             column: {
