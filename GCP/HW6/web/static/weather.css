@@ -193,9 +193,6 @@ img#weather-code-icon{
 }
 #weather-code-text{
     font-size: 110%;
-    /*TODO remove
-    padding-left: 20px;
-    */
 }
 #current-weather-code-stuff{
     padding-left: 25px;
@@ -222,7 +219,7 @@ tr#current-big-picture-row {
   border: 0px;
 }
 .current-weather-stat-type-icon {
-    /*TODO how to grow?*/
+    /*TODO how to grow? Didn't I already do this?*/
 }
 
 /*
