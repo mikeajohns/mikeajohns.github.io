@@ -72,6 +72,7 @@ function loadDaysWeatherChart() {
 
 
 hours_data = null;
+debugHoursChart = null;
 function loadHoursWeatherChart() {
     // weather for today
     hourIdx = 0 // TODO fix the query to only ask what we need
@@ -112,11 +113,11 @@ function loadHoursWeatherChart() {
         title: {
             text: 'Hourly Forecast (For Next 5 Days)'
         },
-        xAxis: {
+        xAxis: [{
             type: 'datetime',
             labels: {
-                enabled: true
-                //TODO format to 2 digit hour padded left w/ zeros
+                enabled: true,
+                format: '{value:%H}'
             },
             title: {
                 enabled: false
@@ -131,7 +132,20 @@ function loadHoursWeatherChart() {
             crosshair: true,
             startOnTick: false,
             minPadding: 0.005,
-        },
+        },{ // Top X axis
+            linkedTo: 0,
+            type: 'datetime',
+            tickInterval: 24 * 3600 * 1000,
+            labels: {
+                format: '{value:<span style="font-size: 12px; font-weight: bold">%a</span> %b %e}',
+                align: 'left',
+                x: 3,
+                y: -5
+            },
+            opposite: true,
+            tickLength: 20,
+            gridLineWidth: 1
+        }],
         yAxis: [
         { //===temperatures axis
             labels: {
@@ -156,8 +170,13 @@ function loadHoursWeatherChart() {
                 enabled: true,
                 style: {
                     color: '#F7B53D',
-                }
-
+                },
+                offset: 0,
+                allowOverlap: false, /*this should be the default*/
+                textAlign: 'left',
+                align: 'left',
+                padding: '5px',
+                x: 3,
             },
             allowDecimals: false,
             title: {
@@ -169,8 +188,9 @@ function loadHoursWeatherChart() {
                     fontSize: '10px',
                     color: '#F7B53D',
                 },
-                textAlign: 'left',
-                x: 3
+                textAlign: 'left',	
+                x: 3,
+                padding: '5px',
             },
             opposite: true,
         }],
@@ -245,6 +265,8 @@ function loadHoursWeatherChart() {
             lineWidth: 1,
         }]
     });
+    
+    debugHoursChart = chart
     
     drawBlocksForWindArrows(chart)
     showWeatherCharts();//TODO remove debug
