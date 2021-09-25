@@ -328,8 +328,9 @@ function showWeatherCharts(){
     loadHoursWeatherChart()
     jQuery("#weather-charts-card").show()
     jQuery("#weather-charts").show()
-    jQuery("#up-button").show()
     jQuery("#down-button").hide()
+    
+    window.scrollTo(null, jQuery("#up-button").show().offset().top)
 }
 
 //up button

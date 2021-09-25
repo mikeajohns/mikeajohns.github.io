@@ -34,7 +34,7 @@ function onLoad() {
 function clearInputFields() {
     
     clearAddrFields()
-    jQuery("#auto-detect").prop('checked', false);
+    jQuery("#auto-detect-cb").prop('checked', false);
 }
 
 function clearAddrFields() {
@@ -44,7 +44,7 @@ function clearAddrFields() {
 }
 
 function onCheckboxChange() {
-    if(jQuery("#auto-detect").prop('checked')) {
+    if(jQuery("#auto-detect-cb").prop('checked')) {
         clearAddrFields()
         jQuery("#street").val("").prop('disabled', true)
         jQuery("#city").val("").prop('disabled', true)
@@ -64,7 +64,7 @@ function clearForm(){
 }
 
 function submitForm(){    
-    if (jQuery("#auto-detect").prop('checked') ) {
+    if (jQuery("#auto-detect-cb").prop('checked') ) {
         // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
             //use info and get lat/lng and submit
