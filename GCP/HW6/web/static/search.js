@@ -342,20 +342,20 @@ function get_weather_code_icon(weatherCode){
 * var data = JSON.parse(this.responseText);
 */
 function get_api_info(api, method, req_data, callback){
-    url = "/apis/" + api
     var req = new XMLHttpRequest();
     req.onreadystatechange = function (){
         if (this.readyState == 4 && this.status == 200) {
             callback(this)
         }
     }
-    req_type = "POST";//TODO must be a GET per https://piazza.com/class/ksgpd7vrj2x4d7?cid=126
-    req.open(req_type, url , true);
+    
+    url = "/apis/" + api + "?" + jQuery.param(req_data)
+    req.open("GET", url , true);
     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     
     req_data.method = method;
     
-    req.send(JSON.stringify(req_data));
+    req.send();
 }
 
 function get_current_weather_icon(infoType){

@@ -29,27 +29,21 @@ def send_webfiles(path):
 
 # https://api.tomorrow.io/v4/timelines?location=-73.98529171943665,40.75872069597532&fields=temperature&timesteps=1h&units=metric&apikey=sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O
 # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY}
-@app.route('/apis/<api_name>', methods=['GET', 'POST'])
+@app.route('/apis/<api_name>', methods=['GET'])
 def call_api(api_name):
-    req_data = request.get_json()
-
-    debug_save_usage = False
-    debug_save_usage = True #TODO remove
-    if debug_save_usage:
-        return get_fake_json(api_name)
+    req_data = request.args
 
     remote_addr = request.remote_addr
     remote_addr = "47.185.202.16" #TODO remove
 
-
     # NOTE: the keys/tokens below should not be shared with anyone
     api_infos = {
         "tomorrow": {
-            "url": "https://api.tomorrow.io/v4",
+            "url": "https://api.tomorrow.io/v4/timelines",
             "url_params": {"apikey": "sRWfsYY1xHVnFN9f6ILSV5fVVlMQgn1O"}
         },
         "geocode": {
-            "url": "https://maps.googleapis.com/maps/api/geocode",
+            "url": "https://maps.googleapis.com/maps/api/geocode/json",
             "url_params": {"key": "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc"}
         },
         "ipinfo": {
@@ -61,36 +55,27 @@ def call_api(api_name):
     if api_name not in api_infos:
         return None
 
-    #import urllib.request
-    import urllib.parse
 
     api_info = api_infos[api_name]
     url = api_info["url"]
 
-    if "method" in req_data:
-        method = req_data["method"]
-        del req_data["method"]
-        url = url + "/%s" % method
-
-
+    import urllib.parse
     import requests
+    params = urllib.parse.urlencode(api_info["url_params"])
+    url = url + ("?%s&%s" % (request.query_string.decode('utf-8'), params))
 
-    if api_name == "tomorrow":
-        # special handling for tomorrow, since the request data is more complicated, it doesn't seem to work all in the URL
-        params = urllib.parse.urlencode(api_info["url_params"])
-        url = url + "?%s" % params
-        print(url)
-        response = requests.post(url, req_data) # {"Accept": "application/json", "Content-Type": "application/json"}
+    debug_print = False
+    if debug_print: print("URL:", url)
 
-    else:
-        params = urllib.parse.urlencode(req_data | api_info["url_params"])
-        url = url + "?%s" % params
-        print(url)
-        response = requests.get(url)
+    debug_save_usage = False
+    debug_save_usage = True  # TODO remove
+    if debug_save_usage:
+        return get_fake_json(api_name)
 
-    print(req_data)
+    response = requests.get(url)
 
-    print(response.json())
+    if debug_print: print("RSP:", response)
+    if debug_print: print("JSON:", response.json())
     return response.json()
 
 
