@@ -7,15 +7,17 @@ function loadDaysWeatherChart() {
     daysChartData = []
         
     //Confirmed from video walkthrough that these are not based on which day you click in the forecast
-    var daysCount = 0
+    //TODO remove var daysCount = 0
     for (day of days) {
         timestamp = (new Date(day.startTime)).getTime()
         debug_days = day
         daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
+        /*TODO remove
         daysCount += 1
         if (daysCount >= 15){
             break;
         }
+        */
     }
     debug_timestamps = daysChartData
     const chart = Highcharts.chart('days-chart', {
@@ -74,6 +76,15 @@ function loadDaysWeatherChart() {
 hours_data = null;
 debugHoursChart = null;
 function loadHoursWeatherChart() {
+    // set beaufort floor for MPH
+    // Taken from: https://jsfiddle.net/BlackLabel/brnLxeto/
+    // And verified values against to: https://www.weather.gov/jetstream/beaufort_max
+    Highcharts.seriesTypes.windbarb.prototype.beaufortFloor = [
+            0, 0.6710820000000001, 3.5791040000000005, 7.605596, 12.303170000000001, 
+            17.89552, 24.158952000000003, 31.093466000000003, 38.475368, 
+            46.528352000000005, 54.80503, 63.752790000000005, 73.14793800000001];
+
+    
     // weather for today
     hourIdx = 0 // TODO fix the query to only ask what we need
     var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;

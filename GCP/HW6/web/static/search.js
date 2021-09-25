@@ -3,8 +3,8 @@ tomorrowWeatherStore = {} //global to store and retrieve weather info
 mjglob = null
 
 function onLoad() {
-    /*TODO uncomment
     jQuery(".default-hide").hide()
+    /*TODO uncomment
     */
     
     jQuery("#state").append(jQuery("<option>", {
@@ -156,15 +156,16 @@ function call_tomorrow_weather(lat, lng, loc) {
         
         var twentyFourHrIdx = 1 //TODO stop hard coding
         var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
-        var daysToForecast = 15
+        //TODO remove var daysToForecast = 15
         
         /*TODO remove debug*/
         for (var timeIdx in forecastData) {
-            
+            /*TODO remove
             if(timeIdx >= daysToForecast)
             {
                 break;
             }
+            */
             
             var timeData = forecastData[timeIdx]
             var date = timeData["startTime"]
