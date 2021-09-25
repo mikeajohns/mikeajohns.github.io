@@ -150,9 +150,12 @@ function call_tomorrow_weather(lat, lng, loc) {
         jQuery("#weather-code-icon").attr("src", get_weather_code_icon(values["weatherCode"]))
         jQuery("#weather-code-text").text(get_weather_code_text(values["weatherCode"]))
         
+        jQuery("#x-day-forecast").empty();
+        
         var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
         var forecastData = tomorrowWeatherStore["data"]["timelines"][twentyFourHrIdx]["intervals"]
-        
+        var headerRow = '<tr class="forecast-table-header"><th>Date</th><th>Status</th><th>Temp High</th><th>Temp Low</th><th>Wind Speed</th></tr>'
+        jQuery("#x-day-forecast").append(headerRow);
         for (var timeIdx in forecastData) {
             var timeData = forecastData[timeIdx]
             var date = timeData["startTime"]

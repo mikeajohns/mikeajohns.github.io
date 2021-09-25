@@ -230,7 +230,7 @@ tr#current-big-picture-row {
     width: 1319px;
 }	
 #x-day-forecast {
-    color: darkgray;
+    color: darkgray; /*TODO should be even darker*/
     border-spacing: 0;
     font-weight: bold;
     text-align: center;
