@@ -89,10 +89,10 @@ function submitForm(){
         };
         get_api_info("geocode", "json", req_data, function(rspObj){
             var json = JSON.parse(rspObj.responseText)
-            var lat = json.results[0].geometry.location.lat
-            var lng = json.results[0].geometry.location.lng
-            resultsIdx = 0 //TODO stop hardcoding
-            call_tomorrow_weather(lat, lng, json["results"][resultsIdx]["formatted_address"])
+            var resultsIdx = 0 //NOTE: hardcoded to just the first result
+            var lat = json.results[resultsIdx].geometry.location.lat
+            var lng = json.results[resultsIdx].geometry.location.lng
+            call_tomorrow_weather(lat, lng, json.results[resultsIdx]["formatted_address"])
         });
     }    
 }
@@ -111,7 +111,7 @@ function call_tomorrow_weather(lat, lng, loc) {
     var req_data = {
         "location": "" + lat + "," + lng + "",
         "fields": [
-            "temperature", "temperatureApparent", "temperatureMin", "temperatureMax", //TODO use temp apparent?
+            "temperature", "temperatureMin", "temperatureMax",
             "humidity", "pressureSeaLevel", "windSpeed", "windDirection", 
             "visibility", "cloudCover", "uvIndex", 
             "weatherCode", "precipitationProbability", "precipitationType", 
@@ -125,7 +125,7 @@ function call_tomorrow_weather(lat, lng, loc) {
         
         // weather for today
         currentTimeIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "current")
-        startTimeIdx = 0 //TODO swap over to using the "current"
+        startTimeIdx = 0
         
         var values = tomorrowWeatherStore["data"]["timelines"][currentTimeIdx]["intervals"][startTimeIdx]["values"]
         
@@ -206,6 +206,7 @@ function showForecastDetail(elem){
     jQuery("#daily-weather-details").show()
     jQuery("#weather-charts-card").hide() //don't show this until the button is clicked
     jQuery("#weather-charts").show()
+    jQuery("#up-button").hide()
     
     // weather for today
     var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
@@ -288,6 +289,7 @@ function getAMPM(d){
 
 iconPrefix = "web/images/";
 weatherCodeLookup = {
+    "0": ["N/A", ""],
     "1000": ["Clear", iconPrefix + "clear_day.svg"],
     "1001": ["Cloudy", iconPrefix + "cloudy.svg"],
     "1100": ["Mostly Clear", iconPrefix + "mostly_clear_day.svg"],
@@ -313,12 +315,19 @@ weatherCodeLookup = {
     "8000": ["Thunderstorm", iconPrefix + "tstorm.svg"]
 }
 
-//TODO fix so that a failure doesn't just crash
 function get_weather_code_text(weatherCode){
-    return weatherCodeLookup[weatherCode][0]
+    try {
+        return weatherCodeLookup[weatherCode][0]
+    } catch (error) {
+        return weatherCodeLookup["0"][0] //N/A
+    }
 }
 function get_weather_code_icon(weatherCode){
-    return weatherCodeLookup[weatherCode][1]
+    try {
+        return weatherCodeLookup[weatherCode][1]
+    } catch (error) {
+        return weatherCodeLookup["0"][1] //N/A
+    }
 }
 
 
