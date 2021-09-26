@@ -73,10 +73,10 @@ def call_api(api_name):
     if debug_save_usage:
         return get_fake_json(api_name)
 
-    response = requests.get(url)
+    rsp = requests.get(url)
 
-    if debug_print: print("RSP:", response)
-    if debug_print: print("JSON:", response.json())
+    if debug_print: print("RSP:", rsp)
+    if debug_print: print("JSON:", rsp.json())
 
     if debug_print:
         from datetime import datetime
@@ -84,9 +84,14 @@ def call_api(api_name):
         log = 'log-' + api_name + '-' + str(sttime) + '.txt'
 
         with open(log, 'a') as logfile:
-            logfile.write(response.text + '\n')
+            logfile.write(rsp.text + '\n')
 
-    return response.json()
+    TOO_MANY_REQTS_ERROR = 429
+    if rsp.status_code == TOO_MANY_REQTS_ERROR or rsp.json()['status'] in ('OVER_QUERY_LIMIT', 'OVER_DAILY_LIMIT '):
+        from flask import Response
+        return Response("", status=TOO_MANY_REQTS_ERROR, mimetype='application/json')
+
+    return rsp.json()
 
 
 def get_fake_json(api_name):
