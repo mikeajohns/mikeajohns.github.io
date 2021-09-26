@@ -68,8 +68,8 @@ def call_api(api_name):
     debug_print = False
     if debug_print: print("URL:", url)
 
-    debug_save_usage = True  # TODO remove
     debug_save_usage = False
+    debug_save_usage = True  # TODO remove
     if debug_save_usage:
         return get_fake_json(api_name)
 

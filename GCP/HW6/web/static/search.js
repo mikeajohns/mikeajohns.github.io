@@ -63,7 +63,8 @@ function clearForm(){
     onCheckboxChange()
 }
 
-function submitForm(){    
+function submitForm(){   
+    jQuery("#no-records-card").hide() 
     if (jQuery("#auto-detect-cb").prop('checked') ) {
         // do auto-detect
         get_api_info("ipinfo", "json", {}, function(rspObj){
@@ -339,8 +340,13 @@ function get_weather_code_icon(weatherCode){
 function get_api_info(api, method, req_data, callback){
     var req = new XMLHttpRequest();
     req.onreadystatechange = function (){
-        if (this.readyState == 4 && this.status == 200) {
-            callback(this)
+        if (this.readyState == 4) {
+            if(this.status == 200) {
+                callback(this)
+            }
+            else if (this.status == 429){
+                jQuery("#no-records-card").show()
+            }
         }
     }
     
