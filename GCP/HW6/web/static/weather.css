@@ -129,7 +129,7 @@ div.header-bar {
     width: 100%;
     
 }
-#address-table tr,td,th {
+#address-table tr, #address-table td, #address-table th {
     padding-bottom: 4px;
 }
 .width-auto-2 {
@@ -178,14 +178,13 @@ label {
     color: #8A8788;
 }
 #current-weather th, #current-weather td {
-    padding: 11px;
-    padding-left: 8px;
-    padding-right: 8px;
-    
+    padding: 8px;    
 }
 #location {
     font-size: 165%;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-top: 15x;
 }
 #current-details{
     width: 100%;
@@ -193,13 +192,13 @@ label {
     text-align: center;
 }
 tr#current-details-icons img {
-    width: 30px;
+    width: 40px;
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
 img#weather-code-icon{
-    width: 140px;
+    width: 180px;
 }
 #weather-code-text{
     font-size: 110%;
@@ -213,11 +212,12 @@ img#weather-code-icon{
     margin-bottom: 20px;
 }
 #current-temp{
-    font-size: 140px;
+    font-size: 180px;
     text-align: center;
     font-weight: 300;
     line-height: 80%;
     padding-right: 45px;
+    margin-top: 10px;
 }
 #current-temp-th{
     vertical-align: top;
@@ -225,7 +225,7 @@ img#weather-code-icon{
 tr#current-big-picture-row {
     height = 50px;
 }
-#current-weather table, tr, th, td {
+#current-weather table, #current-weather tr, #current-weather th, #current-weather td {
   border: 0px;
 }
 
@@ -292,12 +292,12 @@ div.hover-shadow:hover{
     box-shadow: 0px 5px 10px 0px gray
 }
 #daily-day{
-    font-size: 25px;
+    font-size: 28px;
     color: #234469;
     margin-bottom: 20px;
 }
 #daily-weather-code-text {
-    font-size: 25px;
+    font-size: 28px;
     color: #234469;
     margin-bottom: 20px;
 }
@@ -306,8 +306,8 @@ div.hover-shadow:hover{
     color: #234469;
 }
 #daily-weather-code-icon {
-    width: 160px;
-    margin-left: 110px;
+    width: 180px;
+    margin-left: 88px;
     margin-top: 10px;
 }
 #daily-weather-details-table{
@@ -317,18 +317,19 @@ div.hover-shadow:hover{
 }
 .daily-details-label{
     text-align: right;
-    font-size: 110%;
+    font-size: 20px;
+    font-weight: 500;
 }
 .daily-details-value{
     text-align: left;
-    font-size: 120%;
+    font-size: 23px;
     font-weight: 500;
     margin-top: 7px;
     margin-bottom: 7px;
 }
 
 .card-header{
-    font-size: 47px;
+    font-size: 45px;
     margin-top: 45px;
     margin-bottom: 25px;    
 }
@@ -336,6 +337,14 @@ div.hover-shadow:hover{
 
 /*
 * Charts
+*/
+
+/*
+div.weather-chart {
+    margin-top: 0px; /*override the normal margin for cards, to allow the button*/
+    /*
+    display: block;
+}
 */
 .arrow-button{
     width: 44px;
@@ -345,11 +354,10 @@ div.hover-shadow:hover{
     margin-bottom: 8px;
 }
 
-#days-chart {
+#days-chart, #hours-chart{
     width:1000px; 
     height:400px;
-}
-#hours-chart {
-    width:1000px; 
-    height:400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
 }
