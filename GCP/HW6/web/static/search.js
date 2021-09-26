@@ -139,7 +139,7 @@ function call_tomorrow_weather(lat, lng, loc) {
         jQuery("#cloud-cover-value").text(values["cloudCover"] + "%")
         jQuery("#uv-level-value").text(values["uvIndex"])
         
-        jQuery("#current-temp").text(Math.round(values["temperature"]) + "\u00B0");
+        jQuery("#current-temp").text(Math.round(values["temperature"]*10)/10 + "\u00B0");
         
         jQuery("#humidity-icon").attr("src", get_current_weather_icon("humidity"))
         jQuery("#pressure-icon").attr("src", get_current_weather_icon("pressureSeaLevel"))
