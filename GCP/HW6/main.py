@@ -34,7 +34,7 @@ def call_api(api_name):
     req_data = request.args
 
     remote_addr = request.remote_addr
-    remote_addr = "47.185.202.16" #TODO remove
+    remote_addr = "47.185.202.16" #TODO remove for placement on GCP
 
     # NOTE: the keys/tokens below should not be shared with anyone
     api_infos = {
@@ -64,12 +64,10 @@ def call_api(api_name):
     params = urllib.parse.urlencode(api_info["url_params"])
     url = url + ("?%s&%s" % (request.query_string.decode('utf-8'), params))
 
-    debug_print = True
     debug_print = False
     if debug_print: print("URL:", url)
 
     debug_save_usage = False
-    debug_save_usage = True  # TODO remove
     if debug_save_usage:
         return get_fake_json(api_name)
 
