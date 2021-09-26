@@ -87,9 +87,9 @@ def call_api(api_name):
             logfile.write(rsp.text + '\n')
 
     TOO_MANY_REQTS_ERROR = 429
-    if rsp.status_code == TOO_MANY_REQTS_ERROR or rsp.json()['status'] in ('OVER_QUERY_LIMIT', 'OVER_DAILY_LIMIT '):
-        from flask import Response
-        return Response("", status=TOO_MANY_REQTS_ERROR, mimetype='application/json')
+    if rsp.status_code == TOO_MANY_REQTS_ERROR or \
+            rsp.json().get('status') in ('OVER_QUERY_LIMIT', 'OVER_DAILY_LIMIT '):
+        return {}, TOO_MANY_REQTS_ERROR
 
     return rsp.json()
 
