@@ -59,12 +59,13 @@ function clearForm(){
     onCheckboxChange()
 }
 
+
 debug_json = null;
 function submitForm(){   
     jQuery("#no-records-card").hide() 
     if (jQuery("#auto-detect-cb").prop('checked') ) {
         // do auto-detect
-        get_api_info("ipinfo", "json", {}, function(rspObj){
+        call_api( "https://ipinfo.io/json", {"token": "6292e80abfdebd"}, function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
             debug_json = json;
@@ -85,9 +86,14 @@ function submitForm(){
         var req_data = {
             /*NOTE: This is the method to call and is treated special*/
             "address": addr + ", " + city + ", " + state,
+            "key": "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc",
         };
-        get_api_info("geocode", "json", req_data, function(rspObj){
+        call_api("https://maps.googleapis.com/maps/api/geocode/json", req_data, function(rspObj){
             var json = JSON.parse(rspObj.responseText)
+            if(json["status"] == "OVER_QUERY_LIMIT" || json["status"] == "OVER_DAILY_LIMIT"){
+                jQuery("#no-records-card").show() 
+                return null;
+            }
             var resultsIdx = 0 //NOTE: hardcoded to just the first result
             var lat = json.results[resultsIdx].geometry.location.lat
             var lng = json.results[resultsIdx].geometry.location.lng
@@ -327,6 +333,23 @@ function get_weather_code_icon(weatherCode){
     }
 }
 
+
+function call_api(url, req_data, callback) {
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function (){
+        if (this.readyState == 4) {
+            if(this.status == 200) {
+                callback(this)
+            }
+            else if (this.status == 429){
+                jQuery("#no-records-card").show()
+            }
+        }
+    }
+    req.open("GET", url , true);
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");    
+    req.send();
+}
 
 // var url = "/apis/tomorrow/test";
 /*
