@@ -1,9 +1,12 @@
 tomorrowWeatherStore = {} //global to store and retrieve weather info
 
-mjglob = null
+function setShowHideDefaults() {
+    jQuery(".default-hide").hide()
+    jQuery(".default-show").show()
+}
 
 function onLoad() {
-    jQuery(".default-hide").hide()
+    setShowHideDefaults()
     
     jQuery("#state").append(jQuery("<option>", {
             value: "",
@@ -15,11 +18,6 @@ function onLoad() {
             text: stateLong
         }));
     }
-    
-    /*TODO remove debug code*/
-    jQuery("#street").val("1600 Ampitheatre Parkway")
-    jQuery("#city").val("Mountain View")
-    jQuery("#state").val("CA")
 
     var form  = document.getElementById('search-form');
     form.addEventListener('submit', (event) => {
@@ -27,8 +25,6 @@ function onLoad() {
         event.preventDefault();
         submitForm()
     });
-    /*
-    */
 }
 
 function clearInputFields() {
@@ -58,11 +54,12 @@ function onCheckboxChange() {
 }
 
 function clearForm(){
-    jQuery(".default-hide").hide()
+    setShowHideDefaults()
     clearInputFields()
     onCheckboxChange()
 }
 
+debug_json = null;
 function submitForm(){   
     jQuery("#no-records-card").hide() 
     if (jQuery("#auto-detect-cb").prop('checked') ) {
@@ -70,6 +67,7 @@ function submitForm(){
         get_api_info("ipinfo", "json", {}, function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
+            debug_json = json;
             var loc = json["loc"]
             var lat = loc.split(",")[0]
             var lng = loc.split(",")[1]
@@ -259,8 +257,6 @@ function roundToHours(timestamp) {
     var MINUTES_PER_HOUR = 60;
     return Math.round(timestamp.getHours() + timestamp.getMinutes()/MINUTES_PER_HOUR);
 }
-
-mjdate = null
 
 //Ref: https://docs.tomorrow.io/reference/data-layers-core
 function getPrecipitationTypeName(typeCode){

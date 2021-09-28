@@ -20,9 +20,12 @@ def send_webfiles(path):
 @app.route('/apis/<api_name>', methods=['GET'])
 def call_api(api_name):
     req_data = request.args
-
-    remote_addr = request.remote_addr
-    remote_addr = "47.185.202.16" #TODO remove for placement on GCP
+    
+    debug_ip = True #set to true so that testing on localhost works
+    if debug_ip and request.remote_addr == "127.0.0.1":
+        remote_addr = "47.185.202.16"
+    else:
+        remote_addr = request.remote_addr
 
     # NOTE: the keys/tokens below should not be shared with anyone
     api_infos = {
