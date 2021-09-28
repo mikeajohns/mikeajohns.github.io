@@ -3,20 +3,8 @@ from flask import Flask, request, send_from_directory
 #app = Flask(__name__)
 app = Flask(__name__,
             static_url_path='',
-            static_folder='web/static',
-            template_folder='web/templates')
-
-
-@app.route('/')
-def hello():
-    print('Hello')
-    search_html_path = r'web\static\search.html'
-    file_str = ""
-    with open(search_html_path) as f:
-        file_str = f.read()
-
-    return file_str
-
+            static_folder='web/static')
+            
 
 ### another way to do this
 # url_for('static', filename='style.css')
