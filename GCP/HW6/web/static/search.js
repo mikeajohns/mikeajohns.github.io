@@ -86,7 +86,7 @@ function submitForm(){
                 encodeURI("address=" + addr + ", " + city + ", " + state) + "&" + 
                 encodeURI("key=" + "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc"), function(rspObj){
             var json = JSON.parse(rspObj.responseText)
-            if(json["status"] == "OVER_QUERY_LIMIT" || json["status"] == "OVER_DAILY_LIMIT"){
+            if(json["status"] == "OVER_QUERY_LIMIT" || json["status"] == "OVER_DAILY_LIMIT" || json["status"] == "ZERO_RESULTS"){
                 jQuery("#no-records-card").show() 
                 return null;
             }
