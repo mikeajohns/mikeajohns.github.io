@@ -65,7 +65,7 @@ function submitForm(){
     jQuery("#no-records-card").hide() 
     if (jQuery("#auto-detect-cb").prop('checked') ) {
         // do auto-detect
-        call_api( "https://ipinfo.io/json", {"token": "6292e80abfdebd"}, function(rspObj){
+        call_api( "https://ipinfo.io/json?token=6292e80abfdebd", function(rspObj){
             //use info and get lat/lng and submit
             var json = JSON.parse(rspObj.responseText)
             debug_json = json;
@@ -82,13 +82,9 @@ function submitForm(){
         var city = jQuery("#city").val()
         var state = jQuery("#state").val()
         
-        
-        var req_data = {
-            /*NOTE: This is the method to call and is treated special*/
-            "address": addr + ", " + city + ", " + state,
-            "key": "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc",
-        };
-        call_api("https://maps.googleapis.com/maps/api/geocode/json", req_data, function(rspObj){
+        call_api("https://maps.googleapis.com/maps/api/geocode/json?" + 
+                encodeURI("address=" + addr + ", " + city + ", " + state) + "&" + 
+                encodeURI("key=" + "AIzaSyAoLc9k_wqEQNd9R-a9Skhqtl92gTHbfTc"), function(rspObj){
             var json = JSON.parse(rspObj.responseText)
             if(json["status"] == "OVER_QUERY_LIMIT" || json["status"] == "OVER_DAILY_LIMIT"){
                 jQuery("#no-records-card").show() 
@@ -334,8 +330,9 @@ function get_weather_code_icon(weatherCode){
 }
 
 
-function call_api(url, req_data, callback) {
-    var req = new XMLHttpRequest();
+function call_api(url, callback) {
+    const req = new XMLHttpRequest();
+    req.open("GET", url);
     req.onreadystatechange = function (){
         if (this.readyState == 4) {
             if(this.status == 200) {
@@ -346,8 +343,6 @@ function call_api(url, req_data, callback) {
             }
         }
     }
-    req.open("GET", url , true);
-    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");    
     req.send();
 }
 
