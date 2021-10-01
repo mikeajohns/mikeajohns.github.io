@@ -62,7 +62,8 @@ function clearForm(){
 
 debug_json = null;
 function submitForm(){   
-    jQuery("#no-records-card").hide() 
+    jQuery("#no-records-card").hide()
+    setShowHideDefaults()
     if (jQuery("#auto-detect-cb").prop('checked') ) {
         // do auto-detect
         call_api( "https://ipinfo.io/json?token=6292e80abfdebd", function(rspObj){
