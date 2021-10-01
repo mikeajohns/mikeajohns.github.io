@@ -269,6 +269,7 @@ img.forecast-weather-status-icon {
 }
 .forecast-table-row{
     height: 90px;
+    cursor: pointer;
 }
 .forecast-table-row span{
     /*
