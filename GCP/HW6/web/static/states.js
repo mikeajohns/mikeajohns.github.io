@@ -7,7 +7,6 @@ states = {
 "CO": "Colorado",
 "CT": "Connecticut",
 "DE": "Delaware",
-"DC": "District Of Columbia",
 "FL": "Florida",
 "GA": "Georgia",
 "HI": "Hawaii",
