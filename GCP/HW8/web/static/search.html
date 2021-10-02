@@ -20,15 +20,16 @@
         <!--TODO need to autocomplete -- it's a call from Ticketmaster-->
         <tr><td><label for="keyword">Keyword<span class="required">*</span></label></td><td><input type="text" id="keyword" placeholder="Event Artist, Team or Event Name (eg. Lakers)" required></td></tr>
         <tr><td><label for="category">Category</label></td><td><input type="text" id="category" value="All"></input></td></tr>
-        <tr><td><label for="distance">Distance</label></td><td><input type="text" id="distance" value="10"></input><input type="text" id="distance-units" value="miles"></input></td></tr>
+        <tr><td><label for="distance">Distance</label></td><td><input type="text" id="distance" placeholder="10"></input><input type="text" id="distance-units" value="miles"></input></td></tr>
         <tr><td><label for="source">From<span class="required">*</span></label></td><td>
-            <input type="radio" name="source" id="current-location" checked></input><label for="current-location">Current location</label><br>
-            <input type="radio" name="source" id="other-source" required></input><label for="other-source">Other. Please specify:</label>
+            <input type="radio" name="source" onchange="onLocationTypeChange()" id="current-location" checked></input><label for="current-location">Current location</label><br>
+            <input type="radio" name="source" onchange="onLocationTypeChange()" id="other-source" required></input><label for="other-source">Other. Please specify:</label><br>
+            <input type="text" id="other-location"</input>
         </td></tr>
     </table>
     <div>
         <button type="submit" class="submit button">Search</button>
-        <button type="button" onclick="resetSearchFields()" class="clear-button button">Clear</button>
+        <button type="button" onclick="clearSearch()" class="clear-button button">Clear</button>
     </div>
     </form>
 </div></div>
@@ -36,5 +37,7 @@
     <button type="button" class="button">Results</button>
     <button type="button" class="button">Favorites</button>
 </div>
+<div id="results" class="default-hide">RESULTS TODO</div>
+<div id="favorites" class="default-hide">FAVES TODO</div>
 
 </body></html>
