@@ -21,6 +21,7 @@ const app = express();
 
 app.get('/', (req, res) => {
   res.status(200).send('Entertainment Event Ticket Search').end();
+  console.log("Request for: " + req.url) //TODO remove debug
 });
 
 
