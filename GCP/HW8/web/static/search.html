@@ -18,13 +18,13 @@
     <form id="search-form">
     <table id="address-table">
         <!--TODO need to autocomplete -- it's a call from Ticketmaster-->
-        <tr><td><label for="keyword">Keyword<span class="required">*</span></label></td><td><input type="text" id="keyword" placeholder="Event Artist, Team or Event Name (eg. Lakers)" required></td></tr>
+        <tr><td><label for="keyword">Keyword<span class="required">*</span></label></td><td><input type="text" id="keyword" placeholder="Event Artist, Team or Event Name (eg. Lakers)" required></input></td></tr>
         <tr><td><label for="category">Category</label></td><td><input type="text" id="category" value="All"></input></td></tr>
         <tr><td><label for="distance">Distance</label></td><td><input type="text" id="distance" placeholder="10"></input><input type="text" id="distance-units" value="miles"></input></td></tr>
         <tr><td><label for="source">From<span class="required">*</span></label></td><td>
             <input type="radio" name="source" onchange="onLocationTypeChange()" id="current-location" checked></input><label for="current-location">Current location</label><br>
             <input type="radio" name="source" onchange="onLocationTypeChange()" id="other-source" required></input><label for="other-source">Other. Please specify:</label><br>
-            <input type="text" id="other-location"</input>
+            <input type="text" id="other-location" required></input>
         </td></tr>
     </table>
     <div>

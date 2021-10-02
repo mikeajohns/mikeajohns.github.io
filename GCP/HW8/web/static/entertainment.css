@@ -72,8 +72,6 @@ div.card {
 * Search
 */
 #weather-form{
-    width: 610px;
-    height: 465px;
 }
 .required {
     color: red;
