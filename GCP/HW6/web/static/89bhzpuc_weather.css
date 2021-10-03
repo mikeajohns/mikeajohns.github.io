@@ -187,7 +187,7 @@ label {
     font-size: 165%;
     margin-bottom: 5px;
     margin-left: 20px;
-    margin-top: 15x;
+    margin-top: 15px;
 }
 #current-details{
     width: 100%;
@@ -226,7 +226,7 @@ img#weather-code-icon{
     vertical-align: top;
 }
 tr#current-big-picture-row {
-    height = 50px;
+    height: 50px;
 }
 #current-weather table, #current-weather tr, #current-weather th, #current-weather td {
   border: 0px;

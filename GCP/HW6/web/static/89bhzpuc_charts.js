@@ -1,13 +1,18 @@
+let WIND_BARB_LENGTH = 10;
+let WIND_BARB_X_OFFSET = WIND_BARB_LENGTH/2;
+let WIND_BARB_BOX_HEIGHT = 20;
+let WIND_RESOLUTION_FACTOR = 2;
+
 function loadDaysWeatherChart() {
     // weather for today
-    var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d")
+    var twentyFourHrIdx = getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1d");
     var days = tomorrowWeatherStore.data.timelines[twentyFourHrIdx].intervals;
-    daysChartData = []
+    var daysChartData = [];
         
     //Confirmed from video walkthrough that these are not based on which day you click in the forecast
-    for (day of days) {
-        timestamp = (new Date(day.startTime)).getTime()
-        daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax])
+    for (var day of days) {
+        var timestamp = (new Date(day.startTime)).getTime();
+        daysChartData.push([timestamp, day.values.temperatureMin, day.values.temperatureMax]);
     }
     const chart = Highcharts.chart('days-chart', {
         chart: {
@@ -62,7 +67,7 @@ function loadDaysWeatherChart() {
 }
 
 
-hours_data = null;
+let hours_data = null;
 function loadHoursWeatherChart() {
     // set beaufort floor for MPH
     // Taken from: https://jsfiddle.net/BlackLabel/brnLxeto/
@@ -73,36 +78,30 @@ function loadHoursWeatherChart() {
             46.528352000000005, 54.80503, 63.752790000000005, 73.14793800000001];
 
     
-    var hourIdx= getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1h")
+    var hourIdx= getTimestepIdxByName(tomorrowWeatherStore.data.timelines, "1h");
     var hours = tomorrowWeatherStore.data.timelines[hourIdx].intervals;
-    hours_data = hours
-    hoursTemps = []
-    hoursPressures = []
-    hoursHumidities = []
-    hoursWinds = []
-    WIND_RESOLUTION_FACTOR = 2
-    HOURS_IN_5_DAYS = 5 * 24
+    hours_data = hours;
+    var hoursTemps = [];
+    var hoursPressures = [];
+    var hoursHumidities = [];
+    var hoursWinds = [];
     //NOTE: following same guidance here as from the 15/16 day forecast and not limiting the data we receive from tomorrow.io
     
     //Confirmed from video walkthrough that these are not based on which day you click in the forecast
-    for (hour of hours) {
-        timestamp = (new Date(hour.startTime)).getTime()
-        hoursTemps.push([timestamp, hour.values.temperature])
-        hoursPressures.push([timestamp, hour.values.pressureSeaLevel])
-        hoursHumidities.push([timestamp, hour.values.humidity])
+    for (var hour of hours) {
+        var timestamp = (new Date(hour.startTime)).getTime();
+        hoursTemps.push([timestamp, hour.values.temperature]);
+        hoursPressures.push([timestamp, hour.values.pressureSeaLevel]);
+        hoursHumidities.push([timestamp, hour.values.humidity]);
         if(hoursHumidities.length % WIND_RESOLUTION_FACTOR == 1) {
             hoursWinds.push({
                 x: timestamp,
                 value: hour.values.windSpeed,
                 direction: hour.values.windDirection
-            })
+            });
         }
     }
     
-    WIND_BARB_LENGTH = 10
-    WIND_BARB_X_OFFSET = WIND_BARB_LENGTH/2
-    WIND_BARB_X_OFFSET_2 = 0
-    WIND_BARB_BOX_HEIGHT = 20
     const chart = Highcharts.chart('hours-chart', {
         tooltip: {
             shared: true,
@@ -265,7 +264,7 @@ function loadHoursWeatherChart() {
         }]
     });
     
-    drawBlocksForWindArrows(chart)
+    drawBlocksForWindArrows(chart);
 }
 
 
@@ -274,7 +273,7 @@ function loadHoursWeatherChart() {
  * Taken from Meteogram here and modified: 
  *  https://www.highcharts.com/demo/combo-meteogram#https://www.yr.no/place/United_Kingdom/England/London/forecast_hour_by_hour
  */
-drawBlocksForWindArrows = function (chart) {
+let drawBlocksForWindArrows = function (chart) {
     var xAxis = chart.xAxis[0],
         x,
         pos,
@@ -296,16 +295,18 @@ drawBlocksForWindArrows = function (chart) {
             isLong = i % 2 === 0;
         }
         
+        var startY;
+        var endY;
         if(isLong) {
             //draw box edges
-            startY = chart.plotTop + chart.plotHeight
-            endY = startY + WIND_BARB_BOX_HEIGHT            
+            startY = chart.plotTop + chart.plotHeight;
+            endY = startY + WIND_BARB_BOX_HEIGHT;
         }
         else {
             //draw minor ticks
-            WIND_BARB_MINOR_TICK_LENGTH = 4
-            startY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT - WIND_BARB_MINOR_TICK_LENGTH / 2 //off by 1 because of other boundaries
-            endY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT + WIND_BARB_MINOR_TICK_LENGTH / 2 //off by 1 because of other boundaries
+            var WIND_BARB_MINOR_TICK_LENGTH = 4;
+            startY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT - WIND_BARB_MINOR_TICK_LENGTH / 2; //off by 1 because of other boundaries
+            endY = chart.plotTop + chart.plotHeight + WIND_BARB_BOX_HEIGHT + WIND_BARB_MINOR_TICK_LENGTH / 2; //off by 1 because of other boundaries
         }
         chart.renderer.path(['M', x, startY, 'L', x, endY, 'Z'])
             .attr({
@@ -317,24 +318,24 @@ drawBlocksForWindArrows = function (chart) {
     
     // Center items in block
     chart.get('windbarbs').markerGroup.attr({
-        translateX: chart.get('windbarbs').markerGroup.translateX + WIND_BARB_X_OFFSET_2
+        translateX: chart.get('windbarbs').markerGroup.translateX
     });
 };
 
 //down button
 function showWeatherCharts(){
-    loadDaysWeatherChart()
-    loadHoursWeatherChart()
-    jQuery("#weather-charts-card").show()
-    jQuery("#weather-charts").show()
-    jQuery("#down-button").hide()
+    loadDaysWeatherChart();
+    loadHoursWeatherChart();
+    jQuery("#weather-charts-card").show();
+    jQuery("#weather-charts").show();
+    jQuery("#down-button").hide();
     
-    window.scrollTo(null, jQuery("#up-button").show().offset().top)
+    window.scrollTo(null, jQuery("#up-button").show().offset().top);
 }
 
 //up button
 function hideWeatherCharts(){
-    jQuery("#weather-charts-card").hide()
-    jQuery("#up-button").hide()
-    jQuery("#down-button").show()
+    jQuery("#weather-charts-card").hide();
+    jQuery("#up-button").hide();
+    jQuery("#down-button").show();
 }

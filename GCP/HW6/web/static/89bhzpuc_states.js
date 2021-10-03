@@ -1,4 +1,4 @@
-states = {
+let states = {
 "AL": "Alabama",
 "AK": "Alaska",
 "AZ": "Arizona",
@@ -49,4 +49,4 @@ states = {
 "WV": "West Virginia",
 "WI": "Wisconsin",
 "WY": "Wyoming"
-}
+};
