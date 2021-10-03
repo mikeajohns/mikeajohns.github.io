@@ -17,6 +17,7 @@ function resetSearchFields() {
     jQuery("#distance-units").val("miles")
     jQuery("#current-location").prop('checked', true)
     jQuery("#other-location").val("")
+    onLocationTypeChange()
 }
 
 function onLocationTypeChange(){
