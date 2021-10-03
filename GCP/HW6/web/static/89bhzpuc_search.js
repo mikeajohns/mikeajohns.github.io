@@ -297,9 +297,9 @@ weatherCodeLookup = {
     "1102": ["Mostly Cloudy", iconPrefix + "mostly_cloudy.svg"],
     "2000": ["Fog", iconPrefix + "fog.svg"],
     "2100": ["Light Fog", iconPrefix + "fog_light.svg"],
-    "3000": ["Light Wind", iconPrefix + "Light-Wind.jpg"],
-    "3001": ["Wind", iconPrefix + "Wind.png"], 
-    "3002": ["Strong Wind", iconPrefix + "Strong-Wind.png"],
+    "3000": ["Light Wind", iconPrefix + "light_wind.jpg"],
+    "3001": ["Wind", iconPrefix + "wind.png"], 
+    "3002": ["Strong Wind", iconPrefix + "strong-wind.png"],
     "4000": ["Drizzle", iconPrefix + "drizzle.svg"],
     "4001": ["Rain", iconPrefix + "rain.svg"],
     "4200": ["Light Rain", iconPrefix + "rain_light.svg"],
@@ -379,12 +379,12 @@ function get_api_info(api, method, req_data, callback){
 
 function get_current_weather_icon(infoType){
     lookup = {
-        "humidity":         "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-16-512.png",
-        "pressureSeaLevel": "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-25-512.png",
-        "windSpeed":        "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-27-512.png",
-        "visibility":       "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-30-512.png",
-        "cloudCover":       "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-28-512.png",
-        "uvIndex":          "https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png"
+        "humidity":         iconPrefix + "humidity.png",
+        "pressureSeaLevel": iconPrefix + "Pressure.png",
+        "windSpeed":        iconPrefx + "Wind_Speed.png",
+        "visibility":       iconPrefix + "Visibility.png",
+        "cloudCover":       iconPrefix + "Cloud_Cover.png",
+        "uvIndex":          iconPrefix + "UV_Level.png"
     };
     return lookup[infoType];
 }
