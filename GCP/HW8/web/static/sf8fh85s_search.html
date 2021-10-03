@@ -22,12 +22,26 @@
 </div>
 <div class="row">
     <div class="col-md-2"><label for="category">Category</label></div>
-    <div class="col-md-2"><input type="text" id="category" value="All"></input></div>
+    <div class="col-md-2">
+        <select id="category">
+            <option value="All" selected>All</option>
+            <option value="Music">Music</option>
+            <option value="Sports">Sports</option>
+            <option value="Arts & Theatre">Arts & Theatre</option>
+            <option value="Film">Film</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-2"><label for="distance">Distance</label></div>
     <div class="col-md-2"><input type="text" id="distance" placeholder="10"></input></div>
-    <div class="col-md-2"><input type="text" id="distance-units" value="miles"></input></div>
+    <div class="col-md-2">
+        <select id="distance-units">
+            <option value="miles" selected>miles</option>
+            <option value="kilometers">kilometers</option>
+        </select>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-2"><label for="source">From<span class="required">*</span></label></div>
