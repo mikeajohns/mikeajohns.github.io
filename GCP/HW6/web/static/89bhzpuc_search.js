@@ -173,7 +173,7 @@ function call_tomorrow_weather(lat, lng, loc) {
             
             var newRow = "<tr class='forecast-table-row' data-timeidx='" + timeIdx + "'>";
             newRow += "<td>" + date + "</td>";
-            newRow += "<td><span><img class='forecast-weather-status-icon' src='" + weatherStatusIconPath + "'></span><span>" + weatherStatusText + "</span></td>";
+            newRow += "<td><span class='weather-status-span'><img class='forecast-weather-status-icon' src='" + weatherStatusIconPath + "'></span><span>" + weatherStatusText + "</span></td>";
             newRow += "<td>" + highTemp + "</td>";
             newRow += "<td>" + lowTemp + "</td>";
             newRow += "<td>" + windSpeed + "</td>";
