@@ -26,23 +26,23 @@
     <table id="address-table">
         
         <tr><th colspan=2><label for="street">Street<span class="required">*</span></label></th></tr>
-        <tr><th colspan=2><input type="text" id="street" required></th></tr>
+        <tr><th colspan=2><input type="text" id="street" required /></th></tr>
         
         <tr>
             <th class="width-auto-2"><label for="city">City<span class="required">*</span></label></th>
             <th class="width-auto-2"><label for="state">State<span class="required">*</span></label></th>
         </tr>
         <tr>
-            <th id="city-cell" class="width-auto-2"><input type="text" id="city" required></input></th>
+            <th id="city-cell" class="width-auto-2"><input type="text" id="city" required /></th>
             <th id="state-cell" class="width-auto-2"><select id="state" required></select></th>
         </tr>
         <tr>
-            <th colspan="2"><hr id="horiz-rule"></td>
+            <th colspan="2"><hr id="horiz-rule"></th>
         </tr>
     </table>
     </div>
     <div id="auto-detect">
-        <label for="auto-detect">Want us to auto-detect your location? Check here </label><input type="checkbox" onchange="onCheckboxChange()" id="auto-detect-cb"></input>
+        <label for="auto-detect-cb">Want us to auto-detect your location? Check here </label><input type="checkbox" onchange="onCheckboxChange()" id="auto-detect-cb" />
     </div>
     <div>
         <button type="submit" class="submit button">SUBMIT</button>
@@ -61,7 +61,7 @@ No records have been found.
         <tr id="current-big-picture-row">
             <th>
                 <div id="current-weather-code-stuff">
-                    <img id="weather-code-icon"><br/>
+                    <img id="weather-code-icon" alt="Weather Code"><br/>
                     <div id="weather-code-text"></div>
                 </div>
             </th>
@@ -78,12 +78,12 @@ No records have been found.
             <th>UV Level</th>
         </tr>
         <tr id="current-details-icons">
-            <th><img id="humidity-icon" class="current-weather-stat-type-icon"></th>
-            <th><img id="pressure-icon" class="current-weather-stat-type-icon"></th>
-            <th><img id="wind-speed-icon" class="current-weather-stat-type-icon"></th>
-            <th><img id="visibility-icon" class="current-weather-stat-type-icon"></th>
-            <th><img id="cloud-cover-icon" class="current-weather-stat-type-icon"></th>
-            <th><img id="uv-level-icon" class="current-weather-stat-type-icon"></th>
+            <th><img id="humidity-icon" alt="Humidity" class="current-weather-stat-type-icon"></th>
+            <th><img id="pressure-icon" alt="Pressure" class="current-weather-stat-type-icon"></th>
+            <th><img id="wind-speed-icon" alt="Wind Speed" class="current-weather-stat-type-icon"></th>
+            <th><img id="visibility-icon" alt="Visibility" class="current-weather-stat-type-icon"></th>
+            <th><img id="cloud-cover-icon" alt="Cloud Cover" class="current-weather-stat-type-icon"></th>
+            <th><img id="uv-level-icon" alt="UV Level" class="current-weather-stat-type-icon"></th>
         </tr>
         <tr id="current-details-values">
             <th id="humidity-value"></th>
@@ -106,23 +106,21 @@ No records have been found.
             <div id="daily-day"></div>
             <div id="daily-weather-code-text"></div>
             <div id="daily-hi-low-temp"></div></td>
-            <td><img id="daily-weather-code-icon"></td>
+            <td><img id="daily-weather-code-icon" alt="Daily Weather Conditions"></td>
         </tr></table>
         <table id="daily-weather-details-table"></table>
     </div>
 </div>
 <div class="card-holder default-hide" id="weather-charts">
     <div class="card-header">Weather Charts</div>
-    <input type="image" id="up-button" class="arrow-button" onclick="hideWeatherCharts()" src="web/images/point-up-512.png" />
+    <input type="image" id="up-button" alt="Hide Weather Charts" class="arrow-button" onclick="hideWeatherCharts()" src="web/images/point-up-512.png" />
     <div id="weather-charts-card">
         <div id="days-chart"></div>
         <div id="hours-chart"></div>
     </div>
     <div>
-        <input type="image" id="down-button" class="arrow-button default-show" onclick="showWeatherCharts()" src="web/images/point-down-512.png" />
+        <input type="image" id="down-button" alt="Show Weather Charts" class="arrow-button default-show" onclick="showWeatherCharts()" src="web/images/point-down-512.png" />
     </div>
-</div>
-    
 </div>
 
 </body></html>
