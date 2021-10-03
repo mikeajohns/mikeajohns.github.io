@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 
 
 app.use(express.static('web/static'))
+app.use(express.static('node_modules/bootstrap/dist'))
 
 // Start the server
 const PORT = process.env.PORT || 8080;
