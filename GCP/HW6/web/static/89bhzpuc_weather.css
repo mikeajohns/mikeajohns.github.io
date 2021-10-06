@@ -299,6 +299,9 @@ div.hover-shadow:hover{
     /* blur size and spread size are optional (they default to 0) */
     box-shadow: 0px 5px 10px 0px gray
 }
+#daily-info{
+    display: inline-block;
+}
 #daily-day{
     font-size: 28px;
     color: #234469;
@@ -313,10 +316,13 @@ div.hover-shadow:hover{
     font-size: 35px;
     color: #234469;
 }
+#daily-icon-div{
+    display: inline-block;
+    position: absolute;
+    right: 385px;
+}
 #daily-weather-code-icon {
     width: 180px;
-    margin-left: 88px;
-    margin-top: 10px;
 }
 #daily-weather-details-table{
     color: white;
