@@ -8,6 +8,7 @@ function setShowHideDefaults() {
 
 function onLoad() {
     setShowHideDefaults();
+    clearInputFields();
     
     jQuery("#state").append(jQuery("<option>", {
             value: "",
