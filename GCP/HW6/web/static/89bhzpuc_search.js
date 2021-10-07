@@ -298,7 +298,7 @@ let weatherCodeLookup = {
     "2100": ["Light Fog", iconPrefix + "fog_light.svg"],
     "3000": ["Light Wind", iconPrefix + "light_wind.svg"],
     "3001": ["Wind", iconPrefix + "wind.svg"], 
-    "3002": ["Strong Wind", iconPrefix + "strong-wind.svg"],
+    "3002": ["Strong Wind", iconPrefix + "strong_wind.svg"],
     "4000": ["Drizzle", iconPrefix + "drizzle.svg"],
     "4001": ["Rain", iconPrefix + "rain.svg"],
     "4200": ["Light Rain", iconPrefix + "rain_light.svg"],
