@@ -54,6 +54,15 @@ require('nerdamer/Solve')
 const UNARY_MINUS_STR = 'unaryMinus'
 const SIMPLIFY_ITERATIONS = 2
 const EPSILON_MULT = 1.0e5 // NOTE: 1.0e4 was enough for the cases I found
+const DRAGGABLE_CLASS = 'draggable-formula-item'
+const DRAGGABLE_MULT = 'draggable-multiplicand'
+const DRAGGABLE_TERM = 'draggable-term'
+const OPERATOR_CLASS_LOOKUP = {
+  '+': 'ADD_OP',
+  '-': 'SUBTRACT_OP',
+  '*': 'MULT_OP',
+  '/': 'DIVIDE_OP'
+}
 
 // class ExpressionState
 class Expression extends GuiObj {
@@ -191,6 +200,33 @@ class Expression extends GuiObj {
     }
     this.setExpr(math.parse(leftSideExpr.toString() + comparator + rightSideExpr.toString()))
     this.onModify()
+  }
+
+  simplifyPortion (portionToSimplify, simplifyFuncName) {
+    // TODO test and implement
+    console.log('TODO simplifyPortion', portionToSimplify.toString(), 'using simplifyFuncName', simplifyFuncName)
+    const portionSimplified = new Expression(portionToSimplify.toString())
+    portionSimplified.runSimplify(simplifyFuncName)
+    console.log('portion after simplify', portionSimplified.toString())
+    this.replacePortion(portionToSimplify.toString(), portionSimplified.toString())
+    console.log('whole after simplifyPortion', this.toString())
+    // TODO find where the portion was and replace what it had with the simplified version
+  }
+
+  // TODO maybe just combine into simplifyPortion
+  replacePortion (portionToReplace, replaceWith) {
+    const wholeThing = this.mathJsExpr.toString()
+    // TODO this is really hacky, but mathjs doesn't have a way to replace a sub-expression, so I'm doing it with string replacement. This could cause problems if there are multiple identical sub-expressions, but for now I'm just going to assume that the user won't do that.
+    const matchCount = wholeThing.matchAll(portionToReplace).length
+    if (matchCount === 0) {
+      console.log('Error: portion to replace not found in expression')
+    } else if (matchCount > 1) {
+      console.log('Error: portion to replace found multiple times in expression')
+    } else {
+      this.setExpr(math.parse(wholeThing.replace(portionToReplace, replaceWith)))
+      console.log('After replacement, expression is now', this.toString()) // TODO remove debug
+      this.onModify()
+    }
   }
 
   toTex () {
@@ -358,33 +394,17 @@ class Expression extends GuiObj {
     if (this.actions === undefined) {
       this.actions = []
       const theThis = this
-      this.actions.push(new guiAction.GuiAction('filter_8', '', 'Simplify Constants', function () {
-        theThis.userSimplify('simplify_constants')
-      }))
-      this.actions.push(new guiAction.GuiAction('1x_mobiledata', '', 'Simplify Multiplies', function () {
-        theThis.userSimplify('simplify_multiplies')
-      }))
 
-      this.actions.push(new guiAction.GuiAction('1x_mobiledata()', '', 'Multiply Out', function () {
-        theThis.userSimplify('multiplyOut')
-      }))
-      this.actions.push(new guiAction.GuiAction('(&nbsp;)', '', 'Simplify Parens', function () {
-        theThis.userSimplify('simplifyParens')
-      }))
-      this.actions.push(new guiAction.GuiAction('join_full', '', 'Combine Terms', function () {
-        theThis.userSimplify('combine_like_terms')
-      }))
-      this.actions.push(new guiAction.GuiAction('vertical_align_center', '', 'Simplify Numerators and Denominators', function () {
-        theThis.userSimplify('simplifyNumDenoms')
-      }))
+      for (const simplifyName in simplifyFunctionHumanNameMap) {
+        const simplifyHumanName = simplifyFunctionHumanNameMap[simplifyName]
+        const iconName = simplifyFunctionIconMap[simplifyName]
+        this.actions.push(new guiAction.GuiAction(iconName, '', simplifyHumanName, function () {
+          theThis.userSimplify(simplifyName)
+        }))
+      }
+
       this.actions.push(new guiAction.GuiAction('undo', '', 'Undo', function () {
         theThis.userUndo()
-      }))
-      this.actions.push(new guiAction.GuiAction('superscript', '', 'Quadratic (required format: ax^2+bx+c==0)', function () {
-        theThis.userSimplify('solveforQuadratic')
-      }))
-      this.actions.push(new guiAction.GuiAction('sort', '', 'Order Terms', function () {
-        theThis.userSimplify('simplifyArrange')
       }))
       this.actions.push(new guiAction.GuiAction('swap_horizontal_circle', '', 'Substitute', function () {
         const subText = guis.promptUserForText('Enter substitution, (e.g. x=y+1)')
@@ -406,7 +426,7 @@ class Expression extends GuiObj {
     this.simplifySigns()
     const rules = [
       getSimplifyConstant(),
-      // addSubtract
+      // addSubtract (i.e. +/-)
       'addSubtract(c1)/c2 -> addSubtract(c1/c2)',
       'addSubtract(c1)*c2 -> addSubtract(c1*c2)',
       '(addSubtract(c1)+c2)/c3 -> addSubtract(c1/c3)+c2/c3',
@@ -752,15 +772,6 @@ class Expression extends GuiObj {
   }
 }
 
-const DRAGGABLE_CLASS = 'draggable-formula-item'
-const DRAGGABLE_MULT = 'draggable-multiplicand'
-const DRAGGABLE_TERM = 'draggable-term'
-const OPERATOR_CLASS_LOOKUP = {
-  '+': 'ADD_OP',
-  '-': 'SUBTRACT_OP',
-  '*': 'MULT_OP',
-  '/': 'DIVIDE_OP'
-}
 function getDraggableClasses (operator) {
   const classes = [DRAGGABLE_CLASS, OPERATOR_CLASS_LOOKUP[operator]]
   if (operator === '/') {
@@ -981,6 +992,32 @@ function tryReverseOperationOnTerms (appliedOperation, argumentExpr, side) {
   return new Expression(side.toString() + reversedOperation + argumentExpr.toString())
 }
 
+simplifyFunctionHumanNameMap = {
+  simplify_constants: 'Simplify Constants',
+  simplify_multiplies: 'Simplify Multiplies',
+  multiplyOut: 'Multiply Out',
+  simplifyParens: 'Simplify Parentheses',
+  combine_like_terms: 'Combine Like Terms', // TODO this shouldn't apply to drag and drop, it should be a button for the whole equation
+  simplifyNumDenoms: 'Simplify Numerators and Denominators',
+  solveforQuadratic: 'Solve for Quadratic', // TODO is this really a simplify?
+  simplifyArrange: 'Order Terms' // TODO this shouldn't apply to drag and drop, it should be a button for the whole equation
+}
+
+simplifyFunctionIconMap = {
+  simplify_constants: 'filter_8',
+  simplify_multiplies: '1x_mobiledata',
+  multiplyOut: '1x_mobiledata()',
+  simplifyParens: '(&nbsp;)',
+  combine_like_terms: 'join_full',
+  simplifyNumDenoms: 'vertical_align_center',
+  solveforQuadratic: 'superscript', // TODO is this really a simplify?
+  simplifyArrange: 'sort'
+}
+
+const simplifyHumanNameToFunctionNameMap = Object.fromEntries(
+  Object.entries(simplifyFunctionHumanNameMap).map(([key, value]) => [value, key])
+)
+
 module.exports = {
   Expression,
   getTableForMults,
@@ -988,7 +1025,9 @@ module.exports = {
   getDraggableClasses,
   doDraggableHtml,
   tryReverseOperationOnTerm,
-  wrapDraggableHtml
+  wrapDraggableHtml,
+  DRAGGABLE_CLASS,
+  simplifyHumanNameToFunctionNameMap
 }
 
 },{"./DebugStuff":1,"./GuiAction":4,"./GuiObj":5,"./MathJsHelper":6,"./formula-gui-utils":11,"./utils":1008,"jquery":37,"mathjs":912,"mathjs/lib/browser/math.js":38,"nerdamer":995,"nerdamer/Algebra":991,"nerdamer/Solve":994}],3:[function(require,module,exports){
@@ -1130,7 +1169,7 @@ function buildIcon (tag) {
   return html
 }
 
-module.exports = { GuiAction }
+module.exports = { GuiAction, ACTION_BUTTON_CLASS }
 
 },{"./formula-gui-utils":11,"jquery":37}],5:[function(require,module,exports){
 class GuiObj {
@@ -1473,7 +1512,9 @@ function stripUnaryMinus (node) {
 function getStandardTermForm (term) {
   const rules = [
     'v*c -> c*v',
-    'c*-v -> -c*v'
+    'c*-v -> -c*v',
+    '-c*-v -> c*v',
+    'v*-c -> -c*v'
   ]
   return math.simplify(term, rules)
 }
@@ -1531,17 +1572,27 @@ function reverseOperation (operation) {
 
 function collapseAllTerms (expr) {
   const termSplit = guis.split_formula_operation_terms(expr, guis.PLUS_OPS, false)
+  // fix this to ensure that negative signs are applied to the internals of a paren group instead of just the front, so as not to invert sub-terms
   for (let i = 0; i < termSplit.length; i += 2) {
     termSplit[i] = collapseAllConstMults(termSplit[i])
-    termSplit[i] = getStandardTermForm(termSplit[i])
+    // if it's wrapped in parens, then it can't be in standard form
+    if (termSplit[i].isParenthesisNode !== true) {
+      termSplit[i] = getStandardTermForm(termSplit[i])
+    }
   }
 
   for (let i = 0; i < termSplit.length; i += 2) {
-    collapseMatchingTerms(termSplit, i)
+    if (termSplit[i].isParenthesisNode !== true) {
+      // if it's wrapped in parens, then it can't be in standard form
+      collapseMatchingTerms(termSplit, i)
+    }
   }
   return joinExpressions(termSplit)
 }
 
+/*
+* collapses all constant multiplication in an expression, e.g. 2*x*3 -> 6*x
+*/
 function collapseAllConstMults (expr) {
   const termSplit = guis.split_formula_operation_terms(expr, ['*'], false)
   let firstConstIdx
@@ -1701,6 +1752,7 @@ const { debugLog } = require('./DebugStuff')
 
 const BUTTON_COLUMNS = 4
 const SOLVED_ID_PREFIX = 'solved-problem-'
+const DROP_EXPLAINER_ID = 'drop-explainer'
 
 class Problem extends GuiObj {
   constructor (generationOrProblemType, difficulty, problems) {
@@ -1802,6 +1854,7 @@ class Problem extends GuiObj {
     }
     htmlStr += buildInnerHtml('table', tableHtml, 'class="problem-display-table"')
     htmlStr += buildInnerHtml('div', '', 'id="' + SOLVED_ID_PREFIX + this.problemId + '"') // for 'Solved' message
+    htmlStr += buildInnerHtml('div', 'TBD drop explainer is here', 'id="' + DROP_EXPLAINER_ID + '"')
     return htmlStr
   }
 
@@ -1949,10 +2002,10 @@ class Problem extends GuiObj {
     return v
   }
 
-  //TODO add a test for this function
+  // TODO add a test for this function
   collateAuditLogs () {
     // use the backtrack logs, students don't need to show their mistakes
-    let logsToUse = []
+    const logsToUse = []
     for (let i = 0; i < this.currentProblemsState.length; i++) {
       logsToUse.push(this.currentProblemsState[i].backtrackAuditLog)
     }
@@ -2127,21 +2180,24 @@ module.exports = {
   PROBLEM_GENERATION_TYPE,
   PROBLEM_TYPE,
   DIFFICULTY,
-  PROBLEM_MODE
+  PROBLEM_MODE,
+  DROP_EXPLAINER_ID
 }
 
 },{"./DebugStuff":1,"./Expression":2,"./GuiObj":5,"./MathJsHelper":6,"./formula-gui-utils":11,"./mathjs_addons":12,"./problem-generator":1007,"./utils":1008,"jquery":37,"mathjs/lib/browser/math.js":38,"nerdamer":995,"nerdamer/Algebra":991,"nerdamer/Calculus":992,"nerdamer/Extra":993,"nerdamer/Solve":994}],8:[function(require,module,exports){
 const statistics = require('./StatisticsLog')
-prob = require('./Problem')
-expression = require('./Expression')
+const prob = require('./Problem')
+const expression = require('./Expression')
 const grapher = require('./Grapher')
-const { PROBLEM_GENERATION_TYPE } = require('./Problem')
+const { PROBLEM_GENERATION_TYPE, DROP_EXPLAINER_ID } = require('./Problem')
 const { debugLog } = require('./DebugStuff')
 $ = require('jquery')
 jQuery = $
 jquery = $
 
-const { version } = require('./package.json');
+const { version } = require('./package.json')
+const { DRAGGABLE_CLASS, DROPPABLE_CLASS, DROPPABLE_SIMPLIFY_OPTION } = require('./Expression')
+const { ACTION_BUTTON_CLASS } = require('./GuiAction')
 
 const WORKING_AREA_SELECTOR = '#problem-working-area'
 const STATISTICS_BUTTON_SELECTOR = '#statistics-button'
@@ -2157,6 +2213,7 @@ const INCLUDES = ['mathjs: https://mathjs.org/',
 ]
 const ALGEBRA_ABOUT = 'Algebra v' + version + ', designed and built by Michael Johnson.\n\n' +
     'Many thanks to the following projects: \n- ' + INCLUDES.join('\n- ')
+const DRAG_DROP_INSTRUCTION = 'Drop over simplify options or other side to see drag TODO'
 
 if (typeof window !== 'undefined') {
   $(document).ready(function () {
@@ -2262,7 +2319,7 @@ class ProblemWorkingArea {
     })
   }
 
-  getDropHandler () {
+  getOppositeSideDropHandler () {
     const theThis = this
     return function (event, ui) {
       const operator = getAppliedOperator(ui.helper)
@@ -2274,12 +2331,26 @@ class ProblemWorkingArea {
     }
   }
 
+  getActionDropHandler () {
+    const theThis = this
+    return function (event, ui) {
+      const buttonText = $(this).closest('.' + ACTION_BUTTON_CLASS).attr('title')
+      const argumentExpr = new expression.Expression($(ui.helper).attr('data-expr-text'))
+      const theEquationIdx = getDragExprIdxFromEquation(ui.helper)
+      const theEquation = theThis.problem.currentProblemsState[theEquationIdx]
+      // TODO how to make sure it knows which part of the equation to apply the simplification to?
+      // the argumentExpr should be enough, except that it could be reflected in multiple places
+      theEquation.simplifyPortion(argumentExpr, expression.simplifyHumanNameToFunctionNameMap[buttonText])
+    }
+  }
+
   resetDraggables () {
+    const theThis = this
     if (this.canDraw === false) {
       return
     }
 
-    $('.draggable-formula-item').draggable({
+    $('.' + DRAGGABLE_CLASS).draggable({
       snap: false,
       cursor: 'move',
       /// / helper:
@@ -2287,17 +2358,78 @@ class ProblemWorkingArea {
       // original: move original from it's current position
       helper: 'original',
       start: this.getDragStartHandler(),
-      stop: this.getDropHandler()
+      revert: 'invalid',
+      revertDuration: 150
     })
+
+    this.clearExplainerText()
   }
 
   getDragStartHandler () {
-    const f = function () {
-      debugLog('Start drag')
+    const theThis = this
+    const dragHandler = function () {
+      let otherSideClass = null
+      if ($(this).closest('.side-0').length > 0) {
+        otherSideClass = 'side-2'
+      } else if ($(this).closest('.side-2').length > 0) {
+        otherSideClass = 'side-0'
+      } else {
+        console.log("Error: couldn't find side of dragged item")// TODO remove debug
+      }
+      console.log('otherSideClass', otherSideClass)// TODO remove debug
+      // TODO how to also filter down to just the other side of THIS equation, not all equations? maybe add data attributes to the droppables to specify which equation they belong to and then match that with the dragged item's equation?
+      // TODO also, when clearing the droppable class, the equation not dropped onto doesn't clear
+      // for opposite side, show drop target to invert sign of add/mult
+      $('.' + otherSideClass).droppable({
+        hoverClass: 'ui-droppable-active',
+        // intersect is the default and doesn't work great when the two objects are of different sizes,
+        // pointer makes it so that it just depends on where the mouse is
+        tolerance: 'pointer',
+        greedy: true,
+        drop: theThis.getOppositeSideDropHandler(),
+        over: function () {
+          // for all dropping, show a thing that explains what dropping at the current location will do
+          $('#' + DROP_EXPLAINER_ID).text('Drop here to apply the operation to the opposite side and invert its sign')
+        },
+        out: function () {
+          $('#' + DROP_EXPLAINER_ID).text(DRAG_DROP_INSTRUCTION)
+        }
+      })
+      if ($('.' + otherSideClass).length > 1) {
+        console.log('Error: found multiple elements for other side dropping; count ' + $('.' + otherSideClass).length)
+      }
+      /*
+      $('.' + ACTION_BUTTON_CLASS).droppable({
+        hoverClass: 'ui-droppable-active',
+        // intersect is the default and doesn't work great when the two objects are of different sizes,
+        // pointer makes it so that it just depends on where the mouse is
+        tolerance: 'pointer',
+        greedy: true,
+        drop: theThis.getActionDropHandler(),
+        over: function () {
+          // for all dropping, show a thing that explains what dropping at the current location will do
+          const buttonText = $(this).closest('.' + ACTION_BUTTON_CLASS).attr('title')
+          $('#' + DROP_EXPLAINER_ID).text('Drag here to simplify using the following rule: ' + buttonText)
+        },
+        out: function () {
+          $('#' + DROP_EXPLAINER_ID).text(DRAG_DROP_INSTRUCTION)
+        }
+      })
+        */
+
+      theThis.showDropTargets()
+      $('#' + DROP_EXPLAINER_ID).text(DRAG_DROP_INSTRUCTION)
     }
 
-    // TODO Maybe add overlay on opposite side that lets you pick add/sub/mult/div
-    return f
+    return dragHandler
+  }
+
+  showDropTargets () {
+  }
+
+  clearExplainerText () {
+    // clear the explainer text
+    $('#' + DROP_EXPLAINER_ID).text('')
   }
 
   getUserSimplifyFunc (simplifyType) {
@@ -2459,7 +2591,7 @@ function getAppliedOperator (el) {
 
 module.exports = { ProblemWorkingArea }
 
-},{"./DebugStuff":1,"./Expression":2,"./Grapher":3,"./Problem":7,"./StatisticsLog":9,"./package.json":1006,"jquery":37}],9:[function(require,module,exports){
+},{"./DebugStuff":1,"./Expression":2,"./Grapher":3,"./GuiAction":4,"./Problem":7,"./StatisticsLog":9,"./package.json":1006,"jquery":37}],9:[function(require,module,exports){
 const { debugLog } = require('./DebugStuff')
 
 class StatisticsLog {
@@ -128516,7 +128648,7 @@ module.exports.TinyEmitter = E;
 },{}],1006:[function(require,module,exports){
 module.exports={
   "name": "algebra-nodejs",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Graphical Algebra Tool for Students",
   "private": true,
   "license": "Apache-2.0",
@@ -128532,6 +128664,11 @@ module.exports={
     "test": "mocha --exit test/*.test.js",
     "testExpr": "mocha --exit test/Expression.test.js",
     "codecov": "nyc --reporter=html mocha; nyc report --reporter=text > coverage/coverage.txt; cp -r coverage /mnt/c/Users/mikea/Desktop"
+  },
+  "standard": {
+    "ignore": [
+      "otherThirdParty/**"
+    ]
   },
   "dependencies": {
     "@angular/animations": "^12.2.9",
@@ -128740,6 +128877,14 @@ module.exports = { deduplicateList, xor }
 
 .draggable-formula-item {
     cursor: move;
+}
+.ui-droppable {
+    background-color: lightpink;
+    border-style: dotted;
+}
+.ui-droppable-active {
+    background-color: lime;
+    border-style: dotted;
 }
 
 .draggable-multiplicand {
