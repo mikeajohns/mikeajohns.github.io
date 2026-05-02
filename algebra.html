@@ -2213,6 +2213,15 @@ const INCLUDES = ['mathjs: https://mathjs.org/',
 ]
 const ALGEBRA_ABOUT = 'Algebra v' + version + ', designed and built by Michael Johnson.\n\n' +
     'Many thanks to the following projects: \n- ' + INCLUDES.join('\n- ')
+// TODO update these when I change way buttons work to do drag/drop
+const INSTRUCTIONS = [
+  'Solve for the variable(s)',
+  '',
+  '- Click and drag to invert operations to the opposite side (additive terms become negative, multiplicative terms become divisors, etc)',
+  '-- Note: you can drag from either side to the other',
+  '- Select the buttons on the left to apply simplification steps (hover each button to see what it does)'
+]
+const INSTRUCTION_TEXT = INSTRUCTIONS.join('\n')
 const DRAG_DROP_INSTRUCTION = 'Drop over simplify options or other side to see drag TODO'
 
 if (typeof window !== 'undefined') {
@@ -2457,6 +2466,9 @@ class ProblemWorkingArea {
     $('#newProblem').off('click').on('click', function () {
       theThis.enteringData = true
       theThis.updateNewProblemForm()
+    })
+    $('#instructions').off('click').on('click', function () {
+      window.alert(INSTRUCTION_TEXT)
     })
     $('#about').off('click').on('click', function () {
       window.alert(ALGEBRA_ABOUT)
@@ -128648,7 +128660,7 @@ module.exports.TinyEmitter = E;
 },{}],1006:[function(require,module,exports){
 module.exports={
   "name": "algebra-nodejs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Graphical Algebra Tool for Students",
   "private": true,
   "license": "Apache-2.0",
@@ -128931,6 +128943,7 @@ module.exports = { deduplicateList, xor }
             <!--
             <button type="button" id="audit">Print Steps</button>
             -->
+            <button type="button" id="instructions">Instructions</button>
             <button type="button" id="about">About</button>
         </div>
         <div id="problemSelectionArea">
